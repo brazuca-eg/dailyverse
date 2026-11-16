@@ -1,0 +1,21 @@
+.flag-viewer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface-sunken);
+  box-shadow: var(--card-shadow);
+}
+
+.flag-viewer-image {
+  position: absolute;
+  max-width: none;
+  user-select: none;
+  transition:
+    width 0.5s ease,
+    height 0.5s ease,
+    left 0.5s ease,
+    top 0.5s ease,
+    filter 0.5s ease;
+}

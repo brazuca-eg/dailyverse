@@ -1,4 +1,4 @@
-import { MAX_GUESSES } from "../../src/games/mystery-place/game";
+import { MAX_GUESSES } from "../../src/core/guessing";
 import type { MysteryPlacePuzzle } from "../../src/games/mystery-place/types";
 import type { DraftPuzzle } from "./types";
 

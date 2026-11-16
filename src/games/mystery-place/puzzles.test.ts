@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { countries } from "../../core/countries";
 import { containsWholeWord } from "../../core/text";
 import { puzzles } from "./data";
-import { MAX_GUESSES } from "./game";
+import { MAX_GUESSES } from "../../core/guessing";
 
 const countriesByCode = new Map(countries.map((country) => [country.code, country]));
 
