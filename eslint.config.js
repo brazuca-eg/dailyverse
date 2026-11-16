@@ -62,7 +62,7 @@ export default defineConfig(
   },
   { files: ["scripts/**/*.ts"], rules: { "no-console": "off" } },
   {
-    files: ["src/games/mystery-place/SuggestionList.tsx"],
+    files: ["src/ui/SuggestionList.tsx"],
     rules: { "jsx-a11y-x/click-events-have-key-events": "off" },
   },
   {

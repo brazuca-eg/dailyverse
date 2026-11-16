@@ -1,0 +1,103 @@
+.scene-frame {
+  position: relative;
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+}
+
+.scene-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: crosshair;
+  background: none;
+  border: 0;
+  border-radius: var(--radius);
+}
+
+.scene-frame-zoomed {
+  aspect-ratio: 4 / 3;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--surface-sunken);
+  scrollbar-color: var(--border-strong) var(--surface-sunken);
+}
+
+.scene {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scene-frame-zoomed .scene-button {
+  width: 200%;
+}
+
+.marker {
+  fill: none;
+  stroke-width: 4;
+  pointer-events: none;
+}
+
+.marker-found {
+  stroke: var(--success);
+  stroke-dasharray: 400;
+  stroke-dashoffset: 0;
+  animation: marker-draw 450ms ease-out;
+}
+
+.marker-missed {
+  stroke: var(--danger);
+  stroke-dasharray: 8 6;
+}
+
+.miss-mark {
+  pointer-events: none;
+  animation: miss-fade 900ms ease-out forwards;
+}
+
+.miss-mark line {
+  stroke: var(--danger);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.crosshair {
+  pointer-events: none;
+}
+
+.crosshair circle {
+  fill: rgba(255, 255, 255, 0.18);
+  stroke: #ffffff;
+  stroke-width: 2.5;
+  paint-order: stroke;
+}
+
+.crosshair line {
+  stroke: #1f2a24;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+@keyframes marker-draw {
+  from {
+    stroke-dashoffset: 400;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes miss-fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

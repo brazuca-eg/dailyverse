@@ -1,3 +1,5 @@
+import { DIFFICULTIES, type Difficulty } from "../../core/difficulty";
+
 export const CLUE_KINDS = [
   "geography",
   "climate",
@@ -14,9 +16,7 @@ export const CLUE_KINDS = [
 
 export type ClueKind = (typeof CLUE_KINDS)[number];
 
-export const DIFFICULTIES = ["easy", "medium", "hard"] as const;
-
-export type Difficulty = (typeof DIFFICULTIES)[number];
+export { DIFFICULTIES, type Difficulty };
 
 export interface Clue {
   kind: ClueKind;

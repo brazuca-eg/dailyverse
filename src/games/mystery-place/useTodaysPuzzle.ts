@@ -1,7 +1,6 @@
-import { useMemo } from "react";
-import { calculateDaysSinceLaunch, pickDailyItem } from "../../core/daily";
 import { findCountryByCode } from "../../core/search";
 import type { Country } from "../../core/types";
+import { useTodaysItem } from "../../hooks/useTodaysItem";
 import type { MysteryPlacePuzzle } from "./types";
 
 export interface TodaysPuzzle {
@@ -15,9 +14,6 @@ export function useTodaysPuzzle(
   countries: readonly Country[],
   launchDate: Date,
 ): TodaysPuzzle {
-  return useMemo(() => {
-    const dayIndex = calculateDaysSinceLaunch(new Date(), launchDate);
-    const puzzle = pickDailyItem(puzzles, dayIndex);
-    return { dayIndex, puzzle, answer: findCountryByCode(countries, puzzle.country) };
-  }, [puzzles, countries, launchDate]);
+  const { dayIndex, item: puzzle } = useTodaysItem(puzzles, launchDate);
+  return { dayIndex, puzzle, answer: findCountryByCode(countries, puzzle.country) };
 }

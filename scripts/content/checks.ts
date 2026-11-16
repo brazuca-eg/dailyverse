@@ -1,6 +1,6 @@
 import { containsWholeWord } from "../../src/core/text";
 import type { Country } from "../../src/core/types";
-import { MAX_GUESSES } from "../../src/games/mystery-place/game";
+import { MAX_GUESSES } from "../../src/core/guessing";
 import { CLUE_KINDS, DIFFICULTIES } from "../../src/games/mystery-place/types";
 import type { CheckContext, DraftPuzzle, Evidence, Issue, IssueSeverity } from "./types";
 import { toWikipediaUrl } from "./wikipedia";

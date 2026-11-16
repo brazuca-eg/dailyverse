@@ -1,20 +1,12 @@
-import { useState } from "react";
+import { getFlagEmoji } from "../../core/flags";
+import type { GuessingState } from "../../core/guessing";
 import type { Country } from "../../core/types";
-import { Modal } from "../../ui/Modal";
-import { StatsSummary } from "../../ui/StatsSummary";
+import { GuessingGame } from "../../ui/GuessingGame";
 import { CluesList } from "./CluesList";
-import { calculateScore, countVisibleClues } from "./game";
-import { GameToolbar } from "./GameToolbar";
-import { GuessHistory } from "./GuessHistory";
-import { GuessInput } from "./GuessInput";
-import { HowToPlay } from "./HowToPlay";
-import { ProgressPips } from "./ProgressPips";
-import { ResultPanel } from "./ResultPanel";
-import { buildShareText } from "./share";
+import { countVisibleClues } from "./game";
+import { mysteryPlaceStorage } from "./persistence";
+import { MYSTERY_PLACE_RULE_EXAMPLE, MYSTERY_PLACE_RULE_STEPS } from "./rules";
 import type { MysteryPlacePuzzle } from "./types";
-import { useGameSession } from "./useGameSession";
-import { useHelpDialog } from "./useHelpDialog";
-import "./DailyGame.css";
 
 interface DailyGameProps {
   puzzle: MysteryPlacePuzzle;
@@ -24,50 +16,30 @@ interface DailyGameProps {
 }
 
 export function DailyGame({ puzzle, answer, countries, dayIndex }: DailyGameProps) {
-  const { state, stats, submitGuess } = useGameSession(puzzle, answer, dayIndex);
-  const helpDialog = useHelpDialog(state.guesses.length > 0);
-  const [isStatsOpen, setIsStatsOpen] = useState(false);
-
-  const isPlaying = state.status === "playing";
-  const visibleCount = countVisibleClues(state, puzzle.clues.length);
-  const guessedCodes = state.guesses.map((guess) => guess.countryCode);
-  const shareUrl = `${window.location.origin}${window.location.pathname}`;
-
-  return (
-    <div className="game">
-      <ProgressPips
-        guessCount={state.guesses.length}
-        status={state.status}
-        actions={
-          <GameToolbar onShowHelp={helpDialog.open} onShowStats={() => setIsStatsOpen(true)} />
-        }
-      />
+  function renderClues(state: GuessingState) {
+    const visibleCount = countVisibleClues(state, puzzle.clues.length);
+    return (
       <CluesList
         clues={puzzle.clues}
         visibleCount={visibleCount}
-        highlightIndex={isPlaying ? visibleCount - 1 : null}
+        highlightIndex={state.status === "playing" ? visibleCount - 1 : null}
       />
-      <GuessHistory guesses={state.guesses} countries={countries} />
-      {isPlaying && (
-        <GuessInput
-          countries={countries}
-          excludedCodes={guessedCodes}
-          onSubmitGuess={submitGuess}
-        />
-      )}
-      <ResultPanel
-        status={state.status}
-        score={calculateScore(state)}
-        answer={answer}
-        reveal={puzzle.reveal}
-        shareText={buildShareText(state, dayIndex + 1, shareUrl)}
-      />
-      <Modal open={helpDialog.isOpen} title="How to play" onClose={helpDialog.close}>
-        <HowToPlay onStart={helpDialog.close} />
-      </Modal>
-      <Modal open={isStatsOpen} title="Your stats" onClose={() => setIsStatsOpen(false)}>
-        <StatsSummary stats={stats} todayDayIndex={dayIndex} />
-      </Modal>
-    </div>
+    );
+  }
+
+  return (
+    <GuessingGame
+      gameTitle="Mystery Place"
+      storage={mysteryPlaceStorage}
+      puzzleId={puzzle.id}
+      answer={answer}
+      countries={countries}
+      dayIndex={dayIndex}
+      ruleSteps={MYSTERY_PLACE_RULE_STEPS}
+      ruleExample={MYSTERY_PLACE_RULE_EXAMPLE}
+      renderStage={renderClues}
+      resultVisual={getFlagEmoji(answer.code)}
+      resultFact={puzzle.reveal}
+    />
   );
 }

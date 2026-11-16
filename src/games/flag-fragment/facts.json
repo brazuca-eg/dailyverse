@@ -1,0 +1,790 @@
+{
+  "AF": {
+    "funFact": "Afghanistan has changed its national flag several times since the 20th century, mostly using black, red and green.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Afghanistan"
+  },
+  "AL": {
+    "funFact": "On Albania's flag, the red stands for bravery, strength, valour and bloodshed, while the black double-headed eagle is the traditional symbol of Albanians.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Albania"
+  },
+  "DZ": {
+    "funFact": "Algeria's flag, adopted on 3 July 1962, carries a red star and crescent, a symbol of Islam as the nation's prominent faith.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Algeria"
+  },
+  "AD": {
+    "funFact": "The yellow centre stripe of Andorra's flag is slightly wider than the other two, in a bar ratio of 8:9:8.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Andorra"
+  },
+  "AO": {
+    "funFact": "Angola's flag was adopted on 11 November 1975, when the country became independent from Portugal.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Angola"
+  },
+  "AG": {
+    "funFact": "Antigua and Barbuda's flag was chosen in a competition with more than 600 local entries, won by artist and sculptor Sir Reginald Samuel.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Antigua_and_Barbuda"
+  },
+  "AR": {
+    "funFact": "Argentina's sky-blue and white flag was created by Manuel Belgrano and first raised in Rosario on 27 February 1812.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Argentina"
+  },
+  "AM": {
+    "funFact": "Armenia's flag was adopted on 24 August 1990, but it was first used during the First Republic of Armenia (1918–20).",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Armenia"
+  },
+  "AU": {
+    "funFact": "Australia's flag first flew as the Commonwealth blue ensign on 3 September 1901, chosen in a competition held after federation.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Australia"
+  },
+  "AT": {
+    "funFact": "Austria's red-white-red flag is one of the oldest national symbols still in use by a modern country, first recorded in 1230.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Austria"
+  },
+  "AZ": {
+    "funFact": "On Azerbaijan's flag, blue stands for Turkic identity, red for progress and green for Islam. Flag Day is held every year on 9 November.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Azerbaijan"
+  },
+  "BS": {
+    "funFact": "The Bahamas' flag was built from elements of several entries in a national contest held before independence.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Bahamas"
+  },
+  "BH": {
+    "funFact": "The five white triangles on Bahrain's flag symbolize the five pillars of Islam.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Bahrain"
+  },
+  "BD": {
+    "funFact": "Bangladesh's red disc is offset slightly toward the hoist so that it appears centred when the flag is flying.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Bangladesh"
+  },
+  "BB": {
+    "funFact": "On Barbados' flag, the ultramarine stripes represent the sea and the sky, and the gold stripe represents the sand.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Barbados"
+  },
+  "BY": {
+    "funFact": "Belarus's current flag is a modified Soviet-era flag: the hammer and sickle and the red star were removed, and the ornament colours were reversed.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Belarus"
+  },
+  "BE": {
+    "funFact": "Belgium's flag has the unusual proportions of 13:15, so unlike those of Switzerland and the Vatican City, it is not a perfect square.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Belgium"
+  },
+  "BZ": {
+    "funFact": "Belize's flag was adopted on 21 September 1981, the day the country became independent.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Belize"
+  },
+  "BJ": {
+    "funFact": "Benin's flag was adopted in 1959 to replace the French Tricolour, and was the flag of the Republic of Dahomey until 1975.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Benin"
+  },
+  "BT": {
+    "funFact": "Bhutan's flag features the Druk, a dragon from Bhutanese mythology that alludes to the country's name in Dzongkha.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Bhutan"
+  },
+  "BO": {
+    "funFact": "Bolivia has a naval ensign for navy vessels on its rivers and lakes, even though the country is landlocked.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Bolivia"
+  },
+  "BA": {
+    "funFact": "The three points of the triangle on Bosnia and Herzegovina's flag stand for its three main ethnic groups: Bosniaks, Croats and Serbs.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Bosnia_and_Herzegovina"
+  },
+  "BW": {
+    "funFact": "On Botswana's flag, the blue represents water and rainfall, and the black stripe with a white frame represents racial harmony.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Botswana"
+  },
+  "BR": {
+    "funFact": "Brazil's flag was officially adopted on 19 November 1889, four days after the Proclamation of the Republic.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Brazil"
+  },
+  "BN": {
+    "funFact": "Brunei's flag was a solid yellow background until 1906, when two diagonal white and black striped lines were added.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Brunei"
+  },
+  "BG": {
+    "funFact": "Bulgaria's white, green and red flag was first adopted after the 1877–1878 Russo-Turkish War.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Bulgaria"
+  },
+  "BF": {
+    "funFact": "The yellow star on Burkina Faso's flag represents the guiding light of the revolution.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Burkina_Faso"
+  },
+  "BI": {
+    "funFact": "Burundi's flag has a white saltire dividing the field into alternating red and green areas, with three red stars at its centre.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Burundi"
+  },
+  "CV": {
+    "funFact": "The ten yellow stars on Cape Verde's flag represent the ten islands that make up the country.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Cape_Verde"
+  },
+  "KH": {
+    "funFact": "Cambodia's flag, with its white Angkor Wat, is one of only four national flags in the world to feature a building.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Cambodia"
+  },
+  "CM": {
+    "funFact": "Cameroon's flag gained its present form, with a yellow star in the centre, on 20 May 1975 after the country became a unitary state.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Cameroon"
+  },
+  "CA": {
+    "funFact": "Canada's Maple Leaf is the first flag adopted by both houses of Parliament and officially proclaimed by the monarch.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Canada"
+  },
+  "CF": {
+    "funFact": "The Central African Republic's flag has kept the same design since 1958: four horizontal stripes crossed by a single vertical red band.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Central_African_Republic"
+  },
+  "TD": {
+    "funFact": "Chad's flag is so similar to Romania's that the resemblance has caused international discussion since the 1990s.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Chad"
+  },
+  "CL": {
+    "funFact": "Chile's flag, adopted on 18 October 1817, is known in Spanish as La Estrella Solitaria, The Lone Star.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Chile"
+  },
+  "CN": {
+    "funFact": "The four small stars on China's flag symbolize the Chinese people, and the large star symbolizes the Chinese Communist Party.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_China"
+  },
+  "CO": {
+    "funFact": "The yellow band of Colombia's flag takes half the height, in a proportional ratio of 2:1:1.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Colombia"
+  },
+  "KM": {
+    "funFact": "The Comoros' flag was designed in 2001 and adopted on 23 December of that year, keeping a crescent and four stars used since 1975.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Comoros"
+  },
+  "CR": {
+    "funFact": "Costa Rica's flag has a central red stripe twice as wide as each of the other four, which are blue and white.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Costa_Rica"
+  },
+  "CI": {
+    "funFact": "Ivory Coast's orange, white and green flag is the reverse of Ireland's tricolour, with less oblong proportions.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Ivory_Coast"
+  },
+  "HR": {
+    "funFact": "Croatia's flag has been in continuous use since 1868, and its checkerboard shield was added in 1939.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Croatia"
+  },
+  "CU": {
+    "funFact": "Cuba's Lone Star flag was designed in 1849 and officially adopted on May 20, 1902.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Cuba"
+  },
+  "CY": {
+    "funFact": "Cyprus's flag was designed by Turkish Cypriot artist İsmet Güney, using peaceful and neutral symbols to suggest harmony between Greek and Turkish Cypriots.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Cyprus"
+  },
+  "CZ": {
+    "funFact": "Czechoslovakia added a blue triangle to its flag in 1920 because its white-over-red design was almost identical to Poland's.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Czech_Republic"
+  },
+  "CD": {
+    "funFact": "The Democratic Republic of the Congo's flag brought back a design similar to the one flown from 1966 to 1971, with sky blue instead of royal blue.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Democratic_Republic_of_the_Congo"
+  },
+  "DK": {
+    "funFact": "Denmark's Dannebrog has been used by Danish kings since the 14th century, and legend ties it to the Battle of Lindanise of 1219.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Dannebrog"
+  },
+  "DJ": {
+    "funFact": "On Djibouti's flag, the light blue stands for the sky, the sea and the Somalis, and the green for the earth and the Afars.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Djibouti"
+  },
+  "DM": {
+    "funFact": "Dominica's flag was designed by playwright Alwin Bully in early 1978 and is one of the few flags of sovereign states to contain purple.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Dominica"
+  },
+  "DO": {
+    "funFact": "On the Dominican Republic's flag, blue stands for liberty, white for salvation and red for the blood of heroes.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Dominican_Republic"
+  },
+  "EC": {
+    "funFact": "Ecuador's flag is very similar to those of Colombia and Venezuela, which are also former constituent territories of Gran Colombia.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Ecuador"
+  },
+  "EG": {
+    "funFact": "Egypt's flag uses the red, white and black bands of the Arab Liberation Flag, which dates back to the 1952 Egyptian Revolution.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Egypt"
+  },
+  "SV": {
+    "funFact": "From 1865 to 1912, El Salvador's flag resembled that of the United States.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_El_Salvador"
+  },
+  "GQ": {
+    "funFact": "Equatorial Guinea's flag was first raised without its coat of arms at independence from Spain on 12 October 1968.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Equatorial_Guinea"
+  },
+  "ER": {
+    "funFact": "On Eritrea's flag, green stands for the country's agriculture and livestock, and blue for the bounty of the sea.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Eritrea"
+  },
+  "EE": {
+    "funFact": "Estonia's blue-black-white tricolour became the national flag by government decision on 21 November 1918.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Estonia"
+  },
+  "SZ": {
+    "funFact": "Eswatini's flag, designed by King Sobhuza II, features a black and white Nguni shield with a staff and two spears.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Eswatini"
+  },
+  "ET": {
+    "funFact": "Ethiopia's modern tricolour was first adopted on 11 October 1897 by Menelik II.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Ethiopia"
+  },
+  "FJ": {
+    "funFact": "A plan to change Fiji's flag, announced in 2013, was abandoned in August 2016.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Fiji"
+  },
+  "FI": {
+    "funFact": "On Finland's flag, blue is said to represent the country's thousands of lakes and the sky, and white the snow that covers the land in winter.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Finland"
+  },
+  "FR": {
+    "funFact": "France's tricolour was adopted during the French Revolution and has remained the national flag ever since.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_France"
+  },
+  "GA": {
+    "funFact": "Gabon's 1960 flag was made by removing the French Tricolour from the colonial flag and widening the yellow stripe.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Gabon"
+  },
+  "GM": {
+    "funFact": "The Gambia's flag stayed unchanged throughout the country's seven-year confederation with Senegal.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Gambia"
+  },
+  "GE": {
+    "funFact": "Georgia's Five-Cross Flag was originally a banner of the medieval Kingdom of Georgia and was officially reinstated as the nation's flag in 2004.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Georgia_(country)"
+  },
+  "DE": {
+    "funFact": "Germany's black, red and gold flag was first sighted in 1848 in the German Confederation.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Germany"
+  },
+  "GH": {
+    "funFact": "Ghana's flag was designed in 1957 by Theodosia Okoh, a renowned Ghanaian artist and teacher, for independence on 6 March 1957.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Ghana"
+  },
+  "GR": {
+    "funFact": "Greece's flag has 9 horizontal stripes of alternating blue and white, and the cross in its canton symbolises Christianity.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Greece"
+  },
+  "GD": {
+    "funFact": "Grenada's flag has six yellow stars on its border, one more on a red disc in the centre, and a nutmeg at the hoist.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Grenada"
+  },
+  "GT": {
+    "funFact": "Guatemala's flag carries a coat of arms with the resplendent quetzal, the national bird of Guatemala.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Guatemala"
+  },
+  "GN": {
+    "funFact": "Guinea's red, yellow and green use the Pan-African colours, partly as a nod to the flag of Ghana.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Guinea"
+  },
+  "GW": {
+    "funFact": "The black star on Guinea-Bissau's flag symbolises the leadership of the PAIGC, with its colour representing the people of Africa.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Guinea-Bissau"
+  },
+  "GY": {
+    "funFact": "Guyana's Golden Arrowhead was designed by Whitney Smith, an American vexillologist.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Guyana"
+  },
+  "HT": {
+    "funFact": "Haiti's coat of arms carries the motto L'Union fait la Force, which means Unity is strength.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Haiti"
+  },
+  "HN": {
+    "funFact": "The five stars on Honduras' flag represent the five nations of the former Federal Republic of Central America.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Honduras"
+  },
+  "HU": {
+    "funFact": "Hungary's flag is similar to the 1816 version of the British republican tricolour, differing only in the shades used.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Hungary"
+  },
+  "IS": {
+    "funFact": "Iceland's flag law was adopted on 17 June 1944, the day Iceland became a republic.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Iceland"
+  },
+  "IN": {
+    "funFact": "India's flag has the Ashoka Chakra, a 24-spoke wheel, in navy blue at its centre.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_India"
+  },
+  "ID": {
+    "funFact": "Indonesia's flag is graphically similar to Monaco's, with a slight difference in the shade of red.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Indonesia"
+  },
+  "IR": {
+    "funFact": "The Takbir is written 11 times along each edge of the green and red bands of Iran's flag.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Iran"
+  },
+  "IQ": {
+    "funFact": "Iraq's current flag was adopted in 2008 as a temporary compromise and uses the stripes of the Arab Liberation Flag.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Iraq"
+  },
+  "IE": {
+    "funFact": "Ireland's tricolour was intended to symbolise union between Roman Catholics (green) and Protestants (orange).",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Ireland"
+  },
+  "IL": {
+    "funFact": "Israel's flag, adopted on 28 October 1948, is a white banner with two blue stripes above and below a Star of David.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Israel"
+  },
+  "IT": {
+    "funFact": "Italy holds a Tricolour Day every year, established by law on 31 December 1996.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Italy"
+  },
+  "JM": {
+    "funFact": "Jamaica's flag is said to have been directly inspired by the national flag of Scotland.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Jamaica"
+  },
+  "JP": {
+    "funFact": "Japan's flag is officially the Nisshōki, flag of the sun, but is better known as the Hinomaru, circle of the sun.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Japan"
+  },
+  "JO": {
+    "funFact": "Jordan's flag is based on the 1916 flag of the Arab Revolt against the Ottoman Empire.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Jordan"
+  },
+  "KZ": {
+    "funFact": "Kazakhstan's flag shows a 32-ray gold sun above a soaring golden steppe eagle.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Kazakhstan"
+  },
+  "KE": {
+    "funFact": "Kenya's flag carries a Maasai shield and two crossed spears, and was officially adopted on 12 December 1963 at independence.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Kenya"
+  },
+  "KI": {
+    "funFact": "The 17 rays of the sun on Kiribati's flag represent the 16 Gilbert Islands and Banaba.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Kiribati"
+  },
+  "XK": {
+    "funFact": "Kosovo's flag design came from an international competition that attracted almost one thousand entries.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Kosovo"
+  },
+  "KW": {
+    "funFact": "Kuwait's is the only national flag featuring an acute trapezium.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Kuwait"
+  },
+  "KG": {
+    "funFact": "The yellow sun on Kyrgyzstan's flag contains a tündük, the opening in the centre of the roof of a yurt.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Kyrgyzstan"
+  },
+  "LA": {
+    "funFact": "Laos's flag is known as the Moon flag, and its blue middle stripe is twice the height of the red ones.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Laos"
+  },
+  "LV": {
+    "funFact": "Latvia re-adopted its red-white-red flag on 27 February 1990, shortly before regaining independence.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Latvia"
+  },
+  "LB": {
+    "funFact": "Lebanon's white stripe is twice the height of each red stripe, with a green cedar tree touching both.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Lebanon"
+  },
+  "LS": {
+    "funFact": "Lesotho's flag, with a black mokorotlo (a Basotho hat), was adopted on 4 October 2006, the 40th anniversary of independence.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Lesotho"
+  },
+  "LR": {
+    "funFact": "Liberia's flag closely resembles the US flag, reflecting its founding by free people of color and former slaves from the United States and the Caribbean.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Liberia"
+  },
+  "LY": {
+    "funFact": "Libya's flag was designed by Omar Faiek Shennib and introduced in 1951 with the creation of the Kingdom of Libya.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Libya"
+  },
+  "LI": {
+    "funFact": "Liechtenstein added a crown to its flag in 1937 after discovering at the Olympics the year before that it was identical to Haiti's civil flag.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Liechtenstein"
+  },
+  "LT": {
+    "funFact": "Lithuania's flag was adopted on 25 April 1918 during its first period of independence.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Lithuania"
+  },
+  "LU": {
+    "funFact": "Luxembourg's flag was first used between 1845 and 1848 but not officially adopted until 1993.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Luxembourg"
+  },
+  "MG": {
+    "funFact": "Madagascar's flag was designed by Andrianome Ranaivosoa, an agent of the Malagasy National Geographic Institute.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Madagascar"
+  },
+  "MW": {
+    "funFact": "Malawi's flag was officially adopted on 6 July 1964, when the colony of Nyasaland became independent and renamed itself Malawi.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Malawi"
+  },
+  "MY": {
+    "funFact": "Malaysia's 14 stripes represent the equal status of the 13 member states and the federal territories, and the 14 points of the star represent their unity.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Malaysia"
+  },
+  "MV": {
+    "funFact": "The red on the Maldives' flag, adopted on 25 July 1965, represents the blood of the nation's heroes.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Maldives"
+  },
+  "ML": {
+    "funFact": "Mali's flag is a vertical tricolour of the pan-African colours: green, gold and red.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Mali"
+  },
+  "MT": {
+    "funFact": "Malta's is the only national flag to feature English-language text: For Gallantry, on the George Cross.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Malta"
+  },
+  "MH": {
+    "funFact": "The Marshall Islands' flag was designed by Emlain Kabua, the republic's first First Lady.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Marshall_Islands"
+  },
+  "MR": {
+    "funFact": "Mauritania's current flag was adopted in 2017 after a referendum in which 86% of voters favoured changing it.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Mauritania"
+  },
+  "MU": {
+    "funFact": "Mauritius's flag was designed by Gurudutt Moher, whose contribution was recognised posthumously in March 2018.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Mauritius"
+  },
+  "MX": {
+    "funFact": "The emblem on Mexico's flag is based on the Aztec symbol for Tenochtitlan, now Mexico City.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Mexico"
+  },
+  "FM": {
+    "funFact": "The four stars on Micronesia's flag represent the four federated states: Chuuk, Pohnpei, Kosrae and Yap.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Federated_States_of_Micronesia"
+  },
+  "MD": {
+    "funFact": "Moldova's tricolour is based on Romania's flag, reflecting the two countries' national and cultural affinity.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Moldova"
+  },
+  "MC": {
+    "funFact": "The red and white of Monaco's flag have been the heraldic colours of the House of Grimaldi since at least 1339.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Monaco"
+  },
+  "MN": {
+    "funFact": "The Soyombo on Mongolia's flag includes two fish, which never sleep in Mongol mythology, symbolizing that the spirit of the Mongol people never sleeps.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Mongolia"
+  },
+  "ME": {
+    "funFact": "Montenegro's flag was officially adopted on 13 July 2004, when the country was still part of the State Union of Serbia and Montenegro.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Montenegro"
+  },
+  "MA": {
+    "funFact": "The green star on Morocco's flag represents the five pillars of Islam, and the red represents the blood of the ancestors and unity.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Morocco"
+  },
+  "MZ": {
+    "funFact": "Mozambique's flag shows a bayonet-equipped AK-47 crossed by a hoe, on top of an open book.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Mozambique"
+  },
+  "MM": {
+    "funFact": "Myanmar's current flag was adopted on 21 October 2010.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Myanmar"
+  },
+  "NA": {
+    "funFact": "Namibia's flag was adopted on 21 March 1990 at independence, replacing the South African tricolor used during apartheid.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Namibia"
+  },
+  "NR": {
+    "funFact": "On Nauru's flag, the gold stripe represents the Equator and the star shows the country's location just under it.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Nauru"
+  },
+  "NP": {
+    "funFact": "Nepal's is the only non-rectangular national flag in the world, and the only one that is taller than it is wide.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Nepal"
+  },
+  "NL": {
+    "funFact": "The Dutch flag is the oldest tricolour flag in continuous use.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Netherlands"
+  },
+  "NZ": {
+    "funFact": "New Zealand's first internationally accepted national flag, the flag of the United Tribes, was adopted in 1834.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_New_Zealand"
+  },
+  "NI": {
+    "funFact": "Nicaragua's flag is one of the few that use purple, because of the rainbow in its coat of arms.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Nicaragua"
+  },
+  "NE": {
+    "funFact": "Niger's flag has been in use since 1959, a year before the country's formal independence from French West Africa.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Niger"
+  },
+  "NG": {
+    "funFact": "Taiwo Akinkunmi's design for Nigeria's flag won a nationwide contest with over three thousand entries.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Nigeria"
+  },
+  "KP": {
+    "funFact": "North Korea's flag was officially adopted on 8 September 1948 with the country's first constitution.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_North_Korea"
+  },
+  "MK": {
+    "funFact": "The eight-rayed sun on North Macedonia's flag represents the new sun of Liberty referred to in Denes nad Makedonija (Today over Macedonia).",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_North_Macedonia"
+  },
+  "NO": {
+    "funFact": "The vertical part of the cross on Norway's flag is shifted toward the hoist, in the style of Denmark's Dannebrog.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Norway"
+  },
+  "OM": {
+    "funFact": "Oman's flag carries a national emblem of crossed swords over a khanjar, a traditional curved dagger.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Oman"
+  },
+  "PK": {
+    "funFact": "Pakistan's flag has a tilted crescent and five-pointed star on green, with a vertical white stripe at the hoist.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Pakistan"
+  },
+  "PW": {
+    "funFact": "The off-centre disc on Palau's flag represents the moon, not the sun as on the flags of Japan and Bangladesh.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Palau"
+  },
+  "PS": {
+    "funFact": "Palestine's flag uses the pan-Arab colours, first combined in the current style during the 1916 Arab Revolt.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Palestine"
+  },
+  "PA": {
+    "funFact": "Panama's Flag Day is celebrated on November 4, one day after the country's separation from Colombia.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Panama"
+  },
+  "PG": {
+    "funFact": "Papua New Guinea's flag shows the Southern Cross on one side and a silhouetted Raggiana bird-of-paradise on the other.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Papua_New_Guinea"
+  },
+  "PY": {
+    "funFact": "Paraguay's is the only national flag in the world with a unique design on each side.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Paraguay"
+  },
+  "PE": {
+    "funFact": "Peru's Flag Day is celebrated on 7 June, the anniversary of the Battle of Arica.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Peru"
+  },
+  "PH": {
+    "funFact": "The eight rays of the sun on the Philippine flag represent the original eight provinces that rebelled against Spain in the 1896 revolution.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Philippines"
+  },
+  "PL": {
+    "funFact": "White and red were officially adopted as Poland's national colours in 1831.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Poland"
+  },
+  "PT": {
+    "funFact": "Portugal's flag was announced in 1910, following the revolution of 5 October 1910.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Portugal"
+  },
+  "QA": {
+    "funFact": "Qatar's is the only national flag in the world with a width more than twice its height.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Qatar"
+  },
+  "CG": {
+    "funFact": "The Republic of the Congo's flag was adopted in 1959 to replace the French Tricolour and was used until 1970.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Republic_of_the_Congo"
+  },
+  "RO": {
+    "funFact": "The colours of Romania's flag have been used on official insignia and symbols since the 14th century.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Romania"
+  },
+  "RU": {
+    "funFact": "Russia's white, blue and red design was first introduced by Tsar Peter the Great in 1693.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Russia"
+  },
+  "RW": {
+    "funFact": "During the colonial era, the Kingdom of Rwanda flew the German flag and then the Belgian flag.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Rwanda"
+  },
+  "KN": {
+    "funFact": "Saint Kitts and Nevis' flag was adopted in 1983 to replace the flag of Saint Christopher-Nevis-Anguilla.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Saint_Kitts_and_Nevis"
+  },
+  "LC": {
+    "funFact": "Saint Lucia's flag was adopted in 1967 to replace the British Blue Ensign defaced with the arms of the colony.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Saint_Lucia"
+  },
+  "VC": {
+    "funFact": "The green diamonds on Saint Vincent's flag refer to the letter V and to the nicknames Gems of the Antilles and Jewels of the Caribbean.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Saint_Vincent_and_the_Grenadines"
+  },
+  "WS": {
+    "funFact": "Samoa's flag was designed with four stars in 1948, and the smaller fifth star was added in 1949.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Samoa"
+  },
+  "SM": {
+    "funFact": "San Marino's coat of arms has a scroll bearing the word LIBERTAS, which means Freedom.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_San_Marino"
+  },
+  "ST": {
+    "funFact": "São Tomé and Príncipe's flag, adopted on 12 July 1975, is nearly identical to the first flag of the movement that led the country to independence.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe"
+  },
+  "SA": {
+    "funFact": "Saudi Arabia's flag has carried the shahada and a white sword on green since 15 March 1973.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Saudi_Arabia"
+  },
+  "SN": {
+    "funFact": "Senegal's flag was adopted in 1960 to replace the flag of the Mali Federation.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Senegal"
+  },
+  "RS": {
+    "funFact": "Serbia's tricolour, in varying forms, has been used as its flag since 1839.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Serbia"
+  },
+  "SC": {
+    "funFact": "Seychelles' flag uses the official colours of two of the country's major political parties.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Seychelles"
+  },
+  "SL": {
+    "funFact": "Sierra Leone's flag was adopted in 1961, its independence year, to replace the British Blue Ensign.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Sierra_Leone"
+  },
+  "SG": {
+    "funFact": "Singapore's flag was adopted in 1959 and designed by a government committee led by deputy prime minister Toh Chin Chye.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Singapore"
+  },
+  "SK": {
+    "funFact": "Slovakia's flag uses the Pan-Slavic colours of white, blue and red, like many other Slavic nations' flags.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Slovakia"
+  },
+  "SI": {
+    "funFact": "Slovenia's coat of arms shows Mount Triglav, the country's highest peak.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Slovenia"
+  },
+  "SB": {
+    "funFact": "Solomon Islands' flag was adopted on 18 November 1977, eight months before the country gained independence.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Solomon_Islands"
+  },
+  "SO": {
+    "funFact": "The white five-pointed star on Somalia's flag represents the five regions in which Somalis reside.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Somalia"
+  },
+  "ZA": {
+    "funFact": "South Africa's flag was designed in March 1994 and adopted on 27 April 1994, during the 1994 general election.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_South_Africa"
+  },
+  "KR": {
+    "funFact": "South Korea's Taegeukgi has a red and blue taegeuk in its centre, with a black trigram in each corner.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_South_Korea"
+  },
+  "SS": {
+    "funFact": "South Sudan's flag was adopted in 2005, six years before the country became independent in 2011.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_South_Sudan"
+  },
+  "ES": {
+    "funFact": "Spain's flag is nicknamed la Rojigualda, because its middle stripe was once called by the archaic term gualda, a natural dye.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Spain"
+  },
+  "LK": {
+    "funFact": "Sri Lanka's flag shows a golden lion holding a kastane sword, with a gold bo leaf in each corner.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Sri_Lanka"
+  },
+  "SD": {
+    "funFact": "Sudan's flag, used since 20 May 1970, is based on the Arab Liberation Flag of the 1952 Egyptian Revolution.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Sudan"
+  },
+  "SR": {
+    "funFact": "Suriname's law requires vessels to raise its flag when visiting another country, to reduce miscommunication.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Suriname"
+  },
+  "SE": {
+    "funFact": "Sweden's blue and yellow are believed to have been inspired by the coat of arms of 1442.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Sweden"
+  },
+  "CH": {
+    "funFact": "Switzerland's flag is square, instead of the rectangular shape typical for national flags.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Switzerland"
+  },
+  "SY": {
+    "funFact": "Syria's flag has green, white and black stripes with three red five-pointed stars in the white stripe.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Syria"
+  },
+  "TW": {
+    "funFact": "Taiwan's flag was designed by the Revive China Society in 1895, and Sun Yat-sen added the red field in 1906.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_Republic_of_China"
+  },
+  "TJ": {
+    "funFact": "Tajikistan's flag has a yellow crown surmounted by an arc of seven stars at its centre.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Tajikistan"
+  },
+  "TZ": {
+    "funFact": "Tanzania's flag was adopted in 1964 to replace the individual flags of Tanganyika and Zanzibar when the two states merged.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Tanzania"
+  },
+  "TH": {
+    "funFact": "Thailand's flag was adopted on 28 September 1917 by a royal decree issued by Rama VI.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Thailand"
+  },
+  "TL": {
+    "funFact": "Timor-Leste's flag has a black triangle with a white star, on top of a larger yellow triangle, on a red field.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Timor-Leste"
+  },
+  "TG": {
+    "funFact": "Togo's flag was designed by the Togolese artist Paul Ahyi in 1960, just before independence on 27 April.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Togo"
+  },
+  "TO": {
+    "funFact": "Tonga's constitution stipulates that the national flag can never be changed.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Tonga"
+  },
+  "TT": {
+    "funFact": "On Trinidad and Tobago's flag, red, black and white symbolise fire, earth and water.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Trinidad_and_Tobago"
+  },
+  "TN": {
+    "funFact": "Tunisia's flag dates back to a decision by Bey Hussein II after the Battle of Navarino on 20 October 1827.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Tunisia"
+  },
+  "TR": {
+    "funFact": "Turkey's flag is based on the 18th-century flag of the Ottoman Empire.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Turkey"
+  },
+  "TM": {
+    "funFact": "Turkmenistan's flag includes a symbolic representation of the country's famous carpet industry.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Turkmenistan"
+  },
+  "TV": {
+    "funFact": "The nine stars on Tuvalu's flag represent the nine islands of Tuvalu.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Tuvalu"
+  },
+  "UG": {
+    "funFact": "The crested crane on Uganda's flag echoes the colonial badge on the Blue Ensign flown from 1914 to March 1962.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Uganda"
+  },
+  "UA": {
+    "funFact": "Ukraine's blue and yellow bicolour was first seen during the 1848 Spring of Nations in Lemberg (Lviv).",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Ukraine"
+  },
+  "AE": {
+    "funFact": "The UAE's flag was designed in 1971 by Abdullah Mohammed Al Maainah, who was 19 years old, and won a nationwide contest.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_United_Arab_Emirates"
+  },
+  "GB": {
+    "funFact": "The Union Jack overlays the crosses of Saint George for England, Saint Andrew for Scotland and Saint Patrick for Northern Ireland.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Union_Jack"
+  },
+  "US": {
+    "funFact": "The 50 stars on the US flag represent the 50 states, and its 13 stripes represent the thirteen British colonies that won independence.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_the_United_States"
+  },
+  "UY": {
+    "funFact": "Uruguay's flag has nine stripes and a Sun of May with 16 rays, alternating between triangular and wavy.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Uruguay"
+  },
+  "UZ": {
+    "funFact": "Uzbekistan's flag has a white crescent moon and twelve white stars in the canton.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Uzbekistan"
+  },
+  "VU": {
+    "funFact": "Vanuatu's flag colours come from a 1977 party flag designed by local artist Kalontas Malon.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Vanuatu"
+  },
+  "VA": {
+    "funFact": "Vatican City's flag is one of only two national flags with a square 1:1 aspect ratio.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Vatican_City"
+  },
+  "VE": {
+    "funFact": "Venezuela's yellow, blue and red tricolour dates back to the original flag introduced in 1811.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Venezuela"
+  },
+  "VN": {
+    "funFact": "The five points of the golden star on Vietnam's flag represent the five main classes in Vietnamese society.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Vietnam"
+  },
+  "YE": {
+    "funFact": "Yemen's flag was adopted on 22 May 1990, the day of the country's unification.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Yemen"
+  },
+  "ZM": {
+    "funFact": "Zambia's flag has an orange African fish eagle in flight on a green field.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Zambia"
+  },
+  "ZW": {
+    "funFact": "The Zimbabwe Bird on Zimbabwe's flag represents a soapstone statuette found at the ruins of Great Zimbabwe.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Zimbabwe"
+  }
+}

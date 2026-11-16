@@ -71,6 +71,11 @@
   padding: 8px 16px 64px;
 }
 
+.hero-inner-wide,
+.page-wide {
+  max-width: 1040px;
+}
+
 @keyframes sun-bob {
   0%,
   100% {

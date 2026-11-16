@@ -17,6 +17,9 @@
     "content:runway": "tsx scripts/content/cli.ts runway",
     "content:draft": "tsx scripts/content/cli.ts draft",
     "content:models": "tsx scripts/content/cli.ts models",
+    "flags:generate": "tsx scripts/flags/generate.ts",
+    "flags:facts": "tsx scripts/flags/facts-cli.ts",
+    "spotdiff:verify": "tsx scripts/spot-difference/verify-cli.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
@@ -26,12 +29,14 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "astro": "^7.4.12",
+    "flag-icons": "^7.6.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@eslint/js": "^10.0.1",
+    "@resvg/resvg-js": "^2.6.2",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",

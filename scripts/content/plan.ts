@@ -1,46 +1,15 @@
+import {
+  FALLBACK_ORDER,
+  WEEKLY_DIFFICULTY_PATTERN,
+  type Difficulty,
+} from "../../src/core/difficulty";
+import { createRandom, shuffle } from "../../src/core/random";
 import type { Country } from "../../src/core/types";
-import type { Difficulty } from "../../src/games/mystery-place/types";
 import { resolveTier } from "./tiers";
 
 export interface PlannedPuzzle {
   country: Country;
   difficulty: Difficulty;
-}
-
-const DIFFICULTY_PATTERN: readonly Difficulty[] = [
-  "easy",
-  "medium",
-  "hard",
-  "medium",
-  "easy",
-  "medium",
-  "hard",
-];
-
-const FALLBACK_ORDER: Readonly<Record<Difficulty, readonly Difficulty[]>> = {
-  easy: ["easy", "medium", "hard"],
-  medium: ["medium", "hard", "easy"],
-  hard: ["hard", "medium", "easy"],
-};
-
-function createRandom(seed: number): () => number {
-  let state = seed >>> 0;
-  return () => {
-    state = (state + 0x6d2b79f5) >>> 0;
-    let value = state;
-    value = Math.imul(value ^ (value >>> 15), value | 1);
-    value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
-    return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-function shuffle<T>(items: readonly T[], random: () => number): T[] {
-  const result = [...items];
-  for (let index = result.length - 1; index > 0; index -= 1) {
-    const swapIndex = Math.floor(random() * (index + 1));
-    [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
-  }
-  return result;
 }
 
 function pickNext(
@@ -87,7 +56,7 @@ export function planBatch(
   let previousContinent: string | undefined;
   let exhausted = false;
   while (!exhausted && planned.length < size) {
-    const wanted = DIFFICULTY_PATTERN[planned.length % DIFFICULTY_PATTERN.length];
+    const wanted = WEEKLY_DIFFICULTY_PATTERN[planned.length % WEEKLY_DIFFICULTY_PATTERN.length];
     const picked = pickNext(pools, wanted, previousContinent);
     if (picked) {
       planned.push(picked);
