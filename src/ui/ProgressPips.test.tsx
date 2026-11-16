@@ -47,4 +47,26 @@ describe("ProgressPips", () => {
     render(<ProgressPips guessCount={0} status="playing" actions={<button>Extra</button>} />);
     expect(screen.getByRole("button", { name: "Extra" })).toBeInTheDocument();
   });
+
+  it("can show another number of pips with its own label and no current marker", () => {
+    render(
+      <ProgressPips
+        guessCount={2}
+        status="playing"
+        total={7}
+        label="Found 2 of 7"
+        showCurrent={false}
+      />,
+    );
+    expect(screen.getAllByText("Found 2 of 7").length).toBeGreaterThan(0);
+    expect(pipClasses("Found 2 of 7")).toEqual([
+      "pip-used",
+      "pip-used",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+      "empty",
+    ]);
+  });
 });

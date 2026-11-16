@@ -6,29 +6,45 @@ interface ProgressPipsProps {
   guessCount: number;
   status: GameStatus;
   actions?: ReactNode;
+  total?: number;
+  label?: string;
+  showCurrent?: boolean;
 }
 
-function resolvePipClass(index: number, guessCount: number, status: GameStatus): string {
+function resolvePipClass(
+  index: number,
+  guessCount: number,
+  status: GameStatus,
+  showCurrent: boolean,
+): string {
   if (index < guessCount) {
     const isWinningGuess = status === "won" && index === guessCount - 1;
     return isWinningGuess ? "pip pip-win" : "pip pip-used";
   }
-  if (index === guessCount && status === "playing") {
+  if (showCurrent && index === guessCount && status === "playing") {
     return "pip pip-current";
   }
   return "pip";
 }
 
-export function ProgressPips({ guessCount, status, actions }: ProgressPipsProps) {
-  const label =
+export function ProgressPips({
+  guessCount,
+  status,
+  actions,
+  total = MAX_GUESSES,
+  label: customLabel,
+  showCurrent = true,
+}: ProgressPipsProps) {
+  const defaultLabel =
     status === "playing"
-      ? `Guess ${guessCount + 1} of ${MAX_GUESSES}`
-      : `${guessCount} of ${MAX_GUESSES} guesses used`;
+      ? `Guess ${guessCount + 1} of ${total}`
+      : `${guessCount} of ${total} guesses used`;
+  const label = customLabel ?? defaultLabel;
   return (
     <div className="progress">
       <div className="pips" role="img" aria-label={label}>
-        {Array.from({ length: MAX_GUESSES }, (_, index) => (
-          <span key={index} className={resolvePipClass(index, guessCount, status)} />
+        {Array.from({ length: total }, (_, index) => (
+          <span key={index} className={resolvePipClass(index, guessCount, status, showCurrent)} />
         ))}
       </div>
       <div className="progress-row">

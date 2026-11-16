@@ -1,9 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { requireCountry } from "../core/testing";
 import { ResultPanel } from "./ResultPanel";
 
-const answer = requireCountry("EG");
 const reveal = {
   funFact: "Egypt is home to the only surviving ancient wonder.",
   sourceUrl: "https://en.wikipedia.org/wiki/Egypt",
@@ -15,7 +13,12 @@ function renderPanel(status: "playing" | "won" | "lost", score = 0) {
     <ResultPanel
       status={status}
       score={score}
-      answer={answer}
+      maxScore={5}
+      summary={
+        <>
+          The answer was <strong>Egypt</strong>
+        </>
+      }
       visual="🇪🇬"
       fact={reveal}
       shareText={shareText}
@@ -60,5 +63,31 @@ describe("ResultPanel", () => {
     expect(screen.getByText(/Dailyverse Mystery Place #2 2\/5/)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Share result" })).toBeInTheDocument();
     expect(screen.getByRole("timer")).toBeInTheDocument();
+  });
+
+  it("shows a custom summary, score total and lost label", () => {
+    const { container } = render(
+      <ResultPanel
+        status="lost"
+        score={0}
+        maxScore={8}
+        summary="You found 3 of 5 differences"
+        lostEyebrow="Out of lives"
+        shareText="x"
+      />,
+    );
+    expect(screen.getByText("You found 3 of 5 differences")).toBeInTheDocument();
+    expect(screen.getByText("Out of lives")).toBeInTheDocument();
+    expect(screen.queryByText("Out of guesses")).not.toBeInTheDocument();
+    expect(screen.getByText("0 / 8 points")).toBeInTheDocument();
+    expect(container.querySelectorAll(".star")).toHaveLength(8);
+  });
+
+  it("leaves out the picture and the fact when there are none", () => {
+    const { container } = render(
+      <ResultPanel status="won" score={5} maxScore={5} summary="Done" shareText="x" />,
+    );
+    expect(container.querySelector(".result-flag")).toBeNull();
+    expect(container.querySelector(".fact")).toBeNull();
   });
 });

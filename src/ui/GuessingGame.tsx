@@ -1,18 +1,16 @@
 import { useState, type ReactNode } from "react";
 import type { GameStorage } from "../core/gameStorage";
-import { calculateScore, type GuessingState } from "../core/guessing";
+import { calculateScore, MAX_GUESSES, type GuessingState } from "../core/guessing";
 import { buildShareText } from "../core/share";
 import type { Country } from "../core/types";
 import { useGuessingSession } from "../hooks/useGuessingSession";
 import { useHelpDialog } from "../hooks/useHelpDialog";
+import { GameDialogs } from "./GameDialogs";
 import { GameToolbar } from "./GameToolbar";
 import { GuessHistory } from "./GuessHistory";
 import { GuessInput } from "./GuessInput";
-import { Modal } from "./Modal";
 import { ProgressPips } from "./ProgressPips";
 import { ResultPanel, type ResultFact } from "./ResultPanel";
-import { RulesPanel } from "./RulesPanel";
-import { StatsSummary } from "./StatsSummary";
 import "./GuessingGame.css";
 
 interface GuessingGameProps {
@@ -73,17 +71,25 @@ export function GuessingGame({
       <ResultPanel
         status={state.status}
         score={calculateScore(state)}
-        answer={answer}
+        maxScore={MAX_GUESSES}
+        summary={
+          <>
+            The answer was <strong>{answer.name}</strong>
+          </>
+        }
         shareText={buildShareText(gameTitle, state, dayIndex + 1, shareUrl)}
         visual={resultVisual}
         fact={resultFact}
       />
-      <Modal open={helpDialog.isOpen} title="How to play" onClose={helpDialog.close}>
-        <RulesPanel steps={ruleSteps} example={ruleExample} onStart={helpDialog.close} />
-      </Modal>
-      <Modal open={isStatsOpen} title="Your stats" onClose={() => setIsStatsOpen(false)}>
-        <StatsSummary stats={stats} todayDayIndex={dayIndex} />
-      </Modal>
+      <GameDialogs
+        helpDialog={helpDialog}
+        isStatsOpen={isStatsOpen}
+        onCloseStats={() => setIsStatsOpen(false)}
+        ruleSteps={ruleSteps}
+        ruleExample={ruleExample}
+        stats={stats}
+        dayIndex={dayIndex}
+      />
     </div>
   );
 }

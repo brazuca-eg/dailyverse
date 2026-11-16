@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { applyGuess, createGuessingState } from "./guessing";
-import { createGameStorage } from "./gameStorage";
+import { createGameStorage, createStateStorage, isGuessingState } from "./gameStorage";
 import { applyGameResult, createEmptyStats } from "./streak";
 import { createMemoryStore, requireCountry } from "./testing";
 
@@ -134,5 +134,66 @@ describe("saved game stats", () => {
   it("falls back to empty stats for corrupted data", () => {
     const store = createMemoryStore({ [storage.keys.stats]: "nope" });
     expect(storage.loadStats(store)).toEqual(createEmptyStats());
+  });
+});
+
+describe("createStateStorage", () => {
+  interface CounterState {
+    puzzleId: string;
+    taps: number;
+  }
+
+  const isCounterState = (value: unknown): value is CounterState =>
+    typeof value === "object" &&
+    value !== null &&
+    typeof (value as CounterState).puzzleId === "string" &&
+    Number.isInteger((value as CounterState).taps);
+
+  const counters = createStateStorage("counter-game", isCounterState);
+
+  it("saves and restores a state of any shape that passes the check", () => {
+    const store = createMemoryStore();
+    const state = { puzzleId: "a", taps: 3 };
+    expect(counters.saveState(4, state, store)).toBe(true);
+    expect(counters.findSavedState("a", 4, store)).toEqual(state);
+  });
+
+  it("ignores a save from another day or puzzle", () => {
+    const store = createMemoryStore();
+    counters.saveState(4, { puzzleId: "a", taps: 3 }, store);
+    expect(counters.findSavedState("a", 5, store)).toBeNull();
+    expect(counters.findSavedState("b", 4, store)).toBeNull();
+  });
+
+  it("ignores a save that fails the check", () => {
+    const store = createMemoryStore({
+      [counters.keys.game]: JSON.stringify({ dayIndex: 4, state: { puzzleId: "a", taps: "many" } }),
+    });
+    expect(counters.findSavedState("a", 4, store)).toBeNull();
+  });
+
+  it("stores under its own keys, apart from other games", () => {
+    expect(counters.keys.game).toBe("dailyverse:counter-game:game");
+    expect(counters.keys.stats).toBe("dailyverse:counter-game:stats");
+    expect(counters.keys.helpSeen).toBe("dailyverse:counter-game:help-seen");
+  });
+
+  it("keeps help-seen and stats the same as for every other game", () => {
+    const store = createMemoryStore();
+    expect(counters.hasSeenHelp(store)).toBe(false);
+    counters.markHelpSeen(store);
+    expect(counters.hasSeenHelp(store)).toBe(true);
+    const stats = applyGameResult(createEmptyStats(), 3, true);
+    counters.saveStats(stats, store);
+    expect(counters.loadStats(store)).toEqual(stats);
+  });
+});
+
+describe("isGuessingState", () => {
+  it("accepts a fresh state and rejects other shapes", () => {
+    expect(isGuessingState(createGuessingState("p"))).toBe(true);
+    expect(isGuessingState(null)).toBe(false);
+    expect(isGuessingState({ puzzleId: "p", guesses: [], status: "cheating" })).toBe(false);
+    expect(isGuessingState({ puzzleId: 1, guesses: [], status: "playing" })).toBe(false);
   });
 });

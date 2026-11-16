@@ -1,3 +1,5 @@
+export type Random = () => number;
+
 export function createRandom(seed: number): () => number {
   let state = seed >>> 0;
   return () => {
@@ -16,4 +18,11 @@ export function shuffle<T>(items: readonly T[], random: () => number): T[] {
     [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
   }
   return result;
+}
+
+export function hashSeed(seed: number): number {
+  let hash = Math.imul(seed ^ 0x9e3779b9, 0x85ebca6b);
+  hash ^= hash >>> 13;
+  hash = Math.imul(hash, 0xc2b2ae35);
+  return (hash ^ (hash >>> 16)) >>> 0;
 }

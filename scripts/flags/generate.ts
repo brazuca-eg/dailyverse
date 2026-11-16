@@ -1,9 +1,9 @@
 import { readFileSync, writeFileSync } from "node:fs";
-import { Resvg } from "@resvg/resvg-js";
 import type { Country } from "../../src/core/types";
 import type { FlagEntry } from "../../src/games/flag-fragment/types";
 import { resolveFlagDifficulty } from "./difficulty";
-import { chooseFocus, type RasterImage } from "./focus";
+import { rasteriseSvg, type RasterImage } from "../raster";
+import { chooseFocus } from "./focus";
 
 const RASTER_WIDTH = 160;
 const COUNTRIES_PATH = new URL("../../src/core/countries.json", import.meta.url);
@@ -14,10 +14,7 @@ function rasteriseFlag(code: string): RasterImage {
     `../../node_modules/flag-icons/flags/4x3/${code.toLowerCase()}.svg`,
     import.meta.url,
   );
-  const rendered = new Resvg(readFileSync(svgPath), {
-    fitTo: { mode: "width", value: RASTER_WIDTH },
-  }).render();
-  return { width: rendered.width, height: rendered.height, pixels: rendered.pixels };
+  return rasteriseSvg(readFileSync(svgPath), RASTER_WIDTH);
 }
 
 function buildEntry(country: Country): FlagEntry {

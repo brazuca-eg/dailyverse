@@ -1,10 +1,6 @@
 import type { FlagFocus } from "../../src/games/flag-fragment/types";
 
-export interface RasterImage {
-  width: number;
-  height: number;
-  pixels: Uint8Array;
-}
+import type { RasterImage } from "../raster";
 
 const WINDOW_SHARE = 0.25;
 const CANDIDATE_CENTRES = [0.15, 0.3, 0.5, 0.7, 0.85];

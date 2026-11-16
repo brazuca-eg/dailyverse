@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { chooseFocus, countMainColours, type RasterImage } from "./focus";
+import type { RasterImage } from "../raster";
+import { chooseFocus, countMainColours } from "./focus";
 
 const WIDTH = 120;
 const HEIGHT = 90;

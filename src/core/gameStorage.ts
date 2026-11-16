@@ -6,9 +6,13 @@ import { createEmptyStats, isGameStats, type GameStats } from "./streak";
 
 const GAME_STATUSES: readonly GameStatus[] = ["playing", "won", "lost"];
 
-interface SavedGame {
+interface SavedGame<T> {
   dayIndex: number;
-  state: GuessingState;
+  state: T;
+}
+
+export interface SavedState {
+  puzzleId: string;
 }
 
 function isTrue(value: unknown): value is true {
@@ -35,11 +39,11 @@ function isGuessRecord(value: unknown): boolean {
   );
 }
 
-function isSavedGame(value: unknown): value is SavedGame {
-  if (!isRecord(value) || !Number.isInteger(value.dayIndex) || !isRecord(value.state)) {
+export function isGuessingState(value: unknown): value is GuessingState {
+  if (!isRecord(value)) {
     return false;
   }
-  const { puzzleId, guesses, status } = value.state;
+  const { puzzleId, guesses, status } = value;
   return (
     typeof puzzleId === "string" &&
     Array.isArray(guesses) &&
@@ -49,26 +53,31 @@ function isSavedGame(value: unknown): value is SavedGame {
   );
 }
 
-export interface GameStorage {
+export interface StateStorage<T extends SavedState> {
   keys: { game: string; helpSeen: string; stats: string };
-  findSavedState: (
-    puzzleId: string,
-    dayIndex: number,
-    store?: KeyValueStore | null,
-  ) => GuessingState | null;
-  saveState: (dayIndex: number, state: GuessingState, store?: KeyValueStore | null) => boolean;
+  findSavedState: (puzzleId: string, dayIndex: number, store?: KeyValueStore | null) => T | null;
+  saveState: (dayIndex: number, state: T, store?: KeyValueStore | null) => boolean;
   hasSeenHelp: (store?: KeyValueStore | null) => boolean;
   markHelpSeen: (store?: KeyValueStore | null) => boolean;
   loadStats: (store?: KeyValueStore | null) => GameStats;
   saveStats: (stats: GameStats, store?: KeyValueStore | null) => boolean;
 }
 
-export function createGameStorage(gameId: string): GameStorage {
+export type GameStorage = StateStorage<GuessingState>;
+
+export type HelpStorage = Pick<StateStorage<SavedState>, "hasSeenHelp" | "markHelpSeen">;
+
+export function createStateStorage<T extends SavedState>(
+  gameId: string,
+  isState: (value: unknown) => value is T,
+): StateStorage<T> {
   const keys = {
     game: `dailyverse:${gameId}:game`,
     helpSeen: `dailyverse:${gameId}:help-seen`,
     stats: `dailyverse:${gameId}:stats`,
   };
+  const isSavedGame = (value: unknown): value is SavedGame<T> =>
+    isRecord(value) && Number.isInteger(value.dayIndex) && isState(value.state);
   return {
     keys,
     findSavedState: (puzzleId, dayIndex, store) => {
@@ -83,4 +92,8 @@ export function createGameStorage(gameId: string): GameStorage {
     loadStats: (store) => findStoredValue(keys.stats, isGameStats, store) ?? createEmptyStats(),
     saveStats: (stats, store) => saveStoredValue(keys.stats, stats, store),
   };
+}
+
+export function createGameStorage(gameId: string): GameStorage {
+  return createStateStorage(gameId, isGuessingState);
 }
