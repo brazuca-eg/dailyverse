@@ -1,0 +1,43 @@
+.spot-game {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.spot-column {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.spot-scenes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.spot-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.spot-zoom {
+  min-height: 44px;
+  padding: 0 20px;
+}
+
+.spot-hint {
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+@media (min-width: 860px) {
+  .spot-scenes {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}

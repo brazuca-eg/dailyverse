@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createRandom, shuffle } from "./random";
+import { createRandom, hashSeed, shuffle } from "./random";
 
 describe("createRandom", () => {
   it("gives the same sequence for the same seed", () => {
@@ -40,5 +40,27 @@ describe("shuffle", () => {
 
   it("handles an empty list", () => {
     expect(shuffle([], createRandom(1))).toEqual([]);
+  });
+});
+
+describe("hashSeed", () => {
+  it("gives the same result for the same seed", () => {
+    expect(hashSeed(5)).toBe(hashSeed(5));
+  });
+
+  it("spreads consecutive seeds far apart", () => {
+    const hashes = Array.from({ length: 100 }, (_, seed) => hashSeed(seed));
+    expect(new Set(hashes).size).toBe(100);
+    const firstDigits = new Set(hashes.map((hash) => Math.floor((hash / 2 ** 32) * 4)));
+    expect(firstDigits.size).toBe(4);
+  });
+
+  it("returns an unsigned 32-bit integer", () => {
+    [0, 1, 2026, 2 ** 31, -7].forEach((seed) => {
+      const hash = hashSeed(seed);
+      expect(Number.isInteger(hash)).toBe(true);
+      expect(hash).toBeGreaterThanOrEqual(0);
+      expect(hash).toBeLessThan(2 ** 32);
+    });
   });
 });

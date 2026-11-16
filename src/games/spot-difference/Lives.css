@@ -1,0 +1,11 @@
+.lives {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: auto;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.life-lost {
+  opacity: 0.55;
+}

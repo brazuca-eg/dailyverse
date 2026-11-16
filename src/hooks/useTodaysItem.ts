@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { calculateDaysSinceLaunch, pickDailyItem } from "../core/daily";
+import { pickDailyItem } from "../core/daily";
+import { useDayIndex } from "./useDayIndex";
 
 export interface TodaysItem<T> {
   dayIndex: number;
@@ -7,8 +8,6 @@ export interface TodaysItem<T> {
 }
 
 export function useTodaysItem<T>(items: readonly T[], launchDate: Date): TodaysItem<T> {
-  return useMemo(() => {
-    const dayIndex = calculateDaysSinceLaunch(new Date(), launchDate);
-    return { dayIndex, item: pickDailyItem(items, dayIndex) };
-  }, [items, launchDate]);
+  const dayIndex = useDayIndex(launchDate);
+  return useMemo(() => ({ dayIndex, item: pickDailyItem(items, dayIndex) }), [items, dayIndex]);
 }

@@ -8,9 +8,14 @@ import "./BaseLayout.css";
 interface Props {
   title: string;
   description?: string;
+  wide?: boolean;
 }
 
-const { title, description = "Small daily games. A new puzzle every day." } = Astro.props;
+const {
+  title,
+  description = "Small daily games. A new puzzle every day.",
+  wide = false,
+} = Astro.props;
 ---
 
 <html lang="en">
@@ -28,7 +33,7 @@ const { title, description = "Small daily games. A new puzzle every day." } = As
   <body>
     <header class="hero">
       <div class="hero-sun" aria-hidden="true"></div>
-      <div class="hero-inner">
+      <div class:list={["hero-inner", { "hero-inner-wide": wide }]}>
         <a href="/" class="brand" aria-label="Dailyverse home">
           <svg class="brand-mark" viewBox="0 0 32 32" width="34" height="34" aria-hidden="true">
             <rect width="32" height="32" rx="10" fill="#fbf6ec"></rect>
@@ -51,7 +56,7 @@ const { title, description = "Small daily games. A new puzzle every day." } = As
         <path d="M0 104 C200 80 340 112 560 96 S920 74 1200 102 V120 H0 Z" fill="var(--bg)"></path>
       </svg>
     </header>
-    <main class="page">
+    <main class:list={["page", { "page-wide": wide }]}>
       <slot />
     </main>
   </body>

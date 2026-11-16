@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { GameStorage } from "../core/gameStorage";
+import type { HelpStorage } from "../core/gameStorage";
 
 export interface HelpDialog {
   isOpen: boolean;
@@ -7,7 +7,7 @@ export interface HelpDialog {
   close: () => void;
 }
 
-export function useHelpDialog(storage: GameStorage, hasStartedPlaying: boolean): HelpDialog {
+export function useHelpDialog(storage: HelpStorage, hasStartedPlaying: boolean): HelpDialog {
   const [isOpen, setIsOpen] = useState(() => !hasStartedPlaying && !storage.hasSeenHelp());
 
   function close() {
