@@ -1,0 +1,22 @@
+---
+import { countries } from "../core/countries";
+import { MysteryPlaceGame } from "../games/mystery-place/MysteryPlaceGame";
+import { PUZZLE_LAUNCH_DATE, puzzles } from "../games/mystery-place/data";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Mystery Place – Dailyverse"
+  description="Guess the country from five clues. A new puzzle every day."
+>
+  <Fragment slot="hero">
+    <h1>Mystery Place</h1>
+    <p class="lead">Which country is it? A wrong guess unlocks the next clue.</p>
+  </Fragment>
+  <MysteryPlaceGame
+    client:only="react"
+    puzzles={puzzles}
+    countries={countries}
+    launchDate={PUZZLE_LAUNCH_DATE}
+  />
+</BaseLayout>

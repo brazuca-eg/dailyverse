@@ -1,0 +1,60 @@
+.guess-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.guess-row {
+  display: flex;
+  gap: 10px;
+}
+
+.combobox {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.combobox-icon {
+  position: absolute;
+  top: 17px;
+  left: 16px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.combobox input {
+  width: 100%;
+  height: 56px;
+  padding: 0 16px 0 46px;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 2px solid var(--border-strong);
+  border-radius: 14px;
+  box-shadow: 0 3px 0 var(--border);
+}
+
+.combobox input::placeholder {
+  color: var(--text-muted);
+}
+
+.combobox input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.combobox input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.guess-form .button {
+  min-height: 56px;
+}
+
+.form-error {
+  margin: 10px 2px 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--danger);
+}

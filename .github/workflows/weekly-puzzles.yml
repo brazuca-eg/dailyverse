@@ -1,0 +1,67 @@
+name: Weekly puzzle batch
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      count:
+        description: Number of puzzles to draft
+        default: "7"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Set the batch name
+        run: echo "BATCH_DATE=$(date -u +%Y-%m-%d)" >> "$GITHUB_ENV"
+
+      - name: Draft puzzles with the model
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
+          LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
+          COUNT: ${{ inputs.count || '7' }}
+        run: >
+          npm run content:draft --
+          --count "$COUNT"
+          --out "content/drafts/batch-$BATCH_DATE.json"
+          --review review.md
+
+      - name: Check the drafts and add them to the game
+        run: npm run content:merge -- "content/drafts/batch-$BATCH_DATE.json"
+
+      - run: npm test
+
+      - name: Open a pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          branch="puzzles/batch-$BATCH_DATE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add content/drafts src/games/mystery-place/puzzles.json
+          git commit -m "Add puzzle batch $BATCH_DATE"
+          git push origin "$branch"
+          gh pr create \
+            --base "$BASE_BRANCH" \
+            --head "$branch" \
+            --title "Puzzle batch $BATCH_DATE" \
+            --body-file review.md
+
+      - name: Fail if the supply of puzzles is running low
+        run: npm run content:runway -- --min 14

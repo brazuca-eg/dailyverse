@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/home.css";
+---
+
+<BaseLayout title="Dailyverse – Small daily games">
+  <Fragment slot="hero">
+    <h1>Small daily games</h1>
+    <p class="lead">One new puzzle every day. Five minutes, tops.</p>
+  </Fragment>
+  <ul class="game-list">
+    <li>
+      <a class="game-card" href="/mystery-place">
+        <span class="game-card-icon" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            width="30"
+            height="30"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path>
+            <circle cx="12" cy="10" r="2.5"></circle>
+          </svg>
+        </span>
+        <span class="game-card-body">
+          <span class="game-card-title">Mystery Place</span>
+          <span class="game-card-text">Guess the country from five clues.</span>
+        </span>
+        <span class="game-card-cta">Play</span>
+      </a>
+    </li>
+  </ul>
+</BaseLayout>

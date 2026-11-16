@@ -1,0 +1,139 @@
+# CLAUDE.md
+
+Guidance for Claude Code when working in this repository.
+
+## Project
+
+Dailyverse is a small collection of daily games, in the spirit of magnitudle.com. One puzzle per game per day, the same for everyone, playable in under two minutes.
+
+First game: **Mystery Place**. The player guesses a country from five progressively more specific clues. Every wrong guess unlocks the next clue and shows distance and compass direction to the answer. Score is 5 points for a first-guess win down to 1, and 0 for a loss.
+
+Stack: Astro 7 (static), React 19 islands, TypeScript strict, Vite, Vitest 5. No backend and no database: puzzles are JSON, player state is `localStorage`.
+
+## Environment
+
+- Use Node 22 from nvm. Homebrew Node is broken on this machine. Prefix commands with `export PATH=$HOME/.nvm/versions/node/v22.23.5/bin:$PATH`.
+- Never run `git commit` or `git push`. Leave work uncommitted; the owner commits each step.
+
+## Commands
+
+| Command                                   | Purpose                                              |
+| ----------------------------------------- | ---------------------------------------------------- |
+| `npm run dev`                             | Dev server                                           |
+| `npm run build`                           | Static build into `dist/`                            |
+| `npm test`                                | All tests (unit in node, components in jsdom)        |
+| `npx vitest run --project components`     | Component tests only (`--project unit` for the rest) |
+| `npm run lint`                            | ESLint                                               |
+| `npm run format` / `npm run format:check` | Prettier                                             |
+| `npm run check`                           | `astro check` (types in `.astro` and `.ts`)          |
+| `npm run content:*`                       | Puzzle pipeline, see `content/README.md`             |
+
+Before finishing any change, all of these must pass, in CI order: `format:check`, `lint`, `test`, `check`, `build`.
+
+## Architecture
+
+```
+src/
+  core/            Game-agnostic logic: countries, distance, daily index, storage, streak, search, text, clipboard
+  games/<game>/    One folder per game. Logic (*.ts), components (*.tsx), and a co-located *.css each
+  ui/              Shared presentational components: Modal, ShareButton, NextPuzzleCountdown, StatsSummary, icons
+  layouts/         Astro layouts
+  pages/           Astro routes; each game page mounts one island with client:only="react"
+  styles/          Global CSS: tokens, base, animations, primitives, home
+  testing/         Vitest setup (jsdom dialog polyfill, cleanup)
+scripts/content/   Puzzle drafting and verification pipeline (tsx CLI)
+content/           Drafts and the content README
+```
+
+Rules of placement:
+
+- Game-agnostic code goes in `core/` or `ui/`. Nothing in `core/` or `ui/` may import from `games/`.
+- A new game gets its own `src/games/<name>/` folder and its own page. Reuse `core/` and `ui/` before writing anything new.
+- Pure logic lives in `.ts` files with no React. Components only render and wire.
+- Stateful behaviour lives in hooks (`useGameSession`, `useTodaysPuzzle`, `useHelpDialog`), not inside components.
+
+### Daily puzzle
+
+`puzzles[daysSinceLaunch % puzzles.length]`, using the UTC day. The index is computed once on mount, so a session that crosses midnight keeps its puzzle. `launchDate` is a placeholder until the real launch.
+
+### Persistence
+
+Keys are `dailyverse:<game>:game`, `:stats`, `:help-seen`. All reads go through `core/storage.ts`, which tolerates a missing or blocked `localStorage` and corrupt values. Saved game state is validated against the current puzzle before use. Never read or write `localStorage` directly from a component.
+
+### Content pipeline
+
+Puzzles live in `src/games/mystery-place/puzzles.json`. New puzzles start as drafts in `content/drafts/` with a Wikipedia quote as evidence for every clue. The checker verifies that the quote exists, that numbers match, and that no clue leaks the country name, an alias or the demonym. A weekly GitHub workflow drafts puzzles with an OpenAI-compatible API (`LLM_BASE_URL`, `LLM_API_KEY`, `LLM_MODEL`) and opens a PR for human review. Never merge or hand-edit puzzles without running `content:check`.
+
+## Frontend guidelines
+
+These are the standards for all code here. They extend the user's global conventions; where both speak, the stricter wins. ESLint enforces the mechanical ones.
+
+### Code style
+
+- KISS. The simplest thing that works, no speculative abstraction, no dead code, no duplication.
+- **No comments** and no JSDoc. Names and structure carry the meaning. ESLint fails on any comment.
+- **No `break` or `continue`.** Use `find`, `some`, `every`, `filter`, early returns or small functions.
+- Naming states the action and agrees with the return type. `find*` may return `null`. `get*` expects the value to exist and throws if not. `is*`/`has*` return booleans. `handle*` are event handlers, `on*` are callback props.
+- Functions are small and do one thing. Prefer pure functions; pass dependencies as arguments.
+- Prefer `const`, immutable updates and early returns over nested conditionals.
+- Named exports only. One component per file, file named after it.
+
+### TypeScript
+
+- Strict mode. No `any`; use `unknown` and narrow.
+- No non-null assertions (`!`) in production code. They are allowed only in tests and test helpers.
+- Model states as discriminated unions (for example `GuessFeedback`), not optional fields plus flags. Make illegal states unrepresentable.
+- Parse data at the boundary (JSON, `localStorage`, network) with type guards in `core/guards.ts`, then trust the types inside.
+- Use `interface` for props and object shapes, `type` for unions and aliases. Props interfaces are named `<Component>Props`.
+
+### React
+
+- Function components and hooks only.
+- Derive values during render instead of mirroring them in state. State holds the minimum.
+- `useEffect` is for synchronising with the outside world (DOM, timers, storage). Always return cleanup for timers and listeners. Do not use it to compute values or react to props you could handle in an event.
+- Keys are stable ids, never array indexes for reorderable lists.
+- Components are presentational where possible; side effects and persistence sit in hooks.
+- No prop drilling beyond two levels: compose with `children` or split the component first.
+- Use the native `<dialog>` through `ui/Modal`, not custom overlays.
+
+### Accessibility
+
+Treat it as a requirement, not polish. `jsx-a11y` is enforced.
+
+- Real elements first: `button` for actions, `a` for navigation, `dialog` for modals, lists for lists.
+- Every interactive control has an accessible name. Icon-only buttons need `aria-label`.
+- Everything is keyboard operable with a visible focus ring. The guess input is a proper combobox (`aria-activedescendant`, arrow keys, Enter, Escape).
+- Status changes are announced with `aria-live="polite"`. Meaning is never carried by colour alone: pair it with text or an icon.
+- Respect `prefers-reduced-motion` for animations and confetti.
+- Contrast meets WCAG AA in the tokens.
+
+### CSS
+
+- Plain CSS with custom properties. Design tokens live in `styles/tokens.css`; never hard-code colours, spacing or radii in a component stylesheet.
+- Each component imports its own co-located `.css`. Shared patterns (buttons, cards) go in `styles/primitives.css`.
+- Class names are lowercase-hyphenated and prefixed by the component's role to avoid collisions (`guess-badge`, `clue-new`).
+- Mobile first. The game must work at 375px width without horizontal scroll, with touch targets of at least 44px.
+- Warm outdoorsy look: keep to the existing palette and typography in the tokens.
+
+### Performance
+
+- Static HTML with a single React island per game page. Do not add a client framework router, state library or UI kit.
+- Keep the island small. Do not add a dependency for something a few lines of code can do; justify any new package.
+- Static assets are inlined or tiny. No images where an icon component or emoji does the job.
+
+### Testing
+
+- Behaviour over implementation: test what a player sees and does, through the DOM, using `@testing-library/react` and `user-event`. Query by role and accessible name first, never by class unless it is the only signal.
+- Pure logic gets unit tests next to the file (`x.test.ts`). Components and hooks get `x.test.tsx`. Each game has one integration test that plays the whole flow (win, loss, restore, dialogs).
+- Fix time with `vi.useFakeTimers({ toFake: ["Date"] })` when only the date matters. Use full fake timers only for timer behaviour, and drive them with `act`.
+- Storage is cleared after every test by `src/testing/setup.ts`. Tests must not depend on order.
+- When you add a behaviour test, break the code once to prove the test fails, then revert. A test that cannot fail is worthless.
+- Content checks are tested with local fixtures. Tests never touch the network.
+
+### Adding a new game
+
+1. Propose the rules first and wait for approval. Build one part at a time; do not scaffold ahead.
+2. Create `src/games/<name>/` with `types.ts`, pure game logic, hooks, components and CSS.
+3. Reuse `core/daily.ts`, `core/storage.ts`, `core/streak.ts`, `ui/Modal`, `ui/ShareButton`, `ui/StatsSummary`.
+4. Add a page in `src/pages/`, a card on the home page, and a share text builder.
+5. Add unit tests, component tests and an integration test before calling it done.
