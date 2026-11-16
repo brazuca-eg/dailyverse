@@ -1,0 +1,86 @@
+.board {
+  --count-width: 30px;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 3px;
+  touch-action: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.board td,
+.board th {
+  padding: 0;
+  text-align: center;
+}
+
+.corner,
+.board th[scope="row"] {
+  width: var(--count-width);
+}
+
+.line {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.line-met {
+  color: var(--success-text);
+}
+
+.line-over {
+  color: var(--danger);
+}
+
+.cell {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  cursor: pointer;
+  background: var(--surface-sunken);
+  border: 1px solid var(--cell-edge);
+  border-radius: 8px;
+  transition: background-color 120ms ease;
+}
+
+.cell:hover {
+  background: var(--accent-soft);
+}
+
+.cell svg {
+  width: 82%;
+  height: 82%;
+}
+
+.cell-tree {
+  cursor: default;
+  background: var(--surface);
+}
+
+.cell-tent {
+  background: var(--accent-soft);
+}
+
+.cell-grass {
+  background: var(--success-bg);
+}
+
+.cell-clash {
+  outline: 3px dashed var(--danger);
+  outline-offset: -3px;
+}
+
+.cell-answer {
+  background: var(--surface);
+  border-style: dashed;
+  border-color: var(--border-strong);
+}
+
+.cell-answer svg {
+  opacity: 0.6;
+}

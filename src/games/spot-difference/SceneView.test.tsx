@@ -2,6 +2,7 @@ import { createRef } from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { TAP_TOLERANCE } from "./game";
+import { MARKER_COLOURS } from "./markerColours";
 import { generatePuzzle } from "./puzzle";
 import { SceneView } from "./SceneView";
 
@@ -95,6 +96,42 @@ describe("SceneView", () => {
     );
   });
 
+  it("puts a white halo behind every marker so it stands out on any ground", () => {
+    const { container } = renderScene({ foundIds: [first.id], revealAll: true });
+    const halos = container.querySelectorAll(".marker-halo");
+    expect(halos).toHaveLength(5);
+    halos.forEach((halo) => expect(halo.getAttribute("stroke")).toBe("#ffffff"));
+    container.querySelectorAll(".marker").forEach((marker, index) => {
+      expect(marker.getAttribute("cx")).toBe(halos[index].getAttribute("cx"));
+      expect(marker.getAttribute("rx")).toBe(halos[index].getAttribute("rx"));
+    });
+  });
+
+  it("draws found circles dark green and missed ones dark red, from the shared colours", () => {
+    const { container } = renderScene({ foundIds: [first.id], revealAll: true });
+    expect(container.querySelector(".marker-found")?.getAttribute("stroke")).toBe(
+      MARKER_COLOURS.found,
+    );
+    container.querySelectorAll(".marker-missed").forEach((marker) => {
+      expect(marker.getAttribute("stroke")).toBe(MARKER_COLOURS.missed);
+    });
+  });
+
+  it("animates only the circles that were found", () => {
+    const { container } = renderScene({ foundIds: [first.id], revealAll: true });
+    expect(container.querySelectorAll(".marker-draw")).toHaveLength(2);
+    expect(container.querySelector(".marker-found")).toHaveClass("marker-draw");
+    expect(container.querySelector(".marker-missed")).not.toHaveClass("marker-draw");
+  });
+
+  it("draws the wrong-tap cross with a halo in the shared colours", () => {
+    const { container } = renderScene({ miss: { point: { x: 10, y: 10 }, key: 1 } });
+    expect(container.querySelector(".miss-halo")?.getAttribute("stroke")).toBe(MARKER_COLOURS.halo);
+    expect(container.querySelector(".miss-cross")?.getAttribute("stroke")).toBe(
+      MARKER_COLOURS.missed,
+    );
+  });
+
   it("never draws a marker smaller than a fingertip", () => {
     const { container } = renderScene({ revealAll: true });
     container.querySelectorAll(".marker").forEach((marker) => {
@@ -113,7 +150,8 @@ describe("SceneView", () => {
     const { container, unmount } = renderScene({ miss: { point: { x: 120, y: 340 }, key: 1 } });
     const mark = container.querySelector(".miss-mark");
     expect(mark?.getAttribute("transform")).toBe("translate(120 340)");
-    expect(mark?.querySelectorAll("line")).toHaveLength(2);
+    expect(mark?.querySelectorAll(".miss-cross line")).toHaveLength(2);
+    expect(mark?.querySelectorAll(".miss-halo line")).toHaveLength(2);
     unmount();
     expect(renderScene().container.querySelector(".miss-mark")).toBeNull();
   });

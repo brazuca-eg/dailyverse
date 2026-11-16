@@ -1,3 +1,5 @@
+import { WEEKLY_DIFFICULTY_PATTERN, type Difficulty } from "./difficulty";
+
 const MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
 
 function toUtcDayStart(date: Date): number {
@@ -26,4 +28,15 @@ export function pickDailyItem<T>(items: readonly T[], daysSinceLaunch: number): 
   }
   const index = ((daysSinceLaunch % items.length) + items.length) % items.length;
   return items[index];
+}
+
+export interface DailySpec {
+  seed: number;
+  tier: Difficulty;
+}
+
+export function pickDailySpec(dayIndex: number, seedOffset: number): DailySpec {
+  const weekLength = WEEKLY_DIFFICULTY_PATTERN.length;
+  const weekday = ((dayIndex % weekLength) + weekLength) % weekLength;
+  return { seed: dayIndex + seedOffset, tier: WEEKLY_DIFFICULTY_PATTERN[weekday] };
 }

@@ -1,4 +1,4 @@
-import { WEEKLY_DIFFICULTY_PATTERN, type Difficulty } from "../../core/difficulty";
+import { pickDailySpec, type DailySpec } from "../../core/daily";
 import { generatePuzzle } from "./puzzle";
 import type { Puzzle } from "./types";
 
@@ -6,16 +6,8 @@ export const SPOT_LAUNCH_DATE = new Date("2026-11-16T00:00:00Z");
 
 const SEED_OFFSET = 1000;
 
-export interface DailyPuzzleSpec {
-  seed: number;
-  tier: Difficulty;
-}
-
-export function pickDailyPuzzleSpec(dayIndex: number): DailyPuzzleSpec {
-  const weekday =
-    ((dayIndex % WEEKLY_DIFFICULTY_PATTERN.length) + WEEKLY_DIFFICULTY_PATTERN.length) %
-    WEEKLY_DIFFICULTY_PATTERN.length;
-  return { seed: dayIndex + SEED_OFFSET, tier: WEEKLY_DIFFICULTY_PATTERN[weekday] };
+export function pickDailyPuzzleSpec(dayIndex: number): DailySpec {
+  return pickDailySpec(dayIndex, SEED_OFFSET);
 }
 
 export function findDailyPuzzle(dayIndex: number): Puzzle | null {

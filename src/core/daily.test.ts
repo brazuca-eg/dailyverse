@@ -4,7 +4,9 @@ import {
   calculateMillisUntilNextDay,
   formatCountdown,
   pickDailyItem,
+  pickDailySpec,
 } from "./daily";
+import { WEEKLY_DIFFICULTY_PATTERN } from "./difficulty";
 
 const launchDate = new Date("2026-11-16T00:00:00Z");
 
@@ -80,5 +82,30 @@ describe("pickDailyItem", () => {
 
   it("throws for an empty list", () => {
     expect(() => pickDailyItem([], 0)).toThrow();
+  });
+});
+
+describe("pickDailySpec", () => {
+  it("adds the offset to the day number to get the seed", () => {
+    expect(pickDailySpec(0, 1000).seed).toBe(1000);
+    expect(pickDailySpec(5, 2000).seed).toBe(2005);
+  });
+
+  it("follows the weekly pattern for the tier, week after week", () => {
+    Array.from({ length: 21 }, (_, day) => day).forEach((day) => {
+      expect(pickDailySpec(day, 0).tier).toBe(
+        WEEKLY_DIFFICULTY_PATTERN[day % WEEKLY_DIFFICULTY_PATTERN.length],
+      );
+    });
+  });
+
+  it("still gives a valid tier for days before the launch", () => {
+    expect(pickDailySpec(-1, 0).tier).toBe(WEEKLY_DIFFICULTY_PATTERN[6]);
+    expect(pickDailySpec(-7, 0).tier).toBe(WEEKLY_DIFFICULTY_PATTERN[0]);
+    expect(pickDailySpec(-8, 0).tier).toBe(WEEKLY_DIFFICULTY_PATTERN[6]);
+  });
+
+  it("gives different games different seeds for the same day", () => {
+    expect(pickDailySpec(3, 1000).seed).not.toBe(pickDailySpec(3, 2000).seed);
   });
 });
