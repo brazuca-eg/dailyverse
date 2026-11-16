@@ -8,6 +8,7 @@ import {
 } from "react";
 import { findCrosshairMove, findStartPoint, isActivationKey, moveCrosshair } from "./crosshair";
 import { TAP_TOLERANCE, type MissMark, type Point } from "./game";
+import { MARKER_COLOURS } from "./markerColours";
 import { calculateTapTolerance, toScenePoint } from "./pointer";
 import { renderSceneContent } from "./render";
 import type { Bounds, Difference, Scene } from "./types";
@@ -114,12 +115,20 @@ export function SceneView({
           {markers.map((difference) => {
             const marker = describeMarker(difference.region);
             const isFound = foundIds.includes(difference.id);
+            const draw = isFound ? " marker-draw" : "";
             return (
-              <ellipse
-                key={difference.id}
-                className={isFound ? "marker marker-found" : "marker marker-missed"}
-                {...marker}
-              />
+              <g key={difference.id}>
+                <ellipse
+                  className={`marker-halo${draw}`}
+                  stroke={MARKER_COLOURS.halo}
+                  {...marker}
+                />
+                <ellipse
+                  className={`marker ${isFound ? "marker-found" : "marker-missed"}${draw}`}
+                  stroke={isFound ? MARKER_COLOURS.found : MARKER_COLOURS.missed}
+                  {...marker}
+                />
+              </g>
             );
           })}
           {miss && (
@@ -128,8 +137,14 @@ export function SceneView({
               className="miss-mark"
               transform={`translate(${miss.point.x} ${miss.point.y})`}
             >
-              <line x1={-MISS_ARM} y1={-MISS_ARM} x2={MISS_ARM} y2={MISS_ARM} />
-              <line x1={-MISS_ARM} y1={MISS_ARM} x2={MISS_ARM} y2={-MISS_ARM} />
+              <g className="miss-halo" stroke={MARKER_COLOURS.halo}>
+                <line x1={-MISS_ARM} y1={-MISS_ARM} x2={MISS_ARM} y2={MISS_ARM} />
+                <line x1={-MISS_ARM} y1={MISS_ARM} x2={MISS_ARM} y2={-MISS_ARM} />
+              </g>
+              <g className="miss-cross" stroke={MARKER_COLOURS.missed}>
+                <line x1={-MISS_ARM} y1={-MISS_ARM} x2={MISS_ARM} y2={MISS_ARM} />
+                <line x1={-MISS_ARM} y1={MISS_ARM} x2={MISS_ARM} y2={-MISS_ARM} />
+              </g>
             </g>
           )}
           {crosshair && (

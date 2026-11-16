@@ -20,6 +20,7 @@
     "flags:generate": "tsx scripts/flags/generate.ts",
     "flags:facts": "tsx scripts/flags/facts-cli.ts",
     "spotdiff:verify": "tsx scripts/spot-difference/verify-cli.ts",
+    "tents:verify": "tsx scripts/tents-trees/verify-cli.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

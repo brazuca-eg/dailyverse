@@ -38,21 +38,27 @@
   width: 200%;
 }
 
-.marker {
+.marker,
+.marker-halo {
   fill: none;
-  stroke-width: 4;
   pointer-events: none;
 }
 
-.marker-found {
-  stroke: var(--success);
+.marker {
+  stroke-width: 4;
+}
+
+.marker-halo {
+  stroke-width: 8;
+}
+
+.marker-draw {
   stroke-dasharray: 400;
   stroke-dashoffset: 0;
   animation: marker-draw 450ms ease-out;
 }
 
 .marker-missed {
-  stroke: var(--danger);
   stroke-dasharray: 8 6;
 }
 
@@ -62,9 +68,15 @@
 }
 
 .miss-mark line {
-  stroke: var(--danger);
-  stroke-width: 5;
   stroke-linecap: round;
+}
+
+.miss-halo line {
+  stroke-width: 9;
+}
+
+.miss-cross line {
+  stroke-width: 5;
 }
 
 .crosshair {

@@ -6,6 +6,7 @@
   --text-muted: #5b685f;
   --border: #e3d8bf;
   --border-strong: #c9bb98;
+  --cell-edge: #8a7d57;
   --primary: #1f5f46;
   --primary-hover: #25704f;
   --primary-shadow: #123d2d;
@@ -40,6 +41,7 @@
     --text-muted: #a9b5ab;
     --border: #2d3b33;
     --border-strong: #46574c;
+    --cell-edge: #6b7f72;
     --primary: #4cb08a;
     --primary-hover: #63c29d;
     --primary-shadow: #2a7a5a;
