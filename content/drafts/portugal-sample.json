@@ -1,0 +1,44 @@
+[
+  {
+    "country": "PT",
+    "difficulty": "medium",
+    "clues": [
+      {
+        "kind": "geography",
+        "text": "This country is bordered by Spain to the north and east.",
+        "evidence": { "page": "Portugal", "quote": "bordered by Spain to the north and east" }
+      },
+      {
+        "kind": "geography",
+        "text": "It includes two groups of Atlantic islands, Madeira and the Azores.",
+        "evidence": {
+          "page": "Portugal",
+          "quote": "Portugal also includes the archipelagos of Madeira and the Azores in the Atlantic Ocean"
+        }
+      },
+      {
+        "kind": "culture",
+        "text": "Fado is its best-known style of music.",
+        "evidence": { "page": "Portugal", "quote": "its music (especially the fado)" }
+      },
+      {
+        "kind": "history",
+        "text": "In 1498 one of its explorers, Vasco da Gama, reached India by sea.",
+        "evidence": { "page": "Portugal", "quote": "In 1498, Vasco da Gama reached India by sea" }
+      },
+      {
+        "kind": "landmark",
+        "text": "Its capital and largest city is Lisbon.",
+        "evidence": { "page": "Portugal", "quote": "Lisbon, its capital, is the largest city" }
+      }
+    ],
+    "reveal": {
+      "funFact": "The 1755 earthquake and tsunami is counted among the kingdom's worst recorded natural disasters.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Portugal",
+      "evidence": {
+        "page": "Portugal",
+        "quote": "the 1755 earthquake and tsunami, one of the kingdom's worst recorded natural disaster"
+      }
+    }
+  }
+]

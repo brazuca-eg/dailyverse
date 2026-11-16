@@ -1,0 +1,482 @@
+[
+  {
+    "id": "mp-0001",
+    "country": "NZ",
+    "difficulty": "medium",
+    "clues": [
+      { "kind": "geography", "text": "This country is made up of two main islands." },
+      { "kind": "wildlife", "text": "Its national symbol is a flightless bird." },
+      { "kind": "outdoor", "text": "The world's first commercial bungee jumping site opened here in 1988." },
+      { "kind": "culture", "text": "A famous ceremonial war dance called the haka comes from here." },
+      { "kind": "film", "text": "Middle-earth in The Lord of the Rings was filmed across this country." }
+    ],
+    "reveal": {
+      "funFact": "Its Māori name, Aotearoa, is commonly translated as 'land of the long white cloud'.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/New_Zealand"
+    }
+  },
+  {
+    "id": "mp-0002",
+    "country": "EG",
+    "difficulty": "easy",
+    "clues": [
+      { "kind": "geography", "text": "Most of this country's land is desert, and most people live along one river." },
+      { "kind": "history", "text": "Its ancient writing used pictures and was deciphered thanks to the Rosetta Stone." },
+      { "kind": "culture", "text": "Its capital is the largest city in the Arab world." },
+      { "kind": "geography", "text": "A canal here links the Mediterranean Sea with the Red Sea." },
+      { "kind": "landmark", "text": "The only surviving wonder of the ancient world stands just outside its capital." }
+    ],
+    "reveal": {
+      "funFact": "The Great Pyramid of Giza was the tallest human-made structure in the world for roughly 3,800 years.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza"
+    }
+  },
+  {
+    "id": "mp-0003",
+    "country": "JP",
+    "difficulty": "easy",
+    "clues": [
+      { "kind": "geography", "text": "This country is made up of thousands of islands." },
+      { "kind": "culture", "text": "Its capital region is the most populous metropolitan area in the world." },
+      { "kind": "food", "text": "A dish of vinegared rice with raw fish from here is eaten worldwide." },
+      { "kind": "outdoor", "text": "Hundreds of thousands of people climb its highest peak, a sacred volcano, each summer." },
+      { "kind": "history", "text": "High-speed bullet trains began running here in 1964, just before it hosted the Olympics." }
+    ],
+    "reveal": {
+      "funFact": "Mount Fuji was added to the UNESCO World Heritage List in 2013 as a cultural site, not a natural one.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mount_Fuji"
+    }
+  },
+  {
+    "id": "mp-0004",
+    "country": "CH",
+    "difficulty": "medium",
+    "clues": [
+      { "kind": "geography", "text": "This country has no coastline." },
+      { "kind": "language", "text": "It has four national languages." },
+      { "kind": "food", "text": "It is famous worldwide for its chocolate and its watchmaking." },
+      { "kind": "outdoor", "text": "Its most famous peak, shaped like a pyramid, sits on the border with Italy." },
+      { "kind": "history", "text": "It has stayed out of armed conflicts between other nations for centuries and is the birthplace of the Red Cross." }
+    ],
+    "reveal": {
+      "funFact": "Its four national languages are German, French, Italian and Romansh.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Switzerland"
+    }
+  },
+  {
+    "id": "mp-0005",
+    "country": "BR",
+    "difficulty": "easy",
+    "clues": [
+      { "kind": "geography", "text": "This is the largest country on its continent." },
+      { "kind": "language", "text": "Its official language is Portuguese." },
+      { "kind": "wildlife", "text": "Most of the world's largest rainforest lies within its borders." },
+      { "kind": "sport", "text": "Its men's football team has won the World Cup five times." },
+      { "kind": "landmark", "text": "A huge statue of Christ the Redeemer watches over its famous carnival city." }
+    ],
+    "reveal": {
+      "funFact": "It is the only country in the Americas where Portuguese is the official language.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Brazil"
+    }
+  },
+  {
+    "id": "mp-0006",
+    "country": "IT",
+    "difficulty": "easy",
+    "clues": [
+      { "kind": "geography", "text": "The outline of this country is often compared to a boot." },
+      { "kind": "geography", "text": "The Mediterranean islands of Sicily and Sardinia both belong to it." },
+      { "kind": "landmark", "text": "A famously leaning tower in the city of Pisa is one of its best-known sights." },
+      { "kind": "geography", "text": "Two of the world's smallest countries, San Marino and Vatican City, are completely surrounded by it." },
+      { "kind": "history", "text": "Its capital was the heart of an ancient empire and is home to the Colosseum." }
+    ],
+    "reveal": {
+      "funFact": "Mount Etna on the island of Sicily is one of the most active volcanoes in the world.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mount_Etna"
+    }
+  },
+  {
+    "id": "mp-0007",
+    "country": "KE",
+    "difficulty": "medium",
+    "clues": [
+      { "kind": "geography", "text": "This East African country is crossed by the equator." },
+      { "kind": "wildlife", "text": "Every year well over a million wildebeest cross a river to reach its Maasai Mara reserve." },
+      { "kind": "sport", "text": "Its long-distance runners, many from the Rift Valley highlands, dominate marathons." },
+      { "kind": "geography", "text": "The second-highest mountain in Africa rises in its central highlands." },
+      { "kind": "landmark", "text": "A national park where rhinos roam lies only about 7 kilometres south of its capital, Nairobi." }
+    ],
+    "reveal": {
+      "funFact": "The black, red and green flag carries a Maasai shield and two crossed spears.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Flag_of_Kenya"
+    }
+  },
+  {
+    "id": "mp-0008",
+    "country": "IN",
+    "difficulty": "easy",
+    "clues": [
+      { "kind": "geography", "text": "This is the most populous country in the world." },
+      { "kind": "sport", "text": "Cricket is hugely popular here, and its professional league is among the richest in sport." },
+      { "kind": "geography", "text": "The Himalayas form a natural barrier along its northern border." },
+      { "kind": "language", "text": "Hindi and English are its main official languages, alongside many regional ones." },
+      { "kind": "landmark", "text": "A white marble mausoleum in Agra was built by an emperor for his wife." }
+    ],
+    "reveal": {
+      "funFact": "Construction of the Taj Mahal began in 1631, and the whole complex was finished around 1653.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Taj_Mahal"
+    }
+  },
+  {
+    "id": "mp-0009",
+    "country": "PE",
+    "difficulty": "medium",
+    "clues": [
+      { "kind": "geography", "text": "This country is crossed by the Andes mountains and part of the Amazon rainforest." },
+      { "kind": "wildlife", "text": "Llamas, alpacas and vicuñas graze on its high plateaus." },
+      { "kind": "food", "text": "Ceviche, raw fish cured in citrus juice, is its national dish." },
+      { "kind": "history", "text": "The Inca empire had its capital in the mountain city of Cusco." },
+      { "kind": "landmark", "text": "The Inca citadel of Machu Picchu, perched on a mountain ridge, is its most famous sight." }
+    ],
+    "reveal": {
+      "funFact": "Potatoes were first domesticated in the Andes thousands of years ago, and many native varieties are still grown there.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Potato"
+    }
+  },
+  {
+    "id": "mp-0010",
+    "country": "CA",
+    "difficulty": "easy",
+    "clues": [
+      { "kind": "geography", "text": "This is the second-largest country in the world by total area." },
+      { "kind": "geography", "text": "It has more lakes than any other country." },
+      { "kind": "culture", "text": "Its flag shows a red leaf on a white square between two red bars." },
+      { "kind": "language", "text": "English and French are both official languages at the national level." },
+      { "kind": "sport", "text": "Ice hockey is its national winter sport, and it produces most of the world's maple syrup." }
+    ],
+    "reveal": {
+      "funFact": "It has the longest coastline of any country in the world.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Canada"
+    }
+  },
+  {
+    "id": "mp-0011",
+    "country": "IS",
+    "difficulty": "medium",
+    "clues": [
+      { "kind": "geography", "text": "This island country sits on the Mid-Atlantic Ridge, where two tectonic plates are pulling apart." },
+      { "kind": "geography", "text": "Geothermal energy has long been used to heat its homes and baths." },
+      { "kind": "history", "text": "It has no standing army." },
+      { "kind": "landmark", "text": "Its capital is the northernmost capital of a sovereign state in the world." },
+      { "kind": "geography", "text": "Its largest glacier, Vatnajökull, covers about 8% of the country." }
+    ],
+    "reveal": {
+      "funFact": "Its parliament, the Althing, first met in 930 at Þingvellir, a site now listed by UNESCO.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Althing"
+    }
+  },
+  {
+    "id": "mp-0012",
+    "country": "AU",
+    "difficulty": "easy",
+    "clues": [
+      { "kind": "geography", "text": "This country is the sixth-largest in the world by area." },
+      { "kind": "wildlife", "text": "Kangaroos, koalas and wombats are native here." },
+      { "kind": "landmark", "text": "A sail-shaped opera house stands on the harbour of its largest city." },
+      { "kind": "geography", "text": "The world's largest coral reef system lies off its north-east coast." },
+      { "kind": "culture", "text": "A giant red sandstone monolith called Uluru is sacred to its Aboriginal peoples." }
+    ],
+    "reveal": {
+      "funFact": "Its capital, Canberra, was purpose-built as a compromise between the rival cities of Sydney and Melbourne.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Canberra"
+    }
+  },
+  {
+    "id": "mp-0013",
+    "country": "BT",
+    "difficulty": "hard",
+    "clues": [
+      { "kind": "geography", "text": "This landlocked country lies between two of the most populous nations on Earth." },
+      { "kind": "culture", "text": "It is famous for promoting 'Gross National Happiness' as a national goal alongside economic growth." },
+      { "kind": "outdoor", "text": "Climbing mountains above 6,000 metres is banned here, so its highest peak remains unclimbed." },
+      { "kind": "culture", "text": "Men wear a knee-length robe called the gho, which is required in schools and offices." },
+      { "kind": "landmark", "text": "A cliffside monastery known as Tiger's Nest clings to a rock face above the Paro valley." }
+    ],
+    "reveal": {
+      "funFact": "Its forests absorb more carbon dioxide than the country emits, which makes it carbon negative.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Bhutan"
+    }
+  },
+  {
+    "id": "mp-0014",
+    "country": "MA",
+    "difficulty": "medium",
+    "clues": [
+      { "kind": "geography", "text": "This country has coastlines on both the Atlantic Ocean and the Mediterranean Sea." },
+      { "kind": "geography", "text": "The Atlas Mountains cross it, and the Sahara Desert reaches its south." },
+      { "kind": "language", "text": "Arabic and Amazigh, also called Berber, are its official languages." },
+      { "kind": "food", "text": "Tagine, a slow-cooked stew named after its clay pot, is a national staple." },
+      { "kind": "landmark", "text": "Its old walled cities, such as Marrakesh and Fez, are full of labyrinthine medinas." }
+    ],
+    "reveal": {
+      "funFact": "The University of al-Qarawiyyin in Fez, founded in the 9th century, is often cited as the oldest university in the world.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/University_of_al-Qarawiyyin"
+    }
+  },
+  {
+    "id": "mp-0015",
+    "country": "ES",
+    "difficulty": "easy",
+    "clues": [
+      { "kind": "geography", "text": "This country occupies most of the Iberian Peninsula." },
+      { "kind": "culture", "text": "Flamenco music and dance grew up in its southern region of Andalusia." },
+      { "kind": "sport", "text": "Two of its football clubs, from the capital and from Barcelona, have one of the sport's fiercest rivalries." },
+      { "kind": "food", "text": "Paella from Valencia and small plates called tapas are among its best-known foods." },
+      { "kind": "landmark", "text": "Antoni Gaudí's Sagrada Família basilica in Barcelona has been under construction since 1882." }
+    ],
+    "reveal": {
+      "funFact": "The famous running of the bulls takes place every July in Pamplona during the San Fermín festival.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Running_of_the_bulls"
+    }
+  },
+  {
+    "id": "mp-0016",
+    "country": "MX",
+    "difficulty": "easy",
+    "clues": [
+      { "kind": "geography", "text": "Its northern border is shared with the United States." },
+      { "kind": "language", "text": "More people speak Spanish as a first language here than in any other country." },
+      { "kind": "food", "text": "Maize was first domesticated here thousands of years ago, and tortillas are still a staple." },
+      { "kind": "history", "text": "Pyramids built by the Maya and Aztec civilisations stand across the country." },
+      { "kind": "culture", "text": "Each autumn it celebrates the Day of the Dead with marigolds and sugar skulls." }
+    ],
+    "reveal": {
+      "funFact": "Its capital was built on top of the Aztec city of Tenochtitlan.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mexico_City"
+    }
+  },
+  {
+    "id": "mp-0017",
+    "country": "TH",
+    "difficulty": "medium",
+    "clues": [
+      { "kind": "history", "text": "This is the only country in its region of Southeast Asia that was never colonised by a European power." },
+      { "kind": "wildlife", "text": "The elephant is its national animal." },
+      { "kind": "food", "text": "Green curry, mango sticky rice and a famous stir-fried noodle dish are among its best-known foods." },
+      { "kind": "landmark", "text": "The ceremonial name of its capital is among the longest place names in the world." },
+      { "kind": "culture", "text": "Its new year in April is celebrated with giant street water fights." }
+    ],
+    "reveal": {
+      "funFact": "Songkran, the new year water festival, is on UNESCO's list of intangible cultural heritage.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Songkran"
+    }
+  },
+  {
+    "id": "mp-0018",
+    "country": "NA",
+    "difficulty": "hard",
+    "clues": [
+      { "kind": "geography", "text": "This country's Atlantic coast is lined by one of the oldest deserts in the world." },
+      { "kind": "geography", "text": "Its Skeleton Coast is strewn with shipwrecks and whale bones." },
+      { "kind": "geography", "text": "Towering red dunes, some about 300 metres high, surround the clay pan of Sossusvlei." },
+      { "kind": "history", "text": "It gained independence from South Africa in 1990." },
+      { "kind": "wildlife", "text": "Elephants, lions and rhinos gather at waterholes beside the giant salt pan of Etosha National Park." }
+    ],
+    "reveal": {
+      "funFact": "It is one of the most sparsely populated countries in the world.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Namibia"
+    }
+  },
+  {
+    "id": "mp-0019",
+    "country": "AR",
+    "difficulty": "medium",
+    "clues": [
+      { "kind": "geography", "text": "This country stretches from subtropical north to the edge of Antarctica in the far south." },
+      { "kind": "sport", "text": "Lionel Messi, who captained it to the 2022 World Cup title, was born here." },
+      { "kind": "culture", "text": "Tango music and dance were born in working-class districts around the Río de la Plata." },
+      { "kind": "food", "text": "Beef barbecue called asado and the herbal drink mate are national traditions." },
+      { "kind": "geography", "text": "Aconcagua, the highest mountain outside Asia, rises near its western border with Chile." }
+    ],
+    "reveal": {
+      "funFact": "The Iguazú Falls, which it shares with Brazil, consist of about 275 separate drops.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Iguaz%C3%BA_Falls"
+    }
+  },
+  {
+    "id": "mp-0020",
+    "country": "CN",
+    "difficulty": "easy",
+    "clues": [
+      { "kind": "geography", "text": "This country shares land borders with fourteen others." },
+      { "kind": "culture", "text": "Red envelopes and dragon dances mark its biggest holiday, the Lunar New Year." },
+      { "kind": "wildlife", "text": "The giant panda, often used as its national symbol, lives in its bamboo forests." },
+      { "kind": "landmark", "text": "A wall stretching thousands of kilometres was built to defend its northern frontier." },
+      { "kind": "landmark", "text": "Its capital contains the Forbidden City and Tiananmen Square." }
+    ],
+    "reveal": {
+      "funFact": "A 2012 survey measured all sections of the Great Wall at about 21,000 kilometres.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Great_Wall_of_China"
+    }
+  },
+  {
+    "id": "mp-0021",
+    "country": "FJ",
+    "difficulty": "hard",
+    "clues": [
+      { "kind": "geography", "text": "This South Pacific country is an archipelago of more than 300 islands." },
+      { "kind": "sport", "text": "It won its first-ever Olympic medal, gold in rugby sevens, in 2016." },
+      { "kind": "culture", "text": "A ceremonial drink called kava, made from a pepper plant root, is shared at gatherings." },
+      { "kind": "culture", "text": "Villagers on the island of Beqa have a tradition of walking over hot stones." },
+      { "kind": "geography", "text": "Its capital, Suva, is on the main island of Viti Levu, home to about three-quarters of its people." }
+    ],
+    "reveal": {
+      "funFact": "The 180th meridian passes through its island of Taveuni.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Taveuni"
+    }
+  },
+  {
+    "id": "mp-0022",
+    "country": "NO",
+    "difficulty": "medium",
+    "clues": [
+      { "kind": "geography", "text": "The coastline of this country is carved by thousands of deep, narrow sea inlets called fjords." },
+      { "kind": "climate", "text": "In summer the sun barely sets in its far north, and in winter the northern lights glow." },
+      { "kind": "culture", "text": "The Nobel Peace Prize is awarded in its capital each year." },
+      { "kind": "history", "text": "Viking longships once sailed from its shores." },
+      { "kind": "geography", "text": "It is not in the European Union, yet it is one of the world's richest countries thanks to offshore oil and gas." }
+    ],
+    "reveal": {
+      "funFact": "Its sovereign wealth fund, built on oil and gas income, is the largest in the world.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Government_Pension_Fund_of_Norway"
+    }
+  },
+  {
+    "id": "mp-0023",
+    "country": "GR",
+    "difficulty": "easy",
+    "clues": [
+      { "kind": "geography", "text": "This country has thousands of islands, though only a small fraction of them are inhabited." },
+      { "kind": "food", "text": "Feta cheese and olive oil are staples of its cuisine." },
+      { "kind": "sport", "text": "The modern Olympic Games were revived in its capital in 1896." },
+      { "kind": "history", "text": "Ancient philosophers such as Socrates, Plato and Aristotle lived and taught here." },
+      { "kind": "landmark", "text": "A hilltop citadel above its capital is crowned by the Parthenon." }
+    ],
+    "reveal": {
+      "funFact": "It has the longest coastline in the Mediterranean Basin and one of the longest in the world.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Greece"
+    }
+  },
+  {
+    "id": "mp-0024",
+    "country": "ZA",
+    "difficulty": "medium",
+    "clues": [
+      { "kind": "geography", "text": "This country has three capital cities." },
+      { "kind": "geography", "text": "It completely surrounds another country, the mountain kingdom of Lesotho." },
+      { "kind": "wildlife", "text": "The Big Five, lion, leopard, elephant, rhino and buffalo, roam in Kruger National Park." },
+      { "kind": "history", "text": "Nelson Mandela, imprisoned for 27 years, became its first democratically elected president in 1994." },
+      { "kind": "landmark", "text": "A flat-topped mountain overlooks its legislative capital on the coast." }
+    ],
+    "reveal": {
+      "funFact": "It has twelve official languages, including a sign language.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Languages_of_South_Africa"
+    }
+  },
+  {
+    "id": "mp-0025",
+    "country": "MG",
+    "difficulty": "hard",
+    "clues": [
+      { "kind": "geography", "text": "This country occupies the fourth-largest island in the world." },
+      { "kind": "geography", "text": "It lies off the south-east coast of Africa, across the Mozambique Channel." },
+      { "kind": "wildlife", "text": "Around 90% of its wildlife is found nowhere else on Earth." },
+      { "kind": "wildlife", "text": "Lemurs, primates that are native only to this island, leap through its forests." },
+      { "kind": "landmark", "text": "A famous avenue near Morondava is lined with giant baobab trees." }
+    ],
+    "reveal": {
+      "funFact": "It supplies about 80% of the world's natural vanilla.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Madagascar"
+    }
+  },
+  {
+    "id": "mp-0026",
+    "country": "FR",
+    "difficulty": "easy",
+    "clues": [
+      { "kind": "geography", "text": "Its mainland is popularly nicknamed 'the Hexagon'." },
+      { "kind": "food", "text": "Baguettes, croissants and hundreds of kinds of cheese are daily staples." },
+      { "kind": "sport", "text": "A famous cycling race usually finishes on the Champs-Élysées in its capital each July." },
+      { "kind": "history", "text": "A revolution that began in 1789 overthrew its monarchy." },
+      { "kind": "landmark", "text": "An iron tower in its capital was built for the 1889 World's Fair." }
+    ],
+    "reveal": {
+      "funFact": "The Eiffel Tower was originally meant to be dismantled after 20 years.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Eiffel_Tower"
+    }
+  },
+  {
+    "id": "mp-0027",
+    "country": "TR",
+    "difficulty": "medium",
+    "clues": [
+      { "kind": "geography", "text": "This country spans two continents, separated by a narrow strait." },
+      { "kind": "history", "text": "Its largest city was once called Constantinople." },
+      { "kind": "food", "text": "Baklava, kebabs and black tea served in tulip-shaped glasses are everyday pleasures." },
+      { "kind": "landmark", "text": "Hagia Sophia, once a cathedral, then a mosque, a museum and a mosque again, stands in its largest city." },
+      { "kind": "geography", "text": "Fairy-chimney rock towers and sunrise hot-air balloons make Cappadocia one of its top sights." }
+    ],
+    "reveal": {
+      "funFact": "Tulips were cultivated in Constantinople as early as 1055 and later became a symbol of the Ottoman Empire.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tulip"
+    }
+  },
+  {
+    "id": "mp-0028",
+    "country": "MN",
+    "difficulty": "hard",
+    "clues": [
+      { "kind": "geography", "text": "This landlocked country lies between Russia and China." },
+      { "kind": "geography", "text": "It is the least densely populated sovereign state in the world." },
+      { "kind": "culture", "text": "Many families still live in round felt tents called gers." },
+      { "kind": "history", "text": "Genghis Khan united its tribes and founded a great empire in 1206." },
+      { "kind": "sport", "text": "Its national festival, Naadam, features wrestling, archery and horse racing." }
+    ],
+    "reveal": {
+      "funFact": "The first dinosaur eggs ever identified were found in its Gobi Desert in the 1920s.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Gobi_Desert"
+    }
+  },
+  {
+    "id": "mp-0029",
+    "country": "VN",
+    "difficulty": "medium",
+    "clues": [
+      { "kind": "geography", "text": "This country is shaped like a long letter S along the coast of Southeast Asia." },
+      { "kind": "food", "text": "It is the world's second-largest coffee producer, after Brazil." },
+      { "kind": "food", "text": "Pho noodle soup and banh mi sandwiches come from here." },
+      { "kind": "culture", "text": "Motorbikes and scooters are the most popular way to get around." },
+      { "kind": "history", "text": "Its largest city was once called Saigon." }
+    ],
+    "reveal": {
+      "funFact": "The name of its Ha Long Bay means 'descending dragon'.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Ha_Long_Bay"
+    }
+  },
+  {
+    "id": "mp-0030",
+    "country": "SI",
+    "difficulty": "hard",
+    "clues": [
+      { "kind": "geography", "text": "This small country has an Adriatic Sea coastline only about 47 kilometres long." },
+      { "kind": "geography", "text": "It borders Italy, Austria, Hungary and Croatia." },
+      { "kind": "outdoor", "text": "Postojna Cave is so large that visitors ride a train inside it." },
+      { "kind": "landmark", "text": "A church sits on a tiny island in the middle of Lake Bled." },
+      { "kind": "culture", "text": "Its capital, Ljubljana, was named European Green Capital in 2016." }
+    ],
+    "reveal": {
+      "funFact": "About 60% of its land is covered by forest, which makes it the second most forested country in Europe.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Slovenia"
+    }
+  }
+]

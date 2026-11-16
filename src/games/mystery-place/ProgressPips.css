@@ -1,0 +1,53 @@
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+}
+
+.pips {
+  display: flex;
+  gap: 6px;
+}
+
+.pip {
+  flex: 1;
+  height: 10px;
+  background: var(--surface-sunken);
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--border);
+  transition: background-color 250ms ease;
+}
+
+.pip-used {
+  background: var(--proximity-far);
+  box-shadow: none;
+}
+
+.pip-win {
+  background: var(--success);
+  box-shadow: none;
+}
+
+.pip-current {
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: -4px -10px -2px 0;
+}
+
+.progress-label {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
