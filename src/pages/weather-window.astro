@@ -1,0 +1,15 @@
+---
+import { WeatherWindowGame } from "../games/weather-window/WeatherWindowGame";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Weather Window – Dailyverse"
+  description="Memorise the week's forecast, then plan your trips on the best days. A new puzzle every day."
+>
+  <Fragment slot="hero">
+    <h1>Weather Window</h1>
+    <p class="lead">Memorise the forecast, then give every trip its best day.</p>
+  </Fragment>
+  <WeatherWindowGame client:only="react" />
+</BaseLayout>

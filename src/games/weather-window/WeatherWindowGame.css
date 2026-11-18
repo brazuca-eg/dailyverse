@@ -1,0 +1,35 @@
+.ww-game {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ww-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: center;
+}
+
+.ww-phase {
+  font-size: 1rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+.ww-header .toolbar {
+  margin-left: auto;
+}
+
+.ww-notice {
+  min-height: 1.4em;
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.ww-start {
+  min-height: 52px;
+}
