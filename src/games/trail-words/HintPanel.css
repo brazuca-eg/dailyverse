@@ -1,0 +1,50 @@
+.hints {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+}
+
+.hints-summary {
+  min-height: 48px;
+  padding: 12px 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.hints-body {
+  padding: 0 16px 16px;
+  overflow-x: auto;
+}
+
+.hints-note {
+  margin: 0 0 10px;
+  color: var(--text-muted);
+}
+
+.hints-table {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.hints-table th,
+.hints-table td {
+  min-width: 36px;
+  padding: 4px 8px;
+  text-align: center;
+}
+
+.hints-table thead th {
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.hints-table tbody th {
+  text-transform: uppercase;
+}
+
+.hints-table td:last-child,
+.hints-table thead th:last-child {
+  font-weight: 800;
+  border-left: 1px solid var(--border);
+}

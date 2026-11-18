@@ -1,0 +1,23 @@
+---
+import { TrailWordsGame } from "../games/trail-words/TrailWordsGame";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Trail Words – Dailyverse"
+  description="Make words from seven letters, always using the centre one. A new word puzzle every day."
+>
+  <Fragment slot="hero">
+    <h1>Trail Words</h1>
+    <p class="lead">
+      Spell your way up the trail with seven letters and one that must always be used.
+    </p>
+  </Fragment>
+  <TrailWordsGame client:only="react" />
+</BaseLayout>
+
+<script>
+  import { loadWordList } from "../games/trail-words/wordList";
+
+  loadWordList().catch(() => undefined);
+</script>

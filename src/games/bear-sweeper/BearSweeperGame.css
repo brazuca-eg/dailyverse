@@ -1,0 +1,47 @@
+.bs-game {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bs-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: center;
+}
+
+.bs-timer,
+.bs-bears-left {
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.bs-lives {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.bs-life {
+  display: inline-flex;
+  color: var(--danger);
+}
+
+.bs-life-lost {
+  color: var(--border-strong);
+}
+
+.bs-header .toolbar {
+  margin-left: auto;
+}
+
+.bs-notice {
+  min-height: 1.4em;
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}

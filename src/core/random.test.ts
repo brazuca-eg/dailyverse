@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createRandom, hashSeed, shuffle } from "./random";
+import { createRandom, hashSeed, hashString, shuffle } from "./random";
 
 describe("createRandom", () => {
   it("gives the same sequence for the same seed", () => {
@@ -58,6 +58,26 @@ describe("hashSeed", () => {
   it("returns an unsigned 32-bit integer", () => {
     [0, 1, 2026, 2 ** 31, -7].forEach((seed) => {
       const hash = hashSeed(seed);
+      expect(Number.isInteger(hash)).toBe(true);
+      expect(hash).toBeGreaterThanOrEqual(0);
+      expect(hash).toBeLessThan(2 ** 32);
+    });
+  });
+});
+
+describe("hashString", () => {
+  it("gives the same number for the same text", () => {
+    expect(hashString("abc:3")).toBe(hashString("abc:3"));
+  });
+
+  it("gives different numbers for different text", () => {
+    const hashes = Array.from({ length: 200 }, (_, index) => hashString(`set:${index}`));
+    expect(new Set(hashes).size).toBe(200);
+  });
+
+  it("returns an unsigned 32-bit integer, including for empty and non-ASCII text", () => {
+    ["", "a", "héllo", "🏕️"].forEach((text) => {
+      const hash = hashString(text);
       expect(Number.isInteger(hash)).toBe(true);
       expect(hash).toBeGreaterThanOrEqual(0);
       expect(hash).toBeLessThan(2 ** 32);

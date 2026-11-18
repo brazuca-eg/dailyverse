@@ -28,11 +28,33 @@ const TEXT_PAIRS: [string, string][] = [
   ["success-text", "success-bg"],
   ["danger", "bg"],
   ["danger", "surface"],
+  ["on-accent", "accent"],
+  ["text", "surface-sunken"],
+  ["text", "accent-soft"],
+  ["danger", "success-bg"],
+  ["success-text", "surface-sunken"],
+  ["primary", "surface-sunken"],
+  ["primary", "surface"],
+  ["primary", "surface-sunken"],
+  ["primary", "accent-soft"],
+  ["danger", "accent-soft"],
+  ["text-muted", "accent-soft"],
+  ["text", "border"],
+  ["text", "success-bg"],
+  ["text-muted", "success-bg"],
+  ["danger", "surface-sunken"],
+  ["on-primary", "primary"],
 ];
 
 const GRAPHIC_PAIRS: [string, string][] = [
   ["cell-edge", "bg"],
   ["primary", "bg"],
+  ["cell-edge", "surface"],
+  ["success", "surface"],
+  ["primary", "accent-soft"],
+  ["cell-edge", "surface-sunken"],
+  ["primary", "surface-sunken"],
+  ["text", "surface-sunken"],
   ["danger", "bg"],
 ];
 
