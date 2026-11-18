@@ -1,0 +1,122 @@
+.honeycomb {
+  --hex-width: clamp(78px, 24vw, 104px);
+  --hex-height: calc(var(--hex-width) * 0.866);
+  --gap: 6px;
+  position: relative;
+  width: calc(var(--hex-width) * 2.5 + var(--gap) * 2);
+  height: calc(var(--hex-height) * 3 + var(--gap) * 2);
+  margin: 4px auto;
+}
+
+.hex {
+  --edge: var(--cell-edge);
+  --fill: var(--surface-sunken);
+  --ink: var(--text);
+  --inset: 3px;
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: var(--hex-width);
+  height: var(--hex-height);
+  padding: 0;
+  font: inherit;
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  font-weight: 800;
+  color: var(--ink);
+  text-transform: uppercase;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  background: var(--edge);
+  border: 0;
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  transition: transform 90ms ease;
+}
+
+.hex::before {
+  position: absolute;
+  inset: var(--inset);
+  z-index: -1;
+  content: "";
+  background: var(--fill);
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+}
+
+.hex span {
+  position: relative;
+}
+
+.hex:hover {
+  --fill: var(--accent-soft);
+}
+
+.hex:active {
+  transform: scale(0.93);
+}
+
+.hex:focus-visible {
+  --edge: var(--text);
+  --inset: 6px;
+  outline: none;
+}
+
+.hex:disabled {
+  cursor: progress;
+  opacity: 0.6;
+}
+
+.hex-centre {
+  --fill: var(--accent);
+  --ink: var(--on-accent);
+  top: calc(var(--hex-height) + var(--gap));
+  left: calc(var(--hex-width) * 0.75 + var(--gap));
+}
+
+.hex-centre:hover {
+  --fill: var(--accent);
+  filter: brightness(1.06);
+}
+
+.hex-top {
+  top: 0;
+  left: calc(var(--hex-width) * 0.75 + var(--gap));
+}
+
+.hex-bottom {
+  top: calc((var(--hex-height) + var(--gap)) * 2);
+  left: calc(var(--hex-width) * 0.75 + var(--gap));
+}
+
+.hex-upper-left {
+  top: calc(var(--hex-height) * 0.5 + var(--gap) * 0.5);
+  left: 0;
+}
+
+.hex-lower-left {
+  top: calc(var(--hex-height) * 1.5 + var(--gap) * 1.5);
+  left: 0;
+}
+
+.hex-upper-right {
+  top: calc(var(--hex-height) * 0.5 + var(--gap) * 0.5);
+  left: calc((var(--hex-width) * 0.75 + var(--gap)) * 2);
+}
+
+.hex-lower-right {
+  top: calc(var(--hex-height) * 1.5 + var(--gap) * 1.5);
+  left: calc((var(--hex-width) * 0.75 + var(--gap)) * 2);
+}
+
+.hex:not(.hex-centre) {
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hex {
+    transition: none;
+  }
+
+  .hex:active {
+    transform: none;
+  }
+}

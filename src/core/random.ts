@@ -26,3 +26,10 @@ export function hashSeed(seed: number): number {
   hash = Math.imul(hash, 0xc2b2ae35);
   return (hash ^ (hash >>> 16)) >>> 0;
 }
+
+export function hashString(text: string): number {
+  return Array.from(text).reduce(
+    (hash, character) => Math.imul(hash ^ (character.codePointAt(0) ?? 0), 0x01000193) >>> 0,
+    0x811c9dc5,
+  );
+}

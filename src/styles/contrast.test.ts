@@ -28,11 +28,19 @@ const TEXT_PAIRS: [string, string][] = [
   ["success-text", "success-bg"],
   ["danger", "bg"],
   ["danger", "surface"],
+  ["on-accent", "accent"],
+  ["text", "surface-sunken"],
+  ["text", "accent-soft"],
+  ["danger", "surface-sunken"],
+  ["on-primary", "primary"],
 ];
 
 const GRAPHIC_PAIRS: [string, string][] = [
   ["cell-edge", "bg"],
   ["primary", "bg"],
+  ["cell-edge", "surface"],
+  ["cell-edge", "surface-sunken"],
+  ["text", "surface-sunken"],
   ["danger", "bg"],
 ];
 

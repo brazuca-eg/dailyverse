@@ -13,6 +13,7 @@
   --on-primary: #ffffff;
   --accent: #f2b632;
   --accent-soft: #fdf0c9;
+  --on-accent: #1f2a24;
   --success: #2f8f5b;
   --success-bg: #dff1e4;
   --success-text: #1b5e3a;
@@ -48,6 +49,7 @@
     --on-primary: #0d1f17;
     --accent: #f2c14e;
     --accent-soft: #3d3216;
+    --on-accent: #121a16;
     --success: #4cb08a;
     --success-bg: #1d3a2d;
     --success-text: #8fdcb9;
