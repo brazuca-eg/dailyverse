@@ -1,0 +1,59 @@
+.sudoku-pad {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.sudoku-digits {
+  display: grid;
+  grid-template-columns: repeat(var(--keys), minmax(0, 1fr));
+  gap: 4px;
+}
+
+.sudoku-digit-key {
+  position: relative;
+  min-width: 0;
+  min-height: 52px;
+  padding: 0;
+  font-size: 1.35rem;
+}
+
+.sudoku-digit-key:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.sudoku-left {
+  position: absolute;
+  right: 4px;
+  bottom: 2px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.sudoku-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.sudoku-action {
+  min-height: 44px;
+  padding: 0 8px;
+  font-size: 0.95rem;
+}
+
+.sudoku-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.sudoku-action[aria-pressed="true"] {
+  color: var(--text);
+  background: var(--accent-soft);
+  border-color: var(--primary);
+}

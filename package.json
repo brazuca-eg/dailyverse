@@ -27,6 +27,8 @@
     "peak:build": "tsx scripts/peak-order/build-cli.ts",
     "peak:verify": "tsx scripts/peak-order/verify-cli.ts",
     "peak:verify-days": "tsx scripts/peak-order/verify-days-cli.ts",
+    "sudoku:build": "tsx scripts/trail-sudoku/build-cli.ts",
+    "sudoku:verify": "tsx scripts/trail-sudoku/verify-cli.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

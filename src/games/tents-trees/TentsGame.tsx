@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { formatElapsed } from "../../core/elapsed";
 import { useDayIndex } from "../../hooks/useDayIndex";
 import { useHelpDialog } from "../../hooks/useHelpDialog";
 import { GameDialogs } from "../../ui/GameDialogs";
@@ -11,7 +12,7 @@ import { findDailyRound } from "./daily";
 import { analyse, calculateScore, MAX_SCORE, readTents } from "./game";
 import { tentsTreesStorage } from "./persistence";
 import { TENTS_TREES_RULE_STEPS } from "./helpText";
-import { buildShareText, formatElapsed } from "./share";
+import { buildShareText } from "./share";
 import type { TentsRound } from "./types";
 import { useTentsSession } from "./useTentsSession";
 import "./TentsGame.css";
