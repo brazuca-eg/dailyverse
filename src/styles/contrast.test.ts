@@ -31,6 +31,8 @@ const TEXT_PAIRS: [string, string][] = [
   ["on-accent", "accent"],
   ["text", "surface-sunken"],
   ["text", "accent-soft"],
+  ["text", "success-bg"],
+  ["text-muted", "success-bg"],
   ["danger", "surface-sunken"],
   ["on-primary", "primary"],
 ];
@@ -39,6 +41,8 @@ const GRAPHIC_PAIRS: [string, string][] = [
   ["cell-edge", "bg"],
   ["primary", "bg"],
   ["cell-edge", "surface"],
+  ["success", "surface"],
+  ["primary", "accent-soft"],
   ["cell-edge", "surface-sunken"],
   ["text", "surface-sunken"],
   ["danger", "bg"],

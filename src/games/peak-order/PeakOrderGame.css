@@ -1,0 +1,20 @@
+.peak-game {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.peak-prompt {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.peak-notice {
+  min-height: 1.4em;
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}

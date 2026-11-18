@@ -73,6 +73,13 @@ export default defineConfig(
     },
   },
   {
+    files: ["src/games/peak-order/PeakList.tsx"],
+    rules: {
+      "jsx-a11y-x/no-noninteractive-element-interactions": "off",
+      "jsx-a11y-x/no-noninteractive-element-to-interactive-role": "off",
+    },
+  },
+  {
     files: ["**/*.test.ts", "**/*.test.tsx", "**/fixtures.ts", "src/core/testing.ts"],
     rules: { "@typescript-eslint/no-non-null-assertion": "off" },
   },

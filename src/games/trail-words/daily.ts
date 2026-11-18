@@ -1,3 +1,4 @@
+import { modulo } from "../../core/modulo";
 import { createRandom, hashString, shuffle } from "../../core/random";
 import puzzleData from "./puzzles.json";
 import { TRAIL_WEEKLY_PATTERN, type TrailTier } from "./tiers";
@@ -10,10 +11,6 @@ const orders = new Map<TrailTier, number[]>();
 export interface DailyPick {
   tier: TrailTier;
   code: string;
-}
-
-function mod(value: number, divisor: number): number {
-  return ((value % divisor) + divisor) % divisor;
 }
 
 function readOrder(tier: TrailTier): number[] {
@@ -35,9 +32,9 @@ function countInWeek(tier: TrailTier, until = TRAIL_WEEKLY_PATTERN.length): numb
 
 export function pickDailyTrailPuzzle(dayIndex: number): DailyPick {
   const week = Math.floor(dayIndex / TRAIL_WEEKLY_PATTERN.length);
-  const weekday = mod(dayIndex, TRAIL_WEEKLY_PATTERN.length);
+  const weekday = modulo(dayIndex, TRAIL_WEEKLY_PATTERN.length);
   const tier = TRAIL_WEEKLY_PATTERN[weekday];
   const occurrence = week * countInWeek(tier) + countInWeek(tier, weekday);
   const order = readOrder(tier);
-  return { tier, code: pools[tier][order[mod(occurrence, order.length)]] };
+  return { tier, code: pools[tier][order[modulo(occurrence, order.length)]] };
 }
