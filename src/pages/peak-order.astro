@@ -1,0 +1,15 @@
+---
+import { PeakOrderGame } from "../games/peak-order/PeakOrderGame";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Peak Order – Dailyverse"
+  description="Put five mountains, rivers, lakes, islands or volcanoes in order. A new puzzle every day."
+>
+  <Fragment slot="hero">
+    <h1>Peak Order</h1>
+    <p class="lead">Rank five places by size in five checks.</p>
+  </Fragment>
+  <PeakOrderGame client:only="react" />
+</BaseLayout>

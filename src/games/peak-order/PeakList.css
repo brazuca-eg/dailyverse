@@ -1,0 +1,146 @@
+.peak-list-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.peak-end {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.peak-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.peak-row {
+  display: flex;
+  align-items: stretch;
+  background: var(--surface);
+  border: 2px solid var(--cell-edge);
+  border-radius: 14px;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.peak-row[draggable="true"] {
+  cursor: grab;
+}
+
+.peak-main {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  min-height: 64px;
+  padding: 8px 12px;
+  font: inherit;
+  font-weight: 700;
+  color: var(--text);
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 12px;
+}
+
+button.peak-main {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.peak-rank {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  background: var(--surface-sunken);
+  border-radius: 50%;
+}
+
+.peak-name {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.peak-value {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+.peak-badge {
+  display: inline-flex;
+  flex: none;
+  gap: 4px;
+  align-items: center;
+  padding: 2px 10px 2px 6px;
+  font-size: 0.85rem;
+  color: var(--success-text);
+  background: var(--success-bg);
+  border-radius: 999px;
+}
+
+.peak-row-confirmed {
+  border-color: var(--success);
+  background: var(--success-bg);
+}
+
+.peak-row-selected {
+  background: var(--accent-soft);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.peak-row-revealed {
+  background: var(--surface-sunken);
+}
+
+.peak-main:focus-visible,
+.peak-shift:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 2px;
+}
+
+.peak-move {
+  display: flex;
+  flex: none;
+  align-items: center;
+  padding-right: 4px;
+}
+
+.peak-shift {
+  width: 44px;
+  height: 44px;
+  touch-action: manipulation;
+}
+
+.peak-shift:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.peak-shift-down svg {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .peak-row {
+    transition: none;
+  }
+}
