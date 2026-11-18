@@ -21,6 +21,9 @@
     "flags:facts": "tsx scripts/flags/facts-cli.ts",
     "spotdiff:verify": "tsx scripts/spot-difference/verify-cli.ts",
     "tents:verify": "tsx scripts/tents-trees/verify-cli.ts",
+    "words:build": "tsx scripts/trail-words/build-cli.ts",
+    "words:verify": "tsx scripts/trail-words/verify-cli.ts",
+    "trail:verify": "tsx scripts/trail-words/verify-days-cli.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

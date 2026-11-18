@@ -1,0 +1,25 @@
+.trail-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.trail-control {
+  min-height: 52px;
+  padding: 0 12px;
+}
+
+.trail-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.trail-end {
+  min-height: 44px;
+  font-size: 0.95rem;
+}
+
+.trail-end[aria-pressed="true"] {
+  color: var(--danger);
+  border-color: var(--danger);
+}
