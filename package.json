@@ -31,6 +31,8 @@
     "sudoku:verify": "tsx scripts/trail-sudoku/verify-cli.ts",
     "switchback:build": "tsx scripts/switchback/build-cli.ts",
     "switchback:verify": "tsx scripts/switchback/verify-cli.ts",
+    "bears:build": "tsx scripts/bear-sweeper/build-cli.ts",
+    "bears:verify": "tsx scripts/bear-sweeper/verify-cli.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

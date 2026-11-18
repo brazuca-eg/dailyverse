@@ -1,0 +1,17 @@
+.bs-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.bs-control {
+  min-height: 48px;
+  padding: 0 10px;
+  font-size: 0.95rem;
+}
+
+.bs-control[aria-pressed="true"] {
+  color: var(--text);
+  background: var(--accent-soft);
+  border-color: var(--primary);
+}
