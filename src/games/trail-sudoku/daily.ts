@@ -1,6 +1,5 @@
-import { WEEKLY_DIFFICULTY_PATTERN, type Difficulty } from "../../core/difficulty";
-import { modulo } from "../../core/modulo";
-import { createRandom, hashString, shuffle } from "../../core/random";
+import type { Difficulty } from "../../core/difficulty";
+import { pickPoolIndex } from "../../core/dailyPool";
 import { decodeGrid } from "./codec";
 import { sudokuData, type SudokuData } from "./data";
 import { solveGrid } from "./solver";
@@ -12,34 +11,12 @@ export interface DailySudokuPick {
   poolIndex: number;
 }
 
-const orders = new Map<string, number[]>();
-
-function readOrder(tier: Difficulty, size: number): number[] {
-  const key = `${tier}:${size}`;
-  const known = orders.get(key);
-  if (known) {
-    return known;
-  }
-  const order = shuffle(
-    Array.from({ length: size }, (_, index) => index),
-    createRandom(hashString(`trail-sudoku:order:${key}`)),
-  );
-  orders.set(key, order);
-  return order;
-}
-
-function countInWeek(tier: Difficulty, until = WEEKLY_DIFFICULTY_PATTERN.length): number {
-  return WEEKLY_DIFFICULTY_PATTERN.slice(0, until).filter((candidate) => candidate === tier).length;
-}
-
 export function pickDailySudoku(dayIndex: number, data: SudokuData = sudokuData): DailySudokuPick {
-  const weekLength = WEEKLY_DIFFICULTY_PATTERN.length;
-  const weekday = modulo(dayIndex, weekLength);
-  const tier = WEEKLY_DIFFICULTY_PATTERN[weekday];
-  const week = Math.floor(dayIndex / weekLength);
-  const occurrence = week * countInWeek(tier) + countInWeek(tier, weekday);
-  const order = readOrder(tier, data[tier].length);
-  return { tier, poolIndex: order[modulo(occurrence, order.length)] };
+  return pickPoolIndex("trail-sudoku", dayIndex, {
+    easy: data.easy.length,
+    medium: data.medium.length,
+    hard: data.hard.length,
+  });
 }
 
 export function buildSudokuRound(

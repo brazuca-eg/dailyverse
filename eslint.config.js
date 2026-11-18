@@ -80,6 +80,10 @@ export default defineConfig(
     },
   },
   {
+    files: ["src/games/switchback/Board.tsx"],
+    rules: { "jsx-a11y-x/no-noninteractive-element-interactions": "off" },
+  },
+  {
     files: ["**/*.test.ts", "**/*.test.tsx", "**/fixtures.ts", "src/core/testing.ts"],
     rules: { "@typescript-eslint/no-non-null-assertion": "off" },
   },

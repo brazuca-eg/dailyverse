@@ -1,0 +1,45 @@
+.sw-game {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sw-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.sw-timer {
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+.sw-size {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.sw-header .toolbar {
+  margin-left: auto;
+}
+
+.sw-progress {
+  margin: 0;
+  font-weight: 700;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.sw-notice {
+  min-height: 1.4em;
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}

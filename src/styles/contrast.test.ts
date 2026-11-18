@@ -50,6 +50,7 @@ const GRAPHIC_PAIRS: [string, string][] = [
   ["success", "surface"],
   ["primary", "accent-soft"],
   ["cell-edge", "surface-sunken"],
+  ["primary", "surface-sunken"],
   ["text", "surface-sunken"],
   ["danger", "bg"],
 ];
