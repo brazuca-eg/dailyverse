@@ -1,0 +1,38 @@
+.sudoku-game {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sudoku-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.sudoku-timer {
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+.sudoku-size {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.sudoku-header .toolbar {
+  margin-left: auto;
+}
+
+.sudoku-notice {
+  min-height: 1.4em;
+  margin: 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
