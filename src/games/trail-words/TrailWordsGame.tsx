@@ -10,7 +10,9 @@ import { calculateScore, readStatus } from "./game";
 import { FoundWords } from "./FoundWords";
 import { HintPanel } from "./HintPanel";
 import { Honeycomb } from "./Honeycomb";
-import { TRAIL_WORDS_RULE_STEPS } from "./helpText";
+import { EnglishWordsNote } from "./EnglishWordsNote";
+import { buildRuleSteps } from "./helpText";
+import { t } from "./messages";
 import { trailWordsStorage } from "./persistence";
 import { buildTrailPuzzle, type TrailPuzzle } from "./puzzle";
 import { RankBar } from "./RankBar";
@@ -44,6 +46,7 @@ function TrailPlay({ puzzle, dayIndex }: PlayProps) {
 
   return (
     <div className="trail-game">
+      <EnglishWordsNote />
       <div className="trail-top">
         <RankBar score={score} maxScore={puzzle.maxScore} />
         <GameToolbar onShowHelp={helpDialog.open} onShowStats={() => setIsStatsOpen(true)} />
@@ -81,7 +84,7 @@ function TrailPlay({ puzzle, dayIndex }: PlayProps) {
         helpDialog={helpDialog}
         isStatsOpen={isStatsOpen}
         onCloseStats={() => setIsStatsOpen(false)}
-        ruleSteps={TRAIL_WORDS_RULE_STEPS}
+        ruleSteps={buildRuleSteps()}
         stats={session.stats}
         dayIndex={dayIndex}
       />
@@ -101,9 +104,10 @@ function TrailLoading({
   const letters = decodePuzzle(code);
   return (
     <div className="trail-game" aria-busy={!failed}>
+      <EnglishWordsNote />
       <div className="trail-board">
         <p className="trail-loading" role="status">
-          {failed ? "The word list could not be loaded." : "Loading the word list…"}
+          {failed ? t("words.loading.failed") : t("words.loading.busy")}
         </p>
         <Honeycomb
           centre={letters.centre}
@@ -113,7 +117,7 @@ function TrailLoading({
         />
         {failed && (
           <button type="button" className="button button-primary" onClick={onRetry}>
-            Try again
+            {t("words.loading.retry")}
           </button>
         )}
       </div>

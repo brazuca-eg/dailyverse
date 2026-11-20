@@ -1,6 +1,8 @@
 .modal {
   width: min(92vw, 440px);
   max-height: 88vh;
+  max-height: 88dvh;
+  overscroll-behavior: contain;
   padding: 0;
   overflow-y: auto;
   color: var(--text);

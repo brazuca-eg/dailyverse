@@ -12,14 +12,15 @@ import {
   type Recipe,
   type Zone,
 } from "./recipes";
-import { THEMES, type Scene, type SceneElement } from "./types";
+import { MOOD_WEIGHTS } from "./palettes";
+import { MOODS, THEMES, type Scene, type SceneElement, type SceneMood } from "./types";
 
 const PLACEMENT_ATTEMPTS = 80;
 const SPACING = 4;
 const EDGE_MARGIN = 6;
 const SHADES = [-1, 0, 1] as const;
 const SLOTTED_ZONES: readonly Zone[] = ["mountains", "hills"];
-const CROWDED_ZONES: readonly Zone[] = ["sky", "ground", "lake"];
+const CROWDED_ZONES: readonly Zone[] = ["sky", "ground", "lake", "water", "sea"];
 
 interface Slot {
   recipe: Recipe;
@@ -38,6 +39,19 @@ function drawInteger(random: Random, min: number, max: number): number {
 function round(value: number, decimals: number): number {
   const factor = 10 ** decimals;
   return Math.round(value * factor) / factor;
+}
+
+function drawMood(random: Random): SceneMood {
+  const total = MOODS.reduce((sum, mood) => sum + MOOD_WEIGHTS[mood], 0);
+  const target = random() * total;
+  const reached = MOODS.reduce<{ sum: number; mood: SceneMood | null }>(
+    (state, mood) => {
+      const sum = state.sum + MOOD_WEIGHTS[mood];
+      return { sum, mood: state.mood ?? (target < sum ? mood : null) };
+    },
+    { sum: 0, mood: null },
+  );
+  return reached.mood ?? "day";
 }
 
 function planSlots(random: Random, recipes: readonly Recipe[]): Slot[] {
@@ -80,7 +94,7 @@ function proposeElement(random: Random, slot: Slot): SceneElement {
     rotation: 0,
     shade: SHADES[drawInteger(random, 0, SHADES.length - 1)],
     variant: drawInteger(random, 0, VARIANT_COUNTS[recipe.kind] - 1),
-    layer: recipe.kind === "bird" ? BIRD_LAYER : zone.layer,
+    layer: recipe.kind === "bird" || recipe.kind === "balloon" ? BIRD_LAYER : zone.layer,
   };
 }
 
@@ -96,7 +110,12 @@ function isFree(candidate: SceneElement, placed: readonly SceneElement[], zone: 
   );
 }
 
+const WATER_KINDS: readonly string[] = ["duck", "boat"];
+
 function isSameCrowd(element: SceneElement, candidate: SceneElement): boolean {
+  if (element.kind === "lake" && WATER_KINDS.includes(candidate.kind)) {
+    return false;
+  }
   const crowd = CROWD_BY_LAYER[element.layer];
   return crowd !== "background" && crowd === CROWD_BY_LAYER[candidate.layer];
 }
@@ -128,6 +147,7 @@ export function sortForDrawing(elements: readonly SceneElement[]): SceneElement[
 export function generateScene(seed: number): Scene {
   const random = createRandom(hashSeed(seed));
   const theme = THEMES[drawInteger(random, 0, THEMES.length - 1)];
+  const mood = drawMood(random);
   const slots = planSlots(random, THEME_RECIPES[theme]);
   const placed = slots.reduce<SceneElement[]>((elements, slot) => {
     const element = placeSlot(random, slot, elements);
@@ -136,6 +156,7 @@ export function generateScene(seed: number): Scene {
   return {
     seed,
     theme,
+    mood,
     width: SCENE_WIDTH,
     height: SCENE_HEIGHT,
     elements: sortForDrawing(assignIds(placed)),

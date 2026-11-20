@@ -10,6 +10,7 @@ import {
   type Point,
   type SpotState,
   type TapOutcome,
+  calculateScore,
 } from "./game";
 import type { Puzzle } from "./types";
 
@@ -56,6 +57,7 @@ export function useSpotSession(
       const nextStats = applyGameResult(stats, dayIndex, result.state.status === "won");
       setStats(nextStats);
       storage.saveStats(nextStats);
+      storage.recordResult(calculateScore(result.state), result.state.status === "won");
     }
   }
 

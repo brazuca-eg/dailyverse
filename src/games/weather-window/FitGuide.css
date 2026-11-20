@@ -1,5 +1,6 @@
 .ww-fit {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.85rem;
   color: var(--text);
@@ -30,7 +31,8 @@
 .ww-fit th span {
   display: block;
   color: var(--text);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
+  overflow-wrap: anywhere;
 }
 
 .ww-fit tbody th {
@@ -47,4 +49,8 @@
 .ww-fit td {
   font-weight: 700;
   font-variant-numeric: tabular-nums;
+}
+
+.ww-fit thead td:first-child {
+  width: 24%;
 }

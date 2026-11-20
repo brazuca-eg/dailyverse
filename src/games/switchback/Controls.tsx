@@ -1,4 +1,5 @@
 import { useArmedAction } from "../../hooks/useArmedAction";
+import { t } from "./messages";
 import "./Controls.css";
 
 interface ControlsProps {
@@ -20,7 +21,7 @@ export function Controls({ canUndo, onUndo, onReset, onHint, onGiveUp }: Control
         disabled={!canUndo}
         onClick={onUndo}
       >
-        Undo
+        {t("switch.controls.undo")}
       </button>
       <button
         type="button"
@@ -29,10 +30,10 @@ export function Controls({ canUndo, onUndo, onReset, onHint, onGiveUp }: Control
         aria-pressed={reset.isArmed}
         onClick={reset.trigger}
       >
-        {reset.isArmed ? "Tap again" : "Reset"}
+        {reset.isArmed ? t("switch.controls.confirm") : t("switch.controls.reset")}
       </button>
       <button type="button" className="button button-secondary sw-control" onClick={onHint}>
-        Hint
+        {t("switch.controls.hint")}
       </button>
       <button
         type="button"
@@ -40,7 +41,7 @@ export function Controls({ canUndo, onUndo, onReset, onHint, onGiveUp }: Control
         aria-pressed={giveUp.isArmed}
         onClick={giveUp.trigger}
       >
-        {giveUp.isArmed ? "Tap again" : "Give up"}
+        {giveUp.isArmed ? t("switch.controls.confirm") : t("switch.controls.giveUp")}
       </button>
     </div>
   );

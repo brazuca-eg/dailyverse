@@ -1,7 +1,7 @@
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
+  grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
+  gap: 12px 4px;
   margin: 0;
   padding: 14px 8px;
   background: var(--surface-sunken);
@@ -9,6 +9,7 @@
 }
 
 .stat {
+  min-width: 0;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
@@ -24,6 +25,7 @@
 }
 
 .stat dt {
+  overflow-wrap: anywhere;
   font-size: 0.75rem;
   color: var(--text-muted);
 }

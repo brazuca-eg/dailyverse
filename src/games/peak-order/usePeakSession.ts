@@ -9,7 +9,9 @@ import {
   readCheckRows,
   readStatus,
   type PeakState,
+  calculateScore,
 } from "./game";
+import { peakMessages as t } from "./messages";
 import type { PeakPuzzle } from "./puzzle";
 import { ROUND_SIZE } from "./tiers";
 
@@ -38,11 +40,9 @@ function describeCheck(state: PeakState): string {
   const rows = readCheckRows(state);
   const right = rows[rows.length - 1].filter(Boolean).length;
   if (right === ROUND_SIZE) {
-    return "Every item is in the right place.";
+    return t("peak.notice.all");
   }
-  return right === 0
-    ? "None of them are in the right place yet."
-    : `${right} of ${ROUND_SIZE} in the right place.`;
+  return right === 0 ? t("peak.notice.none") : t("peak.notice.some", { right, total: ROUND_SIZE });
 }
 
 export function usePeakSession(
@@ -75,6 +75,7 @@ export function usePeakSession(
       latestStats.current = nextStats;
       setStats(nextStats);
       storage.saveStats(nextStats);
+      storage.recordResult(calculateScore(next), readStatus(next) === "won");
     }
   }
 
@@ -85,7 +86,13 @@ export function usePeakSession(
     }
     const next = applyMove(current, from, to);
     commit(next);
-    setNotice(`${nameAt(next.order, to)} moved to position ${to + 1} of ${ROUND_SIZE}.`);
+    setNotice(
+      t("peak.notice.moved", {
+        name: nameAt(next.order, to),
+        position: to + 1,
+        total: ROUND_SIZE,
+      }),
+    );
     return next;
   }
 
@@ -96,12 +103,10 @@ export function usePeakSession(
     }
     if (selected === null) {
       setSelected(position);
-      setNotice(
-        `${nameAt(current.order, position)} selected. Tap the place it belongs, or use the arrow keys.`,
-      );
+      setNotice(t("peak.notice.selected", { name: nameAt(current.order, position) }));
     } else if (selected === position) {
       setSelected(null);
-      setNotice("Selection cleared.");
+      setNotice(t("peak.notice.cleared"));
     } else {
       move(selected, position);
       setSelected(null);

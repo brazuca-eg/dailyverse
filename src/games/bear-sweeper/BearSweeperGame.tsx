@@ -11,8 +11,9 @@ import { Controls } from "./Controls";
 import { BEARS_LAUNCH_DATE } from "./data";
 import { findDailyBearRound } from "./daily";
 import { MAX_LIVES, MAX_SCORE, calculateScore, countBearsLeft, readLivesLeft } from "./game";
-import { BEAR_SWEEPER_RULE_STEPS } from "./helpText";
+import { buildRuleSteps } from "./helpText";
 import { PawIcon } from "./Icons";
+import { t } from "./messages";
 import { bearSweeperStorage } from "./persistence";
 import { buildShareText } from "./share";
 import type { BearRound } from "./types";
@@ -42,14 +43,20 @@ function BearPlay({ round, dayIndex }: PlayProps) {
         <span className="bs-timer" role="timer">
           ⏱ {formatElapsed(state.elapsedSeconds)}
         </span>
-        <span className="bs-lives" role="img" aria-label={`${lives} of ${MAX_LIVES} lives left`}>
+        <span
+          className="bs-lives"
+          role="img"
+          aria-label={t("bear.header.lives", { lives, max: MAX_LIVES })}
+        >
           {Array.from({ length: MAX_LIVES }, (_, index) => (
             <span key={index} className={index < lives ? "bs-life" : "bs-life bs-life-lost"}>
               <PawIcon size={20} />
             </span>
           ))}
         </span>
-        <span className="bs-bears-left">Bears left: {countBearsLeft(state, puzzle)}</span>
+        <span className="bs-bears-left">
+          {t("bear.header.bearsLeft", { left: countBearsLeft(state, puzzle) })}
+        </span>
         <GameToolbar onShowHelp={helpDialog.open} onShowStats={() => setIsStatsOpen(true)} />
       </div>
       <Board
@@ -78,17 +85,17 @@ function BearPlay({ round, dayIndex }: PlayProps) {
         maxScore={MAX_SCORE}
         summary={
           state.status === "won"
-            ? `All clear in ${formatElapsed(state.elapsedSeconds)}`
-            : "Here is where the bears were"
+            ? t("bear.result.won", { time: formatElapsed(state.elapsedSeconds) })
+            : t("bear.result.lost")
         }
-        lostEyebrow="Chased off"
+        lostEyebrow={t("bear.result.eyebrow")}
         shareText={buildShareText(state, puzzle.size, dayIndex + 1, shareUrl)}
       />
       <GameDialogs
         helpDialog={helpDialog}
         isStatsOpen={isStatsOpen}
         onCloseStats={() => setIsStatsOpen(false)}
-        ruleSteps={BEAR_SWEEPER_RULE_STEPS}
+        ruleSteps={buildRuleSteps()}
         stats={session.stats}
         dayIndex={dayIndex}
       />
@@ -100,7 +107,7 @@ export function BearSweeperGame() {
   const dayIndex = useDayIndex(BEARS_LAUNCH_DATE);
   const round = useMemo(() => findDailyBearRound(dayIndex), [dayIndex]);
   if (!round) {
-    return <p>Today's puzzle could not be loaded.</p>;
+    return <p>{t("bear.error.load")}</p>;
   }
   return <BearPlay round={round} dayIndex={dayIndex} />;
 }

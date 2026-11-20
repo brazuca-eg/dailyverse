@@ -1,6 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { createGameStorage } from "../core/gameStorage";
+import { loadHistory } from "../core/history";
 import { applyGuess, createGuessingState } from "../core/guessing";
 import { requireCountry } from "../core/testing";
 import { useGuessingSession } from "./useGuessingSession";
@@ -52,6 +53,19 @@ describe("useGuessingSession", () => {
       lastCompletedDay: DAY_INDEX,
     });
     expect(storage.loadStats()).toEqual(session.result.current.stats);
+  });
+
+  it("records the points of a win and of a loss in the play history", () => {
+    const won = renderSession();
+    guess(won, "PE");
+    guess(won, answer.code);
+    expect(loadHistory()).toEqual([expect.objectContaining({ score: 4, maxScore: 5, won: true })]);
+  });
+
+  it("records a loss as zero points", () => {
+    const session = renderSession();
+    wrongCodes.forEach((code) => guess(session, code));
+    expect(loadHistory()).toEqual([expect.objectContaining({ score: 0, won: false })]);
   });
 
   it("loses after five wrong guesses and records the loss", () => {

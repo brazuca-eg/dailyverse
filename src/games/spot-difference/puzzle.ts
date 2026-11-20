@@ -13,7 +13,13 @@ export function generatePuzzle(seed: number, tier: Difficulty): Puzzle {
     const random = createRandom(hashSeed(seed * ATTEMPT_SPREAD + attempt + 1));
     const plan = planDifferences(original, tier, random);
     if (plan) {
-      return { seed, tier, original, altered: plan.altered, differences: plan.differences };
+      return {
+        seed,
+        tier,
+        original: plan.original,
+        altered: plan.altered,
+        differences: plan.differences,
+      };
     }
   }
   throw new Error(`Could not place the differences for seed ${seed} at ${tier} difficulty`);

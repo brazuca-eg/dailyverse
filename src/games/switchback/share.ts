@@ -1,5 +1,7 @@
-import { formatElapsed, pluralise } from "../../core/elapsed";
+import { formatElapsed } from "../../core/elapsed";
 import type { SwitchbackState } from "./game";
+import { t } from "./messages";
+import { gameMeta } from "./meta";
 
 export function buildShareText(
   state: SwitchbackState,
@@ -7,10 +9,15 @@ export function buildShareText(
   puzzleNumber: number,
   url?: string,
 ): string {
-  const result = state.status === "won" ? "summit reached" : "gave up";
   const lines = [
-    `Dailyverse Switchback #${puzzleNumber} · ${size}x${size} · ${result}`,
-    `⏱ ${formatElapsed(state.elapsedSeconds)} · 💡 ${pluralise(state.hints, "hint")}`,
+    `Dailyverse ${gameMeta("meta.switch.title")} #${puzzleNumber} · ${t("switch.share.detail", {
+      size,
+      result: state.status === "won" ? t("switch.share.won") : t("switch.share.lost"),
+    })}`,
+    t("switch.share.stats", {
+      time: formatElapsed(state.elapsedSeconds),
+      hints: t("switch.share.hints", { count: state.hints }),
+    }),
   ];
   return [...lines, ...(url ? [url] : [])].join("\n");
 }

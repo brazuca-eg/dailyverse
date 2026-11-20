@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { hasStartedPlaying } from "../../core/clock";
+import { useEffect, useRef, useState, useMemo } from "react";
 import type { StateStorage } from "../../core/gameStorage";
 import { applyGameResult, type GameStats } from "../../core/streak";
 import {
@@ -14,7 +15,9 @@ import {
   paintGrass,
   undo,
   type TentsState,
+  calculateScore,
 } from "./game";
+import { tentsMessages } from "./messages";
 import type { TentsRound } from "./types";
 
 const TICK_MS = 1000;
@@ -34,10 +37,9 @@ export interface TentsSession {
 
 function describeCheck(wrong: number): string {
   if (wrong === 0) {
-    return "Everything so far is right.";
+    return tentsMessages("tents.check.ok");
   }
-  const subject = wrong === 1 ? "1 mark is" : `${wrong} marks are`;
-  return `${subject} wrong. That cost a point.`;
+  return tentsMessages("tents.check.wrong", { count: wrong });
 }
 
 function restoreState(
@@ -80,11 +82,18 @@ export function useTentsSession(
       latestStats.current = nextStats;
       setStats(nextStats);
       storage.saveStats(nextStats);
+      storage.recordResult(calculateScore(next), next.status === "won");
     }
   }
 
+  const initialState = useMemo(
+    () => createInitialState(puzzleId, round.puzzle.size),
+    [puzzleId, round],
+  );
+  const isClockRunning = state.status === "playing" && hasStartedPlaying(state, initialState);
+
   useEffect(() => {
-    if (state.status !== "playing") {
+    if (!isClockRunning) {
       return undefined;
     }
     const timer = window.setInterval(() => {
@@ -97,7 +106,7 @@ export function useTentsSession(
       }
     }, TICK_MS);
     return () => window.clearInterval(timer);
-  }, [state.status, storage, dayIndex]);
+  }, [isClockRunning, storage, dayIndex]);
 
   function runCheck() {
     const result = check(latest.current, puzzle);

@@ -1,22 +1,32 @@
 import { describe, expect, it } from "vitest";
 import { calculateContrast } from "../../testing/contrast";
 import { MARKER_COLOURS } from "./markerColours";
-import { THEME_COLOURS } from "./recipes";
+import { PALETTES, listSkyBands, tintColour } from "./palettes";
+import { MOODS, THEMES } from "./types";
 
 describe("MARKER_COLOURS", () => {
-  const backgrounds = Object.entries(THEME_COLOURS).flatMap(([theme, colours]) => [
-    [`${theme} sky`, colours.sky],
-    [`${theme} ground`, colours.ground],
-  ]);
+  const backgrounds = THEMES.flatMap((theme) =>
+    MOODS.flatMap((mood) => [
+      ...listSkyBands(theme, mood).map((sky, index) => [`${theme} ${mood} sky ${index}`, sky]),
+      [`${theme} ${mood} ground`, tintColour(PALETTES[theme].ground, mood)],
+    ]),
+  );
+
+  function readBestContrast(marker: string, background: string): number {
+    return Math.max(
+      calculateContrast(marker, background),
+      calculateContrast(MARKER_COLOURS.halo, background),
+    );
+  }
 
   it.each(backgrounds)("keeps the found circle visible on the %s", (_name, background) => {
-    expect(calculateContrast(MARKER_COLOURS.found, background)).toBeGreaterThanOrEqual(3);
+    expect(readBestContrast(MARKER_COLOURS.found, background)).toBeGreaterThanOrEqual(3);
   });
 
   it.each(backgrounds)(
     "keeps the missed circle and the wrong-tap cross visible on the %s",
     (_name, background) => {
-      expect(calculateContrast(MARKER_COLOURS.missed, background)).toBeGreaterThanOrEqual(3);
+      expect(readBestContrast(MARKER_COLOURS.missed, background)).toBeGreaterThanOrEqual(3);
     },
   );
 

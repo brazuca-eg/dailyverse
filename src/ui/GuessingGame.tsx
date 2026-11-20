@@ -5,6 +5,7 @@ import { buildShareText } from "../core/share";
 import type { Country } from "../core/types";
 import { useGuessingSession } from "../hooks/useGuessingSession";
 import { useHelpDialog } from "../hooks/useHelpDialog";
+import { AnswerSummary } from "./AnswerSummary";
 import { GameDialogs } from "./GameDialogs";
 import { GameToolbar } from "./GameToolbar";
 import { GuessHistory } from "./GuessHistory";
@@ -72,11 +73,7 @@ export function GuessingGame({
         status={state.status}
         score={calculateScore(state)}
         maxScore={MAX_GUESSES}
-        summary={
-          <>
-            The answer was <strong>{answer.name}</strong>
-          </>
-        }
+        summary={<AnswerSummary answer={answer} />}
         shareText={buildShareText(gameTitle, state, dayIndex + 1, shareUrl)}
         visual={resultVisual}
         fact={resultFact}

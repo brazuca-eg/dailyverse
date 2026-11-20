@@ -1,12 +1,13 @@
-import { CATEGORIES, type CategoryId } from "./categories";
-
-const numberFormat = new Intl.NumberFormat("en-US");
+import { readCurrentLocale } from "../../i18n/locales";
+import type { CategoryId } from "./categories";
+import { peakMessages as t } from "./messages";
 
 export function formatValue(value: number, category: CategoryId): string {
-  return `${numberFormat.format(value)} ${CATEGORIES[category].unit}`;
+  return t(`peak.value.${category}`, {
+    value: new Intl.NumberFormat(readCurrentLocale()).format(value),
+  });
 }
 
 export function buildPrompt(category: CategoryId): string {
-  const { title, lowest, highest } = CATEGORIES[category];
-  return `Order these ${title.toLowerCase()} from ${lowest} to ${highest}`;
+  return t(`peak.prompt.${category}`);
 }

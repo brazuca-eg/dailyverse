@@ -190,8 +190,23 @@ describe("useTentsSession timer", () => {
     vi.restoreAllMocks();
   });
 
+  it("does not count time until the first move, then starts counting", () => {
+    const session = renderSession();
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+    expect(session.result.current.state.elapsedSeconds).toBe(0);
+    expect(vi.getTimerCount()).toBe(0);
+    run(session, (current) => current.cycle(spare[0]));
+    act(() => {
+      vi.advanceTimersByTime(2000);
+    });
+    expect(session.result.current.state.elapsedSeconds).toBe(2);
+  });
+
   it("counts a second at a time while playing", () => {
     const session = renderSession();
+    run(session, (current) => current.cycle(spare[0]));
     act(() => {
       vi.advanceTimersByTime(3000);
     });
@@ -200,6 +215,7 @@ describe("useTentsSession timer", () => {
 
   it("saves the time so a reload keeps it", () => {
     const first = renderSession();
+    run(first, (current) => current.cycle(spare[0]));
     act(() => {
       vi.advanceTimersByTime(5000);
     });
@@ -209,6 +225,7 @@ describe("useTentsSession timer", () => {
 
   it("stops counting once the round is over", () => {
     const session = renderSession();
+    run(session, (current) => current.cycle(spare[0]));
     act(() => {
       vi.advanceTimersByTime(2000);
     });
@@ -231,6 +248,7 @@ describe("useTentsSession timer", () => {
 
   it("does not stop the clock when the player checks", () => {
     const session = renderSession();
+    run(session, (current) => current.cycle(spare[0]));
     act(() => {
       vi.advanceTimersByTime(1000);
     });

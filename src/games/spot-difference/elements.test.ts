@@ -1,3 +1,4 @@
+import { PALETTES } from "./palettes";
 import { describe, expect, it } from "vitest";
 import { drawElement, VARIANT_COUNTS } from "./elements";
 import { ELEMENT_KINDS, type ElementKind, type SceneElement } from "./types";
@@ -76,5 +77,54 @@ describe("drawElement", () => {
         expect(primitive.fill).toMatch(/^#[0-9a-f]{6}$/);
       });
     });
+  });
+});
+
+describe("the desert and beach things", () => {
+  const element = {
+    id: "x-1",
+    kind: "cactus" as const,
+    x: 0,
+    y: 0,
+    scale: 1,
+    rotation: 0,
+    shade: 0,
+    variant: 0,
+    layer: 5,
+  };
+
+  it("gives a cactus a different shape for each variant", () => {
+    const shapes = [0, 1, 2].map((variant) => JSON.stringify(drawElement({ ...element, variant })));
+    expect(new Set(shapes).size).toBe(3);
+  });
+
+  it("leans a palm one way or the other by variant", () => {
+    const palm = { ...element, kind: "palm" as const };
+    expect(JSON.stringify(drawElement({ ...palm, variant: 0 }))).not.toBe(
+      JSON.stringify(drawElement({ ...palm, variant: 1 })),
+    );
+  });
+
+  it("draws the sun as a moon at night, and keeps it bright", () => {
+    const sun = { ...element, kind: "sun" as const };
+    const night = drawElement(sun, { palette: PALETTES.camp, mood: "night" });
+    const day = drawElement(sun, { palette: PALETTES.camp, mood: "day" });
+    expect(night.length).toBeGreaterThan(day.length);
+    expect(night.every((part) => part.glow === true)).toBe(true);
+  });
+
+  it("dims the sun under cloud", () => {
+    const sun = { ...element, kind: "sun" as const };
+    const parts = drawElement(sun, { palette: PALETTES.camp, mood: "overcast" });
+    expect(parts.every((part) => part.shape === "circle" && (part.opacity ?? 1) < 1)).toBe(true);
+  });
+
+  it("colours the trees of an autumn place by variant", () => {
+    const tree = { ...element, kind: "roundTree" as const };
+    const colours = [0, 1, 2].map((variant) =>
+      drawElement({ ...tree, variant }, { palette: PALETTES.autumn, mood: "day" }),
+    );
+    const fills = colours.map((parts) => parts[parts.length - 1].fill);
+    expect(new Set(fills).size).toBeGreaterThan(1);
   });
 });

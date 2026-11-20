@@ -1,13 +1,34 @@
+import { readCountryName } from "../../core/countryNames";
 import { MAX_GUESSES } from "../../core/guessing";
+import type { Country } from "../../core/types";
 import { GuessRow } from "../../ui/GuessRow";
+import { mysteryMessages as t } from "./messages";
 
-export const MYSTERY_PLACE_RULE_STEPS = [
-  `Find the mystery country. You have ${MAX_GUESSES} guesses.`,
-  "Each wrong guess unlocks another clue.",
-  "After a guess, the arrow points from your guess toward the answer, and the bar shows how close you are.",
-  "The fewer guesses you use, the more points you earn.",
-];
+const EXAMPLE_COUNTRY: Country = {
+  code: "ES",
+  name: "Spain",
+  aliases: [],
+  continent: "Europe",
+  lat: 40,
+  lng: -4,
+};
 
-export const MYSTERY_PLACE_RULE_EXAMPLE = (
-  <GuessRow countryCode="ES" name="Spain" distanceKm={1420} direction="NE" />
-);
+export function buildRuleSteps(): string[] {
+  return [
+    t("mystery.rules.1", { max: MAX_GUESSES }),
+    t("mystery.rules.2"),
+    t("mystery.rules.3"),
+    t("mystery.rules.4"),
+  ];
+}
+
+export function buildRuleExample() {
+  return (
+    <GuessRow
+      countryCode={EXAMPLE_COUNTRY.code}
+      name={readCountryName(EXAMPLE_COUNTRY)}
+      distanceKm={1420}
+      direction="NE"
+    />
+  );
+}

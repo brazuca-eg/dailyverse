@@ -10,7 +10,8 @@ import { findDailyWeatherRound } from "./daily";
 import { FitGuide } from "./FitGuide";
 import { Forecast } from "./Forecast";
 import { MAX_SCORE, calculateScore, isPlanComplete, readPlanShare } from "./game";
-import { WEATHER_WINDOW_RULE_STEPS } from "./helpText";
+import { buildWeatherWindowRuleSteps } from "./helpText";
+import { t } from "./messages";
 import { Review } from "./Review";
 import { analysePuzzle, scorePlan } from "./solver";
 import { buildShareText } from "./share";
@@ -42,10 +43,12 @@ function WeatherPlay({ round, dayIndex }: PlayProps) {
     <div className="ww-game">
       <div className="ww-header">
         <span className="ww-phase">
-          {state.phase === "memorise" ? `Memorise: ${session.secondsLeft}s` : null}
-          {isPlanning ? "Plan your trips" : null}
-          {state.phase === "intro" ? "Ready?" : null}
-          {isDone ? `${scorePlan(puzzle, state.plan)} of ${best} points` : null}
+          {state.phase === "memorise"
+            ? t("weather.game.memorise", { seconds: session.secondsLeft })
+            : null}
+          {isPlanning ? t("weather.game.plan") : null}
+          {state.phase === "intro" ? t("weather.game.ready") : null}
+          {isDone ? t("weather.game.score", { points: scorePlan(puzzle, state.plan), best }) : null}
         </span>
         <GameToolbar onShowHelp={helpDialog.open} onShowStats={() => setIsStatsOpen(true)} />
       </div>
@@ -63,12 +66,12 @@ function WeatherPlay({ round, dayIndex }: PlayProps) {
       </p>
       {state.phase === "intro" && (
         <button type="button" className="button ww-start" onClick={session.start}>
-          Show the forecast
+          {t("weather.game.show")}
         </button>
       )}
       {state.phase === "memorise" && (
         <button type="button" className="button ww-start" onClick={session.ready}>
-          I'm ready
+          {t("weather.game.imReady")}
         </button>
       )}
       {isPlanning && (
@@ -97,17 +100,21 @@ function WeatherPlay({ round, dayIndex }: PlayProps) {
         maxScore={MAX_SCORE}
         summary={
           isDone
-            ? `${scorePlan(puzzle, state.plan)} of ${best} points (${Math.round(readPlanShare(state.plan, puzzle) * 100)}% of the best plan)`
+            ? t("weather.game.summary", {
+                points: scorePlan(puzzle, state.plan),
+                best,
+                percent: Math.round(readPlanShare(state.plan, puzzle) * 100),
+              })
             : ""
         }
-        lostEyebrow="Washed out"
+        lostEyebrow={t("weather.game.washedOut")}
         shareText={isDone ? buildShareText(state, puzzle, dayIndex + 1, shareUrl) : ""}
       />
       <GameDialogs
         helpDialog={helpDialog}
         isStatsOpen={isStatsOpen}
         onCloseStats={() => setIsStatsOpen(false)}
-        ruleSteps={WEATHER_WINDOW_RULE_STEPS}
+        ruleSteps={buildWeatherWindowRuleSteps()}
         stats={session.stats}
         dayIndex={dayIndex}
       />
@@ -119,7 +126,7 @@ export function WeatherWindowGame() {
   const dayIndex = useDayIndex(WEATHER_LAUNCH_DATE);
   const round = useMemo(() => findDailyWeatherRound(dayIndex), [dayIndex]);
   if (!round) {
-    return <p>Today's puzzle could not be loaded.</p>;
+    return <p>{t("weather.game.loadError")}</p>;
   }
   return <WeatherPlay round={round} dayIndex={dayIndex} />;
 }

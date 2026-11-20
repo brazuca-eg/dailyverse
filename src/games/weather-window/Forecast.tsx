@@ -1,5 +1,13 @@
-import { DAY_NAMES, TRIPS, WEATHERS, readShortDayName } from "./catalogue";
+import type { CSSProperties } from "react";
+import {
+  DAY_NAMES,
+  readDayName,
+  readShortDayName,
+  readTripLabel,
+  readWeatherLabel,
+} from "./catalogue";
 import { QuestionIcon, TripIcon, WeatherIcon } from "./Icons";
+import { t } from "./messages";
 import type { WeatherPuzzle } from "./types";
 import { UNPLACED } from "./types";
 import "./Forecast.css";
@@ -22,9 +30,11 @@ function describeDay(
 ): string {
   const trip = plan.indexOf(day);
   const parts = [
-    DAY_NAMES[day].label,
-    isRevealed ? WEATHERS[puzzle.weather[day]].label : "weather hidden",
-    trip === UNPLACED ? "no trip planned" : `${TRIPS[puzzle.trips[trip]].label} planned`,
+    readDayName(day),
+    isRevealed ? readWeatherLabel(puzzle.weather[day]) : t("weather.forecast.weatherHidden"),
+    trip === UNPLACED
+      ? t("weather.forecast.noTrip")
+      : t("weather.forecast.tripPlanned", { trip: readTripLabel(puzzle.trips[trip]) }),
   ];
   return parts.join(", ");
 }
@@ -40,7 +50,18 @@ export function Forecast({
 }: ForecastProps) {
   const hint = isPeekArmed || selectedTrip !== null;
   return (
-    <ul className="ww-forecast">
+    <ul
+      className="ww-forecast"
+      style={
+        {
+          "--ww-days": puzzle.weather.length,
+          "--ww-narrow-columns": Math.min(
+            puzzle.weather.length,
+            4 + Number(puzzle.weather.length <= 5),
+          ),
+        } as CSSProperties
+      }
+    >
       {puzzle.weather.map((weather, day) => {
         const revealed = isRevealed(day);
         const trip = plan.indexOf(day);
@@ -61,8 +82,8 @@ export function Forecast({
                 ) : (
                   <QuestionIcon size={30} />
                 )}
-                <span className="ww-day-label">
-                  {revealed ? WEATHERS[weather].label : "Hidden"}
+                <span className={revealed ? "ww-day-label" : "ww-day-label visually-hidden"}>
+                  {revealed ? readWeatherLabel(weather) : t("weather.forecast.hidden")}
                 </span>
               </span>
               <span className="ww-day-trip">
@@ -71,7 +92,7 @@ export function Forecast({
                 ) : (
                   <>
                     <TripIcon trip={puzzle.trips[trip]} size={16} />
-                    {TRIPS[puzzle.trips[trip]].label}
+                    {readTripLabel(puzzle.trips[trip])}
                   </>
                 )}
               </span>

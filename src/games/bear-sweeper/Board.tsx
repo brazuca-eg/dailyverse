@@ -2,6 +2,7 @@ import { useRef, type KeyboardEvent, type MouseEvent, type PointerEvent } from "
 import { FLAGGED, HIDDEN, REVEALED, TRIGGERED, type BearState } from "./game";
 import { toCol, toRow } from "./grid";
 import { PawIcon, PennantIcon } from "./Icons";
+import { t } from "./messages";
 import type { BearPuzzle } from "./types";
 import "./Board.css";
 
@@ -36,19 +37,22 @@ function describeCell(
   count: number,
   flags: { isBear: boolean; isWrongFlag: boolean },
 ): string {
-  const place = `Row ${toRow(size, index) + 1}, column ${toCol(size, index) + 1}`;
+  const place = t("bear.cell.place", {
+    row: toRow(size, index) + 1,
+    column: toCol(size, index) + 1,
+  });
   if (code === TRIGGERED) {
-    return `${place}, bear`;
+    return t("bear.cell.bear", { place });
   }
   if (code === REVEALED) {
     return count === 0
-      ? `${place}, revealed, no bears nearby`
-      : `${place}, revealed, ${count} ${count === 1 ? "bear" : "bears"} nearby`;
+      ? t("bear.cell.revealedEmpty", { place })
+      : t("bear.cell.nearby", { place, count });
   }
   if (code === FLAGGED) {
-    return flags.isWrongFlag ? `${place}, flagged, no bear here` : `${place}, flagged`;
+    return t(flags.isWrongFlag ? "bear.cell.flaggedWrong" : "bear.cell.flagged", { place });
   }
-  return flags.isBear ? `${place}, hidden, a bear was here` : `${place}, hidden`;
+  return t(flags.isBear ? "bear.cell.hiddenBear" : "bear.cell.hidden", { place });
 }
 
 export function Board({
@@ -134,7 +138,7 @@ export function Board({
     <table
       className={`bs-board bs-${size}`}
       role="grid"
-      aria-label="Bear Sweeper board"
+      aria-label={t("bear.board.label")}
       onKeyDown={handleKeyDown}
       onPointerDown={handlePointerDown}
       onPointerUp={cancelPress}

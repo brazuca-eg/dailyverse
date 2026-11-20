@@ -1,4 +1,5 @@
 import { LockIcon } from "../../ui/icons";
+import { mysteryMessages as t } from "./messages";
 import type { Clue, ClueKind } from "./types";
 import "./CluesList.css";
 
@@ -31,15 +32,19 @@ const KIND_STYLES: Record<ClueKind, KindStyle> = {
 
 export function CluesList({ clues, visibleCount, highlightIndex }: CluesListProps) {
   return (
-    <ol className="clues card-list" aria-label="Clues">
+    <ol className="clues card-list" aria-label={t("mystery.clues.label")}>
       {clues.map((clue, index) => {
         const number = index + 1;
         if (index >= visibleCount) {
           return (
-            <li key={index} className="clue clue-locked" aria-label={`Clue ${number}, locked`}>
+            <li
+              key={index}
+              className="clue clue-locked"
+              aria-label={t("mystery.clue.lockedLabel", { number })}
+            >
               <span className="clue-number">{number}</span>
               <span className="clue-locked-text">
-                <LockIcon size={14} /> Locked
+                <LockIcon size={14} /> {t("mystery.clue.lockedText")}
               </span>
             </li>
           );
@@ -51,7 +56,7 @@ export function CluesList({ clues, visibleCount, highlightIndex }: CluesListProp
             <span className="clue-number">{number}</span>
             <div className="clue-body">
               <span className={`kind-chip hue-${style.hue}`}>
-                <span aria-hidden="true">{style.emoji}</span> {clue.kind}
+                <span aria-hidden="true">{style.emoji}</span> {t(`mystery.kind.${clue.kind}`)}
               </span>
               <span className="clue-text">{clue.text}</span>
             </div>

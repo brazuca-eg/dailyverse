@@ -1,6 +1,7 @@
 .guess-form {
   display: flex;
   flex-direction: column;
+  scroll-margin-bottom: 24px;
 }
 
 .guess-row {
@@ -27,6 +28,8 @@
   height: 56px;
   padding: 0 16px 0 46px;
   font: inherit;
+  font-size: max(16px, 1rem);
+  touch-action: manipulation;
   color: var(--text);
   background: var(--surface);
   border: 2px solid var(--border-strong);

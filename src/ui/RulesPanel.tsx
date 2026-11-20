@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { uiMessages as t } from "./messages";
 import "./RulesPanel.css";
 
 interface RulesPanelProps {
@@ -20,9 +21,9 @@ export function RulesPanel({ steps, example, onStart }: RulesPanelProps) {
           {example}
         </div>
       )}
-      <p className="how-to-play-note">A new puzzle arrives every day at 00:00 UTC.</p>
+      <p className="how-to-play-note">{t("ui.rules.note")}</p>
       <button type="button" className="button button-primary button-block" onClick={onStart}>
-        Start playing
+        {t("ui.rules.start")}
       </button>
     </div>
   );

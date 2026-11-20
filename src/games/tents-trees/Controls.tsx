@@ -1,4 +1,5 @@
 import { useArmedAction } from "../../hooks/useArmedAction";
+import { tentsMessages } from "./messages";
 import "./Controls.css";
 
 interface ControlsProps {
@@ -21,13 +22,13 @@ export function Controls({ canUndo, onUndo, onClear, onCheck, onHint, onGiveUp }
         disabled={!canUndo}
         onClick={onUndo}
       >
-        Undo
+        {tentsMessages("tents.control.undo")}
       </button>
       <button type="button" className="button button-secondary control" onClick={onCheck}>
-        Check
+        {tentsMessages("tents.control.check")}
       </button>
       <button type="button" className="button button-secondary control" onClick={onHint}>
-        Hint
+        {tentsMessages("tents.control.hint")}
       </button>
       <button
         type="button"
@@ -35,7 +36,9 @@ export function Controls({ canUndo, onUndo, onClear, onCheck, onHint, onGiveUp }
         aria-pressed={clear.isArmed}
         onClick={clear.trigger}
       >
-        {clear.isArmed ? "Tap again" : "Clear"}
+        {clear.isArmed
+          ? tentsMessages("tents.control.armed")
+          : tentsMessages("tents.control.clear")}
       </button>
       <button
         type="button"
@@ -43,7 +46,9 @@ export function Controls({ canUndo, onUndo, onClear, onCheck, onHint, onGiveUp }
         aria-pressed={giveUp.isArmed}
         onClick={giveUp.trigger}
       >
-        {giveUp.isArmed ? "Tap again" : "Give up"}
+        {giveUp.isArmed
+          ? tentsMessages("tents.control.armed")
+          : tentsMessages("tents.control.giveUp")}
       </button>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { StateStorage } from "../../core/gameStorage";
 import { applyGameResult, type GameStats } from "../../core/streak";
-import { DAY_NAMES, TRIPS, WEATHERS } from "./catalogue";
+import { readDayName, readTripLabel, readWeatherLabel } from "./catalogue";
 import {
   buildPuzzleId,
   countPeeksLeft,
@@ -15,7 +15,9 @@ import {
   startPreview,
   submitPlan,
   type WeatherState,
+  calculateScore,
 } from "./game";
+import { t } from "./messages";
 import { TIER_SETTINGS } from "./tiers";
 import type { WeatherRound } from "./types";
 
@@ -63,15 +65,17 @@ function describeChange(
   round: WeatherRound,
 ): string | null {
   if (next.phase === "done") {
-    return next.status === "won" ? "Plan submitted. Nice forecasting!" : "Plan submitted.";
+    return next.status === "won" ? t("weather.notice.submittedWon") : t("weather.notice.submitted");
   }
   const changed = next.plan.findIndex((day, trip) => day !== previous.plan[trip]);
   if (changed < 0) {
     return null;
   }
-  const label = TRIPS[round.puzzle.trips[changed]].label;
+  const trip = readTripLabel(round.puzzle.trips[changed]);
   const day = next.plan[changed];
-  return day < 0 ? `${label} taken off the plan.` : `${label} planned for ${DAY_NAMES[day].label}.`;
+  return day < 0
+    ? t("weather.notice.removed", { trip })
+    : t("weather.notice.planned", { trip, day: readDayName(day) });
 }
 
 export function useWeatherSession(
@@ -111,6 +115,7 @@ export function useWeatherSession(
       latestStats.current = nextStats;
       setStats(nextStats);
       storage.saveStats(nextStats);
+      storage.recordResult(calculateScore(next, round.puzzle), next.status === "won");
     }
     return true;
   }
@@ -171,7 +176,12 @@ export function useWeatherSession(
       if (isPeekArmed) {
         if (apply((current) => spendPeek(current, settings.peeks))) {
           setPeekedDay(day);
-          setNotice(`${DAY_NAMES[day].label}: ${WEATHERS[round.puzzle.weather[day]].label}.`);
+          setNotice(
+            t("weather.notice.peeked", {
+              day: readDayName(day),
+              weather: readWeatherLabel(round.puzzle.weather[day]),
+            }),
+          );
         }
         pick({ trip: null, isPeekArmed: false });
       } else if (trip !== null) {

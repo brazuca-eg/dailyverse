@@ -1,0 +1,18 @@
+---
+import { LOCALES, DEFAULT_LOCALE } from "../../i18n/locales";
+import GamePage from "../../site/GamePage.astro";
+import { SITE_GAMES } from "../../site/games";
+
+export function getStaticPaths() {
+  return LOCALES.filter((locale) => locale !== DEFAULT_LOCALE).flatMap((locale) =>
+    SITE_GAMES.map(({ slug }) => ({
+      params: { lang: locale, game: slug },
+      props: { locale, slug },
+    })),
+  );
+}
+
+const { locale, slug } = Astro.props;
+---
+
+<GamePage slug={slug} locale={locale} />

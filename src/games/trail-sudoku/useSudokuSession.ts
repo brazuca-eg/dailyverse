@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { hasStartedPlaying } from "../../core/clock";
+import { useEffect, useRef, useState, useMemo } from "react";
 import type { StateStorage } from "../../core/gameStorage";
 import { applyGameResult, type GameStats } from "../../core/streak";
 import {
@@ -14,7 +15,9 @@ import {
   toggleNote,
   undoMove,
   type SudokuState,
+  calculateScore,
 } from "./game";
+import { sudokuMessages as t } from "./messages";
 import type { SudokuRound } from "./types";
 
 const TICK_MS = 1000;
@@ -37,10 +40,9 @@ export interface SudokuSession {
 
 function describeCheck(wrong: number): string {
   if (wrong === 0) {
-    return "Everything entered so far is right.";
+    return t("sudoku.notice.allRight");
   }
-  const subject = wrong === 1 ? "1 number is" : `${wrong} numbers are`;
-  return `${subject} wrong. That cost a point.`;
+  return t("sudoku.notice.wrong", { count: wrong });
 }
 
 function restoreState(
@@ -94,11 +96,18 @@ export function useSudokuSession(
       latestStats.current = nextStats;
       setStats(nextStats);
       storage.saveStats(nextStats);
+      storage.recordResult(calculateScore(next), next.status === "won");
     }
   }
 
+  const initialState = useMemo(
+    () => createInitialState(puzzleId, round.puzzle.size),
+    [puzzleId, round],
+  );
+  const isClockRunning = state.status === "playing" && hasStartedPlaying(state, initialState);
+
   useEffect(() => {
-    if (state.status !== "playing") {
+    if (!isClockRunning) {
       return undefined;
     }
     const timer = window.setInterval(() => {
@@ -110,7 +119,7 @@ export function useSudokuSession(
       }
     }, TICK_MS);
     return () => window.clearInterval(timer);
-  }, [state.status, storage, dayIndex]);
+  }, [isClockRunning, storage, dayIndex]);
 
   function runCheck() {
     const result = checkBoard(latest.current, puzzle);
@@ -130,7 +139,7 @@ export function useSudokuSession(
     enter: (digit) => {
       const target = latestSelected.current;
       if (target === null) {
-        setNotice("Select a square first.");
+        setNotice(t("sudoku.notice.select"));
         return;
       }
       apply((current) =>

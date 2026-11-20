@@ -8,6 +8,7 @@ import {
 } from "react";
 import { findCrosshairMove, findStartPoint, isActivationKey, moveCrosshair } from "./crosshair";
 import { TAP_TOLERANCE, type MissMark, type Point } from "./game";
+import { spotMessages as t } from "./messages";
 import { MARKER_COLOURS } from "./markerColours";
 import { calculateTapTolerance, toScenePoint } from "./pointer";
 import { renderSceneContent } from "./render";
@@ -39,9 +40,6 @@ function describeMarker(region: Bounds): { cx: number; cy: number; rx: number; r
   const ry = Math.max((region.bottom - region.top) / 2, MARKER_MIN_RADIUS) + MARKER_PADDING;
   return { cx: (region.left + region.right) / 2, cy: (region.top + region.bottom) / 2, rx, ry };
 }
-
-const KEYBOARD_HELP =
-  "Use the arrow keys to move the crosshair, and Enter or Space to mark a difference.";
 
 export function SceneView({
   scene,
@@ -101,7 +99,7 @@ export function SceneView({
       <button
         type="button"
         className="scene-button"
-        aria-label={`${label}. ${KEYBOARD_HELP}`}
+        aria-label={`${label}. ${t("spot.scene.keyboard")}`}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
       >

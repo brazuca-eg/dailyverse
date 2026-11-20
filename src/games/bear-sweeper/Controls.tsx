@@ -1,4 +1,5 @@
 import { useArmedAction } from "../../hooks/useArmedAction";
+import { t } from "./messages";
 import "./Controls.css";
 
 interface ControlsProps {
@@ -18,10 +19,10 @@ export function Controls({ isFlagMode, onToggleFlagMode, onHint, onGiveUp }: Con
         aria-pressed={isFlagMode}
         onClick={onToggleFlagMode}
       >
-        Flag mode {isFlagMode ? "on" : "off"}
+        {t(isFlagMode ? "bear.controls.flagOn" : "bear.controls.flagOff")}
       </button>
       <button type="button" className="button button-secondary bs-control" onClick={onHint}>
-        Hint
+        {t("bear.controls.hint")}
       </button>
       <button
         type="button"
@@ -29,7 +30,7 @@ export function Controls({ isFlagMode, onToggleFlagMode, onHint, onGiveUp }: Con
         aria-pressed={giveUp.isArmed}
         onClick={giveUp.trigger}
       >
-        {giveUp.isArmed ? "Tap again" : "Give up"}
+        {t(giveUp.isArmed ? "bear.controls.tapAgain" : "bear.controls.giveUp")}
       </button>
     </div>
   );

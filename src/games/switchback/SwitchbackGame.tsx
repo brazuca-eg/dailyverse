@@ -10,7 +10,8 @@ import { Controls } from "./Controls";
 import { SWITCHBACK_LAUNCH_DATE } from "./data";
 import { findDailySwitchbackRound } from "./daily";
 import { calculateScore, countCells, countReachedMarks, MAX_SCORE } from "./game";
-import { SWITCHBACK_RULE_STEPS } from "./helpText";
+import { buildRuleSteps } from "./helpText";
+import { t } from "./messages";
 import { switchbackStorage } from "./persistence";
 import { buildShareText } from "./share";
 import type { SwitchbackRound } from "./types";
@@ -41,7 +42,7 @@ function SwitchbackPlay({ round, dayIndex }: PlayProps) {
           ⏱ {formatElapsed(state.elapsedSeconds)}
         </span>
         <span className="sw-size">
-          {puzzle.size}x{puzzle.size} · {round.tier}
+          {t("switch.size", { size: puzzle.size, tier: t(`switch.tier.${round.tier}`) })}
         </span>
         <GameToolbar onShowHelp={helpDialog.open} onShowStats={() => setIsStatsOpen(true)} />
       </div>
@@ -57,9 +58,12 @@ function SwitchbackPlay({ round, dayIndex }: PlayProps) {
         onReset={session.reset}
       />
       <p className="sw-progress">
-        {covered} of {cells} squares · checkpoint{" "}
-        {Math.min(countReachedMarks(puzzle, state.path), puzzle.marks.length)} of{" "}
-        {puzzle.marks.length}
+        {t("switch.progress", {
+          covered,
+          cells,
+          reached: Math.min(countReachedMarks(puzzle, state.path), puzzle.marks.length),
+          total: puzzle.marks.length,
+        })}
       </p>
       <p className="sw-notice" role="status">
         {session.notice}
@@ -79,17 +83,17 @@ function SwitchbackPlay({ round, dayIndex }: PlayProps) {
         maxScore={MAX_SCORE}
         summary={
           state.status === "won"
-            ? `Summit reached in ${formatElapsed(state.elapsedSeconds)}`
-            : "Here is the route"
+            ? t("switch.summary.won", { time: formatElapsed(state.elapsedSeconds) })
+            : t("switch.summary.lost")
         }
-        lostEyebrow="Gave up"
+        lostEyebrow={t("switch.eyebrow.lost")}
         shareText={buildShareText(state, puzzle.size, dayIndex + 1, shareUrl)}
       />
       <GameDialogs
         helpDialog={helpDialog}
         isStatsOpen={isStatsOpen}
         onCloseStats={() => setIsStatsOpen(false)}
-        ruleSteps={SWITCHBACK_RULE_STEPS}
+        ruleSteps={buildRuleSteps()}
         stats={session.stats}
         dayIndex={dayIndex}
       />
@@ -101,7 +105,7 @@ export function SwitchbackGame() {
   const dayIndex = useDayIndex(SWITCHBACK_LAUNCH_DATE);
   const round = useMemo(() => findDailySwitchbackRound(dayIndex), [dayIndex]);
   if (!round) {
-    return <p>Today's puzzle could not be loaded.</p>;
+    return <p>{t("switch.loadError")}</p>;
   }
   return <SwitchbackPlay round={round} dayIndex={dayIndex} />;
 }

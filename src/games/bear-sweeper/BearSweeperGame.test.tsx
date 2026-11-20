@@ -84,6 +84,7 @@ describe("BearSweeperGame", () => {
 
   it("counts the seconds", () => {
     startGame();
+    fireEvent.click(cell(numbered));
     act(() => {
       vi.advanceTimersByTime(65_000);
     });
@@ -147,6 +148,7 @@ describe("BearSweeperGame", () => {
 
   it("wins when every safe square is open: 5 points less the hints, the time and a share button", () => {
     startGame();
+    fireEvent.click(cell(numbered));
     act(() => {
       vi.advanceTimersByTime(161_000);
     });

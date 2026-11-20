@@ -1,0 +1,117 @@
+---
+import { countries } from "../core/countries";
+import { BearSweeperGame } from "../games/bear-sweeper/BearSweeperGame";
+import { FlagGame } from "../games/flag-fragment/FlagGame";
+import { FLAG_LAUNCH_DATE, flagSchedule } from "../games/flag-fragment/data";
+import { MysteryPlaceGame } from "../games/mystery-place/MysteryPlaceGame";
+import { PUZZLE_LAUNCH_DATE, puzzles } from "../games/mystery-place/data";
+import { localisePuzzles } from "../games/mystery-place/translations";
+import { PeakOrderGame } from "../games/peak-order/PeakOrderGame";
+import { SpotGame } from "../games/spot-difference/SpotGame";
+import { SPOT_LAUNCH_DATE } from "../games/spot-difference/daily";
+import { SwitchbackGame } from "../games/switchback/SwitchbackGame";
+import { TentsGame } from "../games/tents-trees/TentsGame";
+import { TENTS_LAUNCH_DATE } from "../games/tents-trees/daily";
+import { SudokuGame } from "../games/trail-sudoku/SudokuGame";
+import { TrailWordsGame } from "../games/trail-words/TrailWordsGame";
+import { WeatherWindowGame } from "../games/weather-window/WeatherWindowGame";
+import { buildLocalePath } from "../i18n/locales";
+import { siteMessages } from "../i18n/site";
+import type { Locale } from "../i18n/locales";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { FavouriteButton } from "./FavouriteButton";
+import { getSiteGame, listGameGroups, listGroupGames } from "./games";
+import "./GameLayout.css";
+
+interface Props {
+  slug: string;
+  locale: Locale;
+}
+
+const { slug, locale } = Astro.props;
+const game = getSiteGame(slug);
+const title = game.readMeta(locale, "title");
+const t = siteMessages.in(locale);
+const isWide = slug === "spot-the-difference";
+const group = listGameGroups().find((candidate) => candidate.slugs.includes(slug));
+const siblings = group ? listGroupGames(group).filter((candidate) => candidate.slug !== slug) : [];
+---
+
+<BaseLayout
+  title={siteMessages.in(locale)("site.page.title", { game: title })}
+  description={game.readMeta(locale, "description")}
+  locale={locale}
+  wide={isWide}
+  game={!isWide}
+>
+  <Fragment slot="hero">
+    <h1>{title}</h1>
+    <p class="lead">{game.readMeta(locale, "lead")}</p>
+  </Fragment>
+  <div class="game-toprow">
+    <a class="back-link" href={buildLocalePath(locale)}>
+      <span aria-hidden="true">←</span> {siteMessages.in(locale)("site.menu.home")}
+    </a>
+    <FavouriteButton slug={slug} client:only="react" />
+  </div>
+  <div class:list={["game-layout", { "game-layout-wide": isWide }]}>
+    <div class="game-main" data-game={slug}>
+      {slug === "mystery-place" && (
+        <MysteryPlaceGame
+          client:only="react"
+          puzzles={localisePuzzles(puzzles, locale)}
+          countries={countries}
+          launchDate={PUZZLE_LAUNCH_DATE}
+        />
+      )}
+      {slug === "flag-fragment" && (
+        <FlagGame
+          client:only="react"
+          schedule={flagSchedule}
+          countries={countries}
+          launchDate={FLAG_LAUNCH_DATE}
+        />
+      )}
+      {slug === "peak-order" && <PeakOrderGame client:only="react" />}
+      {slug === "trail-words" && <TrailWordsGame client:only="react" />}
+      {slug === "trail-sudoku" && <SudokuGame client:only="react" />}
+      {slug === "tents-and-trees" && (
+        <TentsGame client:only="react" launchDate={TENTS_LAUNCH_DATE} />
+      )}
+      {slug === "switchback" && <SwitchbackGame client:only="react" />}
+      {slug === "bear-sweeper" && <BearSweeperGame client:only="react" />}
+      {slug === "spot-the-difference" && (
+        <SpotGame client:only="react" launchDate={SPOT_LAUNCH_DATE} />
+      )}
+      {slug === "weather-window" && <WeatherWindowGame client:only="react" />}
+    </div>
+    {!isWide && (
+      <aside class="game-aside">
+        <div id="game-aside-slot" />
+        <nav class="game-aside-more" aria-label={t("site.aside.more")}>
+          <h2 class="game-aside-heading">{t("site.aside.more")}</h2>
+          <ul>
+            {siblings.map((sibling) => (
+              <li>
+                <a href={buildLocalePath(locale, sibling.slug)}>
+                  {sibling.readMeta(locale, "title")}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a href={buildLocalePath(locale)}>{t("site.menu.home")}</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+    )}
+  </div>
+</BaseLayout>
+
+<script>
+  if (document.querySelector('[data-game="trail-words"]')) {
+    import("../games/trail-words/wordList")
+      .then((module) => module.loadWordList())
+      .catch(() => undefined);
+  }
+</script>

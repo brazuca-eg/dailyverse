@@ -4,7 +4,10 @@ import {
   type CompassDirection,
 } from "../core/distance";
 import { getFlagEmoji } from "../core/flags";
+import { coreMessages } from "../core/messages";
+import { readCurrentLocale } from "../i18n/locales";
 import { ArrowUpIcon } from "./icons";
+import { uiMessages as t } from "./messages";
 import "./GuessRow.css";
 
 interface GuessRowProps {
@@ -14,17 +17,6 @@ interface GuessRowProps {
   direction: CompassDirection;
   showFlag?: boolean;
 }
-
-const DIRECTION_LABELS: Record<CompassDirection, string> = {
-  N: "north",
-  NE: "north-east",
-  E: "east",
-  SE: "south-east",
-  S: "south",
-  SW: "south-west",
-  W: "west",
-  NW: "north-west",
-};
 
 const NEAR_PROXIMITY_PERCENT = 75;
 const MID_PROXIMITY_PERCENT = 40;
@@ -48,7 +40,9 @@ export function GuessRow({
   showFlag = true,
 }: GuessRowProps) {
   const proximity = calculateProximityPercent(distanceKm);
-  const directionLabel = DIRECTION_LABELS[direction];
+  const targetLabel = t("ui.guess.target", {
+    direction: coreMessages(`core.direction.${direction}`),
+  });
   const rotation = COMPASS_DIRECTIONS.indexOf(direction) * 45;
   return (
     <>
@@ -60,7 +54,9 @@ export function GuessRow({
       <div className="guess-main">
         <div className="guess-line">
           <span className="guess-name">{name}</span>
-          <span className="guess-distance">{distanceKm.toLocaleString("en-US")} km</span>
+          <span className="guess-distance">
+            {t("ui.guess.distance", { distance: distanceKm.toLocaleString(readCurrentLocale()) })}
+          </span>
         </div>
         <div className="proximity">
           <div className="proximity-track">
@@ -72,12 +68,7 @@ export function GuessRow({
           <span className="proximity-value">{proximity}%</span>
         </div>
       </div>
-      <span
-        className="guess-badge"
-        role="img"
-        aria-label={`Target is ${directionLabel}`}
-        title={`Target is ${directionLabel}`}
-      >
+      <span className="guess-badge" role="img" aria-label={targetLabel} title={targetLabel}>
         <span style={{ display: "inline-flex", transform: `rotate(${rotation}deg)` }}>
           <ArrowUpIcon size={22} />
         </span>

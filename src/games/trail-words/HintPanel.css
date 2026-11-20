@@ -23,14 +23,17 @@
 }
 
 .hints-table {
+  width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   font-variant-numeric: tabular-nums;
 }
 
 .hints-table th,
 .hints-table td {
-  min-width: 36px;
-  padding: 4px 8px;
+  min-width: 0;
+  padding: 4px 2px;
+  overflow-wrap: anywhere;
   text-align: center;
 }
 

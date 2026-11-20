@@ -1,4 +1,5 @@
 import { MAX_LIVES } from "./game";
+import { spotMessages as t } from "./messages";
 import "./Lives.css";
 
 interface LivesProps {
@@ -6,7 +7,7 @@ interface LivesProps {
 }
 
 export function Lives({ livesLeft }: LivesProps) {
-  const label = livesLeft === 1 ? "1 life left" : `${livesLeft} lives left`;
+  const label = t("spot.lives.left", { count: livesLeft });
   return (
     <span className="lives" role="img" aria-label={label}>
       {Array.from({ length: MAX_LIVES }, (_, index) => (

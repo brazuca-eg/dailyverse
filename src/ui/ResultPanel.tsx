@@ -1,8 +1,13 @@
 import type { ReactNode } from "react";
+import { formatUtcDate } from "../core/doneToday";
 import type { GameStatus } from "../core/guessing";
+import { loadHistory } from "../core/history";
+import { calculateCurrentStreak } from "../core/overview";
+import { frameShareText } from "../core/shareFrame";
 import { Confetti } from "./Confetti";
 import { ExternalLinkIcon } from "./icons";
 import { NextPuzzleCountdown } from "./NextPuzzleCountdown";
+import { uiMessages as t } from "./messages";
 import { ShareButton } from "./ShareButton";
 import "./ResultPanel.css";
 
@@ -30,12 +35,17 @@ export function ResultPanel({
   shareText,
   visual,
   fact,
-  lostEyebrow = "Out of guesses",
+  lostEyebrow,
 }: ResultPanelProps) {
   if (status === "playing") {
     return null;
   }
   const won = status === "won";
+  const streak = calculateCurrentStreak(loadHistory(), formatUtcDate(new Date()));
+  const framedText = frameShareText(shareText, {
+    streakLine: streak >= 2 ? t("ui.share.streak", { days: streak }) : null,
+    callLine: t("ui.share.call"),
+  });
   return (
     <section className={won ? "result result-won" : "result result-lost"} aria-live="polite">
       {won && <Confetti />}
@@ -44,8 +54,10 @@ export function ResultPanel({
           {visual}
         </div>
       )}
-      <p className="result-eyebrow">{won ? "Solved" : lostEyebrow}</p>
-      <h2 className="result-title">{won ? "You got it!" : "Not this time"}</h2>
+      <p className="result-eyebrow">
+        {won ? t("ui.result.solved") : (lostEyebrow ?? t("ui.result.outOfGuesses"))}
+      </p>
+      <h2 className="result-title">{won ? t("ui.result.won") : t("ui.result.lost")}</h2>
       <p className="result-answer">{summary}</p>
       <p className="result-score">
         <span className="stars" aria-hidden="true">
@@ -55,21 +67,19 @@ export function ResultPanel({
             </span>
           ))}
         </span>
-        <span className="result-score-text">
-          {score} / {maxScore} points
-        </span>
+        <span className="result-score-text">{t("ui.result.score", { score, max: maxScore })}</span>
       </p>
       {fact && (
         <div className="fact">
-          <p className="fact-label">Did you know?</p>
+          <p className="fact-label">{t("ui.result.fact")}</p>
           <p className="fact-text">{fact.funFact}</p>
           <a className="fact-link" href={fact.sourceUrl} target="_blank" rel="noopener noreferrer">
-            Source <ExternalLinkIcon size={14} />
+            {t("ui.result.source")} <ExternalLinkIcon size={14} />
           </a>
         </div>
       )}
-      <pre className="share-preview">{shareText}</pre>
-      <ShareButton text={shareText} />
+      <pre className="share-preview">{framedText}</pre>
+      <ShareButton text={framedText} />
       <NextPuzzleCountdown />
     </section>
   );

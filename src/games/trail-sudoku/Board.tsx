@@ -2,6 +2,7 @@ import { useRef, type KeyboardEvent } from "react";
 import { listDigits, findBox } from "./layout";
 import { readLayout } from "./readLayout";
 import type { SudokuState } from "./game";
+import { sudokuMessages as t } from "./messages";
 import type { SudokuPuzzle } from "./types";
 import "./Board.css";
 
@@ -39,16 +40,22 @@ function describeCell(
   notes: number,
   flags: { isConflict: boolean; isFlagged: boolean },
 ): string {
-  const place = `Row ${Math.floor(index / size) + 1}, column ${(index % size) + 1}`;
-  let what = "empty";
+  const place = t("sudoku.cell.place", {
+    row: Math.floor(index / size) + 1,
+    col: (index % size) + 1,
+  });
+  let what = t("sudoku.cell.empty");
   if (given !== 0) {
-    what = `given ${given}`;
+    what = t("sudoku.cell.given", { digit: given });
   } else if (value !== 0) {
-    what = `entered ${value}`;
+    what = t("sudoku.cell.entered", { digit: value });
   } else if (notes !== 0) {
-    what = `empty, notes ${listDigits(notes).join(" ")}`;
+    what = t("sudoku.cell.notes", { digits: listDigits(notes).join(" ") });
   }
-  const marks = [flags.isConflict ? "clashes" : "", flags.isFlagged ? "wrong" : ""].filter(Boolean);
+  const marks = [
+    flags.isConflict ? t("sudoku.cell.clash") : "",
+    flags.isFlagged ? t("sudoku.cell.wrong") : "",
+  ].filter(Boolean);
   return [place, what, ...marks].join(", ");
 }
 
@@ -112,7 +119,7 @@ export function Board({
     <table
       className={`sudoku-board sudoku-${size}`}
       role="grid"
-      aria-label="Trail Sudoku board"
+      aria-label={t("sudoku.board.label")}
       onKeyDown={handleKeyDown}
     >
       <tbody>

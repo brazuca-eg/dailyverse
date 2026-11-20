@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { hasStartedPlaying } from "../../core/clock";
+import { useEffect, useRef, useState, useMemo } from "react";
 import type { StateStorage } from "../../core/gameStorage";
 import { applyGameResult, type GameStats } from "../../core/streak";
 import {
@@ -15,7 +16,9 @@ import {
   revealCell,
   toggleFlag,
   type BearState,
+  calculateScore,
 } from "./game";
+import { t } from "./messages";
 import type { BearRound } from "./types";
 
 const TICK_MS = 1000;
@@ -46,15 +49,14 @@ function restoreState(
 
 function describeChange(previous: BearState, next: BearState): string | null {
   if (next.status === "won") {
-    return "All clear! Every safe square is revealed.";
+    return t("bear.notice.won");
   }
   if (next.status === "lost") {
-    return "The bears win this time.";
+    return t("bear.notice.lost");
   }
   const hit = countEncounters(next) - countEncounters(previous);
   if (hit > 0) {
-    const left = readLivesLeft(next);
-    return `A bear! ${left} ${left === 1 ? "life" : "lives"} left.`;
+    return t("bear.notice.hit", { count: readLivesLeft(next) });
   }
   return null;
 }
@@ -89,11 +91,15 @@ export function useBearSession(
       latestStats.current = nextStats;
       setStats(nextStats);
       storage.saveStats(nextStats);
+      storage.recordResult(calculateScore(next), next.status === "won");
     }
   }
 
+  const initialState = useMemo(() => createInitialState(puzzleId, round.puzzle), [puzzleId, round]);
+  const isClockRunning = state.status === "playing" && hasStartedPlaying(state, initialState);
+
   useEffect(() => {
-    if (state.status !== "playing") {
+    if (!isClockRunning) {
       return undefined;
     }
     const timer = window.setInterval(() => {
@@ -105,7 +111,7 @@ export function useBearSession(
       }
     }, TICK_MS);
     return () => window.clearInterval(timer);
-  }, [state.status, storage, dayIndex]);
+  }, [isClockRunning, storage, dayIndex]);
 
   return {
     state,

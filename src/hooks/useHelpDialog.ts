@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { HelpStorage } from "../core/gameStorage";
 
 export interface HelpDialog {
@@ -9,6 +9,12 @@ export interface HelpDialog {
 
 export function useHelpDialog(storage: HelpStorage, hasStartedPlaying: boolean): HelpDialog {
   const [isOpen, setIsOpen] = useState(() => !hasStartedPlaying && !storage.hasSeenHelp());
+
+  useEffect(() => {
+    if (hasStartedPlaying) {
+      storage.markHelpSeen();
+    }
+  }, [hasStartedPlaying, storage]);
 
   function close() {
     setIsOpen(false);

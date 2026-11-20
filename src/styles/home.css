@@ -1,6 +1,6 @@
 .game-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 14px;
   margin: 0;
   padding: 0;
@@ -64,4 +64,139 @@
   background: var(--primary);
   border-radius: 999px;
   box-shadow: 0 3px 0 var(--primary-shadow);
+}
+
+.home-group {
+  margin-bottom: 32px;
+}
+
+.home-group-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.home-group-lead {
+  margin: 2px 0 14px;
+  color: var(--text-muted);
+}
+
+.game-card-done {
+  margin-top: 2px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--success-text);
+}
+
+.game-list > li {
+  display: flex;
+}
+
+.game-card {
+  width: 100%;
+}
+
+.game-card:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
+@media (min-width: 720px) {
+  .game-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .home-group {
+    margin-bottom: 44px;
+  }
+
+  .home-group-title {
+    font-size: 1.75rem;
+  }
+}
+
+.game-card-body {
+  min-width: 0;
+}
+
+.game-card-title,
+.game-card-text {
+  overflow-wrap: anywhere;
+}
+
+.game-card-cta {
+  flex: none;
+}
+
+@media (max-width: 420px) {
+  .game-card {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .game-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .game-card-cta {
+    padding: 8px 14px;
+  }
+}
+
+.game-list > li {
+  position: relative;
+}
+
+.fav-toggle {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: var(--text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.fav-toggle[hidden] {
+  display: none;
+}
+
+.fav-toggle path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+
+.fav-toggle[aria-pressed="true"] {
+  color: var(--primary);
+}
+
+.fav-toggle[aria-pressed="true"] path {
+  fill: currentColor;
+}
+
+.fav-toggle:hover {
+  background: var(--accent-soft);
+}
+
+.fav-toggle:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.game-card {
+  padding-top: 26px;
+}
+
+.game-card-cta {
+  align-self: flex-end;
 }

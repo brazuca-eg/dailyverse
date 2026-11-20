@@ -1,4 +1,5 @@
 import { useArmedAction } from "../../hooks/useArmedAction";
+import { t } from "./messages";
 import "./TrailControls.css";
 
 interface TrailControlsProps {
@@ -24,10 +25,10 @@ export function TrailControls({
         disabled={!canDelete}
         onClick={onDelete}
       >
-        Delete
+        {t("words.controls.delete")}
       </button>
       <button type="button" className="button button-secondary trail-control" onClick={onShuffle}>
-        Shuffle
+        {t("words.controls.shuffle")}
       </button>
       <button
         type="button"
@@ -35,7 +36,7 @@ export function TrailControls({
         disabled={!canSubmit}
         onClick={onSubmit}
       >
-        Enter
+        {t("words.controls.enter")}
       </button>
     </div>
   );
@@ -54,7 +55,7 @@ export function EndGameButton({ onEnd }: EndGameButtonProps) {
       aria-pressed={armed.isArmed}
       onClick={armed.trigger}
     >
-      {armed.isArmed ? "Tap again to end the game" : "End game"}
+      {armed.isArmed ? t("words.controls.endConfirm") : t("words.controls.end")}
     </button>
   );
 }

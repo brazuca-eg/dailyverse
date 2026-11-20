@@ -1,9 +1,9 @@
 import type { Difficulty } from "../../core/difficulty";
 import { shuffle, type Random } from "../../core/random";
 import { DIFFERENCE_COUNT, TIER_PROFILES, type TierProfile } from "./difficulty";
-import { VARIANT_COUNTS } from "./elements";
-import { drawElement } from "./elements";
+import { VARIANT_COUNTS, drawElement, type DrawContext } from "./elements";
 import { boundsOverlap, isInside, measureElement, measureParts } from "./geometry";
+import { MOOD_SHADE_BOOST, PALETTES } from "./palettes";
 import { CROWD_BY_LAYER, SCENE_HEIGHT, SCENE_WIDTH } from "./recipes";
 import { sortForDrawing } from "./scene";
 import {
@@ -23,17 +23,96 @@ const NEIGHBOUR_SPACING = 2;
 const MAX_PER_KIND = 2;
 const ALTERATION_ATTEMPTS = 8;
 const MIN_SHAPE_CHANGE_AREA = 400;
+const MIN_RESIZE_GAIN = 30;
 const FLOWER_PETAL_STYLES = 4;
 const TENT_FLAP_OFFSET = 3;
 const TENT_VARIANTS = 6;
 const ROUND_TREE_NEXT_VARIANT: readonly number[] = [1, 2, 1];
 
+const REMOVABLE: readonly ElementKind[] = [
+  "flower",
+  "rock",
+  "bush",
+  "bird",
+  "cloud",
+  "roundTree",
+  "pine",
+  "tent",
+  "campfire",
+  "cactus",
+  "palm",
+  "cabin",
+  "barn",
+  "windmill",
+  "haybale",
+  "fence",
+  "boat",
+  "duck",
+  "deer",
+  "rabbit",
+  "mushroom",
+  "signpost",
+  "backpack",
+  "snowman",
+  "balloon",
+  "umbrella",
+];
+
 export const ELIGIBLE_KINDS: Readonly<Record<DifferenceKind, readonly ElementKind[]>> = {
-  remove: ["flower", "rock", "bush", "bird", "cloud", "roundTree", "pine", "tent", "campfire"],
-  move: ["flower", "rock", "bush", "bird", "cloud", "roundTree", "pine", "tent"],
-  resize: ["flower", "rock", "bush", "bird", "cloud", "roundTree", "pine", "tent", "campfire"],
-  reshade: ["pine", "roundTree", "bush", "tent", "rock"],
-  revariant: ["pine", "roundTree", "tent", "campfire", "flower", "cloud", "bird"],
+  remove: REMOVABLE,
+  add: REMOVABLE,
+  move: REMOVABLE.filter((kind) => kind !== "campfire"),
+  resize: REMOVABLE,
+  reshade: [
+    "pine",
+    "roundTree",
+    "bush",
+    "tent",
+    "rock",
+    "cactus",
+    "palm",
+    "cabin",
+    "barn",
+    "windmill",
+    "haybale",
+    "fence",
+    "boat",
+    "duck",
+    "deer",
+    "rabbit",
+    "mushroom",
+    "signpost",
+    "backpack",
+    "balloon",
+    "umbrella",
+  ],
+  revariant: [
+    "pine",
+    "roundTree",
+    "tent",
+    "campfire",
+    "flower",
+    "cloud",
+    "bird",
+    "cactus",
+    "palm",
+    "cabin",
+    "barn",
+    "windmill",
+    "haybale",
+    "fence",
+    "boat",
+    "duck",
+    "deer",
+    "rabbit",
+    "mushroom",
+    "signpost",
+    "backpack",
+    "snowman",
+    "balloon",
+    "umbrella",
+  ],
+  mirror: ["palm", "cabin", "boat", "duck", "deer", "rabbit", "signpost", "backpack"],
 };
 
 interface Change {
@@ -44,6 +123,7 @@ interface Change {
 }
 
 export interface DifferencePlan {
+  original: Scene;
   altered: Scene;
   differences: Difference[];
 }
@@ -84,7 +164,10 @@ export function alterElement(
 ): SceneElement | null {
   switch (kind) {
     case "remove":
+    case "add":
       return null;
+    case "mirror":
+      return { ...element, flip: !element.flip };
     case "move": {
       const angle = random() * 2 * Math.PI;
       const distance = between(random, profile.moveDistance);
@@ -122,9 +205,13 @@ function unionBounds(boundsList: readonly Bounds[]): Bounds {
   return boundsList.reduce((merged, bounds) => mergeBounds(merged, bounds), boundsList[0]);
 }
 
-function findChangedParts(before: SceneElement, after: SceneElement): Bounds {
-  const oldParts = drawElement(before);
-  const newParts = drawElement(after);
+function readContext(scene: Scene): DrawContext {
+  return { palette: PALETTES[scene.theme], mood: scene.mood };
+}
+
+function findChangedParts(before: SceneElement, after: SceneElement, context: DrawContext): Bounds {
+  const oldParts = drawElement(before, context);
+  const newParts = drawElement(after, context);
   const key = (part: unknown) => JSON.stringify(part);
   const oldKeys = new Set(oldParts.map(key));
   const newKeys = new Set(newParts.map(key));
@@ -151,6 +238,24 @@ function isHiddenBehind(element: SceneElement, scene: Scene): boolean {
   );
 }
 
+const FAINT_BOOST = 1.7;
+
+function isSymmetric(element: SceneElement, kind: DifferenceKind): boolean {
+  if (kind !== "mirror") {
+    return false;
+  }
+  return (
+    (element.kind === "boat" && element.variant !== 2) ||
+    (element.kind === "signpost" && element.variant !== 0)
+  );
+}
+
+function isTooFaint(element: SceneElement, kind: DifferenceKind, scene: Scene): boolean {
+  const isDim = MOOD_SHADE_BOOST[scene.mood] >= FAINT_BOOST;
+  const isThin = scene.mood === "night" && element.kind === "fence";
+  return isThin || (isDim && element.kind === "flower" && kind === "revariant");
+}
+
 function isCandidate(
   element: SceneElement,
   kind: DifferenceKind,
@@ -161,6 +266,10 @@ function isCandidate(
   const area = measureArea(bounds);
   return (
     ELIGIBLE_KINDS[kind].includes(element.kind) &&
+    !isTooFaint(element, kind, scene) &&
+    !isSymmetric(element, kind) &&
+    (kind !== "resize" ||
+      (area * profile.resizeShare[0]) / MOOD_SHADE_BOOST[scene.mood] >= MIN_RESIZE_GAIN) &&
     area >= profile.minTargetArea &&
     area <= profile.maxTargetArea &&
     (kind !== "revariant" || area >= MIN_SHAPE_CHANGE_AREA) &&
@@ -189,12 +298,13 @@ function findRegion(
   altered: SceneElement | null,
   kind: DifferenceKind,
   before: Bounds,
+  context: DrawContext,
 ): Bounds {
   if (altered === null) {
     return pad(before);
   }
   return kind === "revariant"
-    ? findChangedParts(element, altered)
+    ? findChangedParts(element, altered, context)
     : mergeBounds(before, measureElement(altered));
 }
 
@@ -216,7 +326,7 @@ function tryAlteration(
         original: element,
         altered,
         kind,
-        region: findRegion(element, altered, kind, before),
+        region: findRegion(element, altered, kind, before, readContext(scene)),
       };
     })
     .find(
@@ -254,7 +364,12 @@ function chooseNext(
   return options.find((change) => change !== null) ?? null;
 }
 
-function applyChanges(scene: Scene, changes: readonly Change[]): Scene {
+function dropElements(scene: Scene, ids: ReadonlySet<string>): Scene {
+  return { ...scene, elements: scene.elements.filter((element) => !ids.has(element.id)) };
+}
+
+function applyChanges(scene: Scene, allChanges: readonly Change[]): Scene {
+  const changes = allChanges.filter((change) => change.kind !== "add");
   const byId = new Map(changes.map((change) => [change.original.id, change.altered]));
   const elements = scene.elements.flatMap((element) => {
     if (!byId.has(element.id)) {
@@ -271,7 +386,11 @@ export function planDifferences(
   tier: Difficulty,
   random: Random,
 ): DifferencePlan | null {
-  const profile = TIER_PROFILES[tier];
+  const base = TIER_PROFILES[tier];
+  const profile = {
+    ...base,
+    shadeSteps: Math.round(base.shadeSteps * MOOD_SHADE_BOOST[scene.mood]),
+  };
   const changes = drawKinds(random).reduce<Change[] | null>((taken, kind) => {
     if (taken === null) {
       return null;
@@ -282,7 +401,11 @@ export function planDifferences(
   if (changes === null) {
     return null;
   }
+  const added = new Set(
+    changes.filter((change) => change.kind === "add").map((change) => change.original.id),
+  );
   return {
+    original: dropElements(scene, added),
     altered: applyChanges(scene, changes),
     differences: changes.map((change) => ({
       id: change.original.id,

@@ -86,6 +86,7 @@ describe("TentsGame", () => {
   it("counts the seconds", () => {
     renderGame();
     dismissHelp();
+    tap(spare[0]);
     act(() => {
       vi.advanceTimersByTime(65_000);
     });

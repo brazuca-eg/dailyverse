@@ -5,7 +5,8 @@ import { GuessingGame } from "../../ui/GuessingGame";
 import { CluesList } from "./CluesList";
 import { countVisibleClues } from "./game";
 import { mysteryPlaceStorage } from "./persistence";
-import { MYSTERY_PLACE_RULE_EXAMPLE, MYSTERY_PLACE_RULE_STEPS } from "./rules";
+import { gameMeta } from "./meta";
+import { buildRuleExample, buildRuleSteps } from "./rules";
 import type { MysteryPlacePuzzle } from "./types";
 
 interface DailyGameProps {
@@ -29,14 +30,14 @@ export function DailyGame({ puzzle, answer, countries, dayIndex }: DailyGameProp
 
   return (
     <GuessingGame
-      gameTitle="Mystery Place"
+      gameTitle={gameMeta("meta.mystery.title")}
       storage={mysteryPlaceStorage}
       puzzleId={puzzle.id}
       answer={answer}
       countries={countries}
       dayIndex={dayIndex}
-      ruleSteps={MYSTERY_PLACE_RULE_STEPS}
-      ruleExample={MYSTERY_PLACE_RULE_EXAMPLE}
+      ruleSteps={buildRuleSteps()}
+      ruleExample={buildRuleExample()}
       renderStage={renderClues}
       resultVisual={getFlagEmoji(answer.code)}
       resultFact={puzzle.reveal}

@@ -11,7 +11,9 @@ import {
   buildPuzzleId,
   createInitialState,
   countEncounters,
+  calculateScore,
 } from "./game";
+import { loadHistory } from "../../core/history";
 import { bearSweeperStorage } from "./persistence";
 import { useBearSession } from "./useBearSession";
 
@@ -130,6 +132,29 @@ describe("useBearSession", () => {
     expect(bearSweeperStorage.loadStats().gamesWon).toBe(1);
   });
 
+  it("records the points of a win in the play history", () => {
+    const session = renderSession();
+    for (let step = 0; step < 200 && session.result.current.state.status === "playing"; step += 1) {
+      run(session, (current) => current.hint());
+    }
+    expect(loadHistory()).toEqual([
+      expect.objectContaining({
+        game: "bear-sweeper",
+        score: calculateScore(session.result.current.state),
+        maxScore: 5,
+        won: true,
+      }),
+    ]);
+  });
+
+  it("records giving up as zero points", () => {
+    const session = renderSession();
+    run(session, (current) => current.surrender());
+    expect(loadHistory()).toEqual([
+      expect.objectContaining({ game: "bear-sweeper", score: 0, won: false }),
+    ]);
+  });
+
   it("ends the game when the player gives up, then takes no more input", () => {
     const session = renderSession();
     run(session, (current) => current.surrender());
@@ -142,8 +167,23 @@ describe("useBearSession", () => {
     expect(session.result.current.stats.gamesPlayed).toBe(1);
   });
 
+  it("does not count time until the first move, then starts counting", () => {
+    const session = renderSession();
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+    expect(session.result.current.state.elapsedSeconds).toBe(0);
+    expect(vi.getTimerCount()).toBe(0);
+    run(session, (current) => current.press(numbered));
+    act(() => {
+      vi.advanceTimersByTime(2000);
+    });
+    expect(session.result.current.state.elapsedSeconds).toBe(2);
+  });
+
   it("counts the seconds, and not while the page is hidden", () => {
     const session = renderSession();
+    run(session, (current) => current.press(numbered));
     act(() => {
       vi.advanceTimersByTime(3000);
     });

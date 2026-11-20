@@ -1,3 +1,5 @@
+import { readCurrentLocale, type Locale } from "../i18n/locales";
+import { readCountryName } from "./countryNames";
 import { foldText } from "./text";
 import type { Country } from "./types";
 
@@ -14,19 +16,26 @@ function normalizeSearchText(text: string): string {
   return foldText(text).trim();
 }
 
-function calculateMatchRank(country: Country, query: string): number | null {
-  const name = normalizeSearchText(country.name);
+function listNames(country: Country, locale: Locale): string[] {
+  return [...new Set([readCountryName(country, locale), country.name])].map(normalizeSearchText);
+}
+
+function calculateMatchRank(country: Country, query: string, locale: Locale): number | null {
+  const names = listNames(country, locale);
   const aliases = country.aliases.map(normalizeSearchText);
-  if (name === query || aliases.includes(query)) {
+  if (names.includes(query) || aliases.includes(query)) {
     return MATCH_RANK.exact;
   }
-  if (name.startsWith(query)) {
+  if (names.some((name) => name.startsWith(query))) {
     return MATCH_RANK.namePrefix;
   }
   if (aliases.some((alias) => alias.startsWith(query))) {
     return MATCH_RANK.aliasPrefix;
   }
-  if (name.includes(query) || aliases.some((alias) => alias.includes(query))) {
+  if (
+    names.some((name) => name.includes(query)) ||
+    aliases.some((alias) => alias.includes(query))
+  ) {
     return MATCH_RANK.contains;
   }
   return null;
@@ -36,7 +45,11 @@ export function findCountryByCode(countries: readonly Country[], code: string): 
   return countries.find((country) => country.code === code) ?? null;
 }
 
-export function findCountryByName(countries: readonly Country[], query: string): Country | null {
+export function findCountryByName(
+  countries: readonly Country[],
+  query: string,
+  locale: Locale = readCurrentLocale(),
+): Country | null {
   const normalizedQuery = normalizeSearchText(query);
   if (normalizedQuery === "") {
     return null;
@@ -44,7 +57,7 @@ export function findCountryByName(countries: readonly Country[], query: string):
   return (
     countries.find(
       (country) =>
-        normalizeSearchText(country.name) === normalizedQuery ||
+        listNames(country, locale).includes(normalizedQuery) ||
         country.aliases.some((alias) => normalizeSearchText(alias) === normalizedQuery),
     ) ?? null
   );
@@ -55,6 +68,7 @@ export function searchCountries(
   query: string,
   excludedCodes: readonly string[] = [],
   limit: number = DEFAULT_RESULT_LIMIT,
+  locale: Locale = readCurrentLocale(),
 ): Country[] {
   const normalizedQuery = normalizeSearchText(query);
   if (normalizedQuery === "") {
@@ -62,9 +76,16 @@ export function searchCountries(
   }
   return countries
     .filter((country) => !excludedCodes.includes(country.code))
-    .map((country) => ({ country, rank: calculateMatchRank(country, normalizedQuery) }))
+    .map((country) => ({ country, rank: calculateMatchRank(country, normalizedQuery, locale) }))
     .filter((match): match is { country: Country; rank: number } => match.rank !== null)
-    .sort((a, b) => a.rank - b.rank || a.country.name.localeCompare(b.country.name))
+    .sort(
+      (a, b) =>
+        a.rank - b.rank ||
+        readCountryName(a.country, locale).localeCompare(
+          readCountryName(b.country, locale),
+          locale,
+        ),
+    )
     .slice(0, limit)
     .map((match) => match.country);
 }

@@ -1,0 +1,581 @@
+{
+  "AF": {
+    "funFact": "Afghanistan hat seine Nationalflagge seit dem 20. Jahrhundert mehrfach geändert, meist in Schwarz, Rot und Grün."
+  },
+  "AL": {
+    "funFact": "Auf Albaniens Flagge steht Rot für Mut, Stärke, Tapferkeit und Blutvergießen, während der schwarze Doppeladler das traditionelle Symbol der Albaner ist."
+  },
+  "DZ": {
+    "funFact": "Algeriens Flagge, am 3. Juli 1962 angenommen, trägt einen roten Stern mit Halbmond, ein Symbol des Islam als Hauptglaube der Nation."
+  },
+  "AD": {
+    "funFact": "Der gelbe Mittelstreifen auf Andorras Flagge ist etwas breiter als die beiden anderen, im Streifenverhältnis 8:9:8."
+  },
+  "AO": {
+    "funFact": "Angolas Flagge wurde am 11. November 1975 angenommen, als das Land von Portugal unabhängig wurde."
+  },
+  "AG": {
+    "funFact": "Die Flagge von Antigua und Barbuda wurde in einem Wettbewerb mit mehr als 600 einheimischen Einsendungen gewählt, den der Künstler und Bildhauer Sir Reginald Samuel gewann."
+  },
+  "AR": {
+    "funFact": "Argentiniens himmelblau-weiße Flagge wurde von Manuel Belgrano geschaffen und am 27. Februar 1812 erstmals in Rosario gehisst."
+  },
+  "AM": {
+    "funFact": "Armeniens Flagge wurde am 24. August 1990 angenommen, aber schon in der Ersten Republik Armenien (1918–20) verwendet."
+  },
+  "AU": {
+    "funFact": "Australiens Flagge wehte erstmals am 3. September 1901 als blaue Commonwealth-Flagge, gewählt in einem Wettbewerb nach der Föderation."
+  },
+  "AT": {
+    "funFact": "Österreichs rot-weiß-rote Flagge ist eines der ältesten Nationalsymbole, das ein moderner Staat noch verwendet, erstmals 1230 belegt."
+  },
+  "AZ": {
+    "funFact": "Auf Aserbaidschans Flagge steht Blau für die türkische Identität, Rot für Fortschritt und Grün für den Islam. Der Tag der Flagge wird jedes Jahr am 9. November begangen."
+  },
+  "BS": {
+    "funFact": "Die Flagge der Bahamas wurde aus Elementen mehrerer Entwürfe eines nationalen Wettbewerbs vor der Unabhängigkeit zusammengesetzt."
+  },
+  "BH": {
+    "funFact": "Die fünf weißen Dreiecke auf Bahrains Flagge symbolisieren die fünf Säulen des Islam."
+  },
+  "BD": {
+    "funFact": "Bangladeschs roter Kreis ist leicht zur Stangenseite versetzt, damit er bei wehender Flagge zentriert erscheint."
+  },
+  "BB": {
+    "funFact": "Auf Barbados' Flagge stehen die ultramarinblauen Streifen für Meer und Himmel, der goldene Streifen für den Sand."
+  },
+  "BY": {
+    "funFact": "Belarus' heutige Flagge ist eine abgewandelte Flagge aus der Sowjetzeit: Hammer und Sichel sowie der rote Stern wurden entfernt, und die Farben des Ornaments wurden vertauscht."
+  },
+  "BE": {
+    "funFact": "Belgiens Flagge hat die ungewöhnlichen Proportionen 13:15, ist also, anders als die der Schweiz und der Vatikanstadt, kein perfektes Quadrat."
+  },
+  "BZ": {
+    "funFact": "Belizes Flagge wurde am 21. September 1981 angenommen, dem Tag der Unabhängigkeit des Landes."
+  },
+  "BJ": {
+    "funFact": "Benins Flagge wurde 1959 angenommen, um die französische Trikolore zu ersetzen, und war bis 1975 die Flagge der Republik Dahomey."
+  },
+  "BT": {
+    "funFact": "Bhutans Flagge zeigt den Druk, einen Drachen aus der bhutanischen Mythologie, der auf den Namen des Landes in Dzongkha anspielt."
+  },
+  "BO": {
+    "funFact": "Bolivien hat eine Marineflagge für Schiffe der Marine auf seinen Flüssen und Seen, obwohl das Land keinen Meerzugang hat."
+  },
+  "BA": {
+    "funFact": "Die drei Spitzen des Dreiecks auf der Flagge von Bosnien und Herzegowina stehen für die drei wichtigsten Volksgruppen: Bosniaken, Kroaten und Serben."
+  },
+  "BW": {
+    "funFact": "Auf Botswanas Flagge steht Blau für Wasser und Regen, der schwarze Streifen mit weißer Einfassung für Harmonie zwischen den Rassen."
+  },
+  "BR": {
+    "funFact": "Brasiliens Flagge wurde am 19. November 1889 offiziell angenommen, vier Tage nach der Ausrufung der Republik."
+  },
+  "BN": {
+    "funFact": "Bruneis Flagge war bis 1906 einfarbig gelb, dann wurden zwei diagonale weiße und schwarze Streifen hinzugefügt."
+  },
+  "BG": {
+    "funFact": "Bulgariens weiß-grün-rote Flagge wurde erstmals nach dem Russisch-Türkischen Krieg von 1877–1878 angenommen."
+  },
+  "BF": {
+    "funFact": "Der gelbe Stern auf Burkina Fasos Flagge steht für das Leitlicht der Revolution."
+  },
+  "BI": {
+    "funFact": "Burundis Flagge hat ein weißes Andreaskreuz, das das Feld in abwechselnd rote und grüne Flächen teilt, mit drei roten Sternen in der Mitte."
+  },
+  "CV": {
+    "funFact": "Die zehn gelben Sterne auf der Flagge Kap Verdes stehen für die zehn Inseln, aus denen das Land besteht."
+  },
+  "KH": {
+    "funFact": "Kambodschas Flagge mit dem weißen Angkor Wat ist eine von nur vier Nationalflaggen der Welt, die ein Gebäude zeigen."
+  },
+  "CM": {
+    "funFact": "Kameruns Flagge erhielt ihre heutige Form mit einem gelben Stern in der Mitte am 20. Mai 1975, nachdem das Land ein Einheitsstaat geworden war."
+  },
+  "CA": {
+    "funFact": "Kanadas Maple Leaf ist die erste Flagge, die von beiden Häusern des Parlaments beschlossen und vom Monarchen offiziell proklamiert wurde."
+  },
+  "CF": {
+    "funFact": "Die Flagge der Zentralafrikanischen Republik hat seit 1958 dasselbe Design: vier waagrechte Streifen, gekreuzt von einem einzelnen senkrechten roten Band."
+  },
+  "TD": {
+    "funFact": "Tschads Flagge ist der Rumäniens so ähnlich, dass die Ähnlichkeit seit den 1990er-Jahren international diskutiert wird."
+  },
+  "CL": {
+    "funFact": "Chiles Flagge, am 18. Oktober 1817 angenommen, heißt auf Spanisch La Estrella Solitaria, „Der einsame Stern“."
+  },
+  "CN": {
+    "funFact": "Die vier kleinen Sterne auf Chinas Flagge symbolisieren das chinesische Volk, der große Stern die Kommunistische Partei Chinas."
+  },
+  "CO": {
+    "funFact": "Der gelbe Streifen auf Kolumbiens Flagge nimmt die halbe Höhe ein, im Verhältnis 2:1:1."
+  },
+  "KM": {
+    "funFact": "Die Flagge der Komoren wurde 2001 entworfen und am 23. Dezember desselben Jahres angenommen, wobei ein Halbmond und vier Sterne beibehalten wurden, die seit 1975 verwendet werden."
+  },
+  "CR": {
+    "funFact": "Costa Ricas Flagge hat einen roten Mittelstreifen, der doppelt so breit ist wie jeder der anderen vier, die blau und weiß sind."
+  },
+  "CI": {
+    "funFact": "Die orange-weiß-grüne Flagge der Elfenbeinküste ist die Umkehrung der irischen Trikolore, mit weniger länglichen Proportionen."
+  },
+  "HR": {
+    "funFact": "Kroatiens Flagge ist seit 1868 ununterbrochen in Gebrauch, und ihr Schachbrettwappen wurde 1939 hinzugefügt."
+  },
+  "CU": {
+    "funFact": "Kubas Flagge mit dem einsamen Stern wurde 1849 entworfen und am 20. Mai 1902 offiziell angenommen."
+  },
+  "CY": {
+    "funFact": "Zyperns Flagge wurde vom türkisch-zyprischen Künstler İsmet Güney entworfen, mit friedlichen und neutralen Symbolen, die Harmonie zwischen griechischen und türkischen Zyprern andeuten sollen."
+  },
+  "CZ": {
+    "funFact": "Die Tschechoslowakei fügte ihrer Flagge 1920 ein blaues Dreieck hinzu, weil ihr weiß-rotes Design der polnischen Flagge fast glich."
+  },
+  "CD": {
+    "funFact": "Die Flagge der Demokratischen Republik Kongo griff ein Design auf, das dem von 1966 bis 1971 verwendeten ähnelt, mit Himmelblau statt Königsblau."
+  },
+  "DK": {
+    "funFact": "Dänemarks Dannebrog wird seit dem 14. Jahrhundert von dänischen Königen verwendet, und eine Legende verbindet ihn mit der Schlacht von Lyndanisse im Jahr 1219."
+  },
+  "DJ": {
+    "funFact": "Auf Dschibutis Flagge steht Hellblau für den Himmel, das Meer und die Somali, Grün für die Erde und die Afar."
+  },
+  "DM": {
+    "funFact": "Dominicas Flagge wurde Anfang 1978 vom Dramatiker Alwin Bully entworfen und ist eine der wenigen Flaggen souveräner Staaten mit Violett."
+  },
+  "DO": {
+    "funFact": "Auf der Flagge der Dominikanischen Republik steht Blau für Freiheit, Weiß für Erlösung und Rot für das Blut der Helden."
+  },
+  "EC": {
+    "funFact": "Ecuadors Flagge ähnelt stark denen von Kolumbien und Venezuela, die ebenfalls ehemalige Teilgebiete Großkolumbiens sind."
+  },
+  "EG": {
+    "funFact": "Ägyptens Flagge verwendet die roten, weißen und schwarzen Streifen der Flagge der Arabischen Befreiung, die auf die ägyptische Revolution von 1952 zurückgeht."
+  },
+  "SV": {
+    "funFact": "Von 1865 bis 1912 ähnelte die Flagge El Salvadors der der Vereinigten Staaten."
+  },
+  "GQ": {
+    "funFact": "Äquatorialguineas Flagge wurde bei der Unabhängigkeit von Spanien am 12. Oktober 1968 zunächst ohne Wappen gehisst."
+  },
+  "ER": {
+    "funFact": "Auf Eritreas Flagge steht Grün für die Landwirtschaft und Viehzucht des Landes, Blau für den Reichtum des Meeres."
+  },
+  "EE": {
+    "funFact": "Estlands blau-schwarz-weiße Trikolore wurde am 21. November 1918 per Regierungsbeschluss zur Nationalflagge."
+  },
+  "SZ": {
+    "funFact": "Eswatinis Flagge, entworfen von König Sobhuza II., zeigt einen schwarz-weißen Nguni-Schild mit Stab und zwei Speeren."
+  },
+  "ET": {
+    "funFact": "Äthiopiens moderne Trikolore wurde am 11. Oktober 1897 von Menelik II. erstmals angenommen."
+  },
+  "FJ": {
+    "funFact": "Ein 2013 angekündigter Plan zur Änderung von Fidschis Flagge wurde im August 2016 aufgegeben."
+  },
+  "FI": {
+    "funFact": "Auf Finnlands Flagge soll Blau für die Tausenden Seen des Landes und den Himmel stehen, Weiß für den Schnee, der das Land im Winter bedeckt."
+  },
+  "FR": {
+    "funFact": "Frankreichs Trikolore wurde während der Französischen Revolution angenommen und ist seither die Nationalflagge geblieben."
+  },
+  "GA": {
+    "funFact": "Gabuns Flagge von 1960 entstand, indem die französische Trikolore aus der Kolonialflagge entfernt und der gelbe Streifen verbreitert wurde."
+  },
+  "GM": {
+    "funFact": "Gambias Flagge blieb während der siebenjährigen Konföderation des Landes mit Senegal unverändert."
+  },
+  "GE": {
+    "funFact": "Georgiens Fünfkreuzflagge war ursprünglich ein Banner des mittelalterlichen Königreichs Georgien und wurde 2004 offiziell als Flagge der Nation wieder eingeführt."
+  },
+  "DE": {
+    "funFact": "Deutschlands schwarz-rot-goldene Flagge wurde 1848 im Deutschen Bund erstmals gesichtet."
+  },
+  "GH": {
+    "funFact": "Ghanas Flagge wurde 1957 von Theodosia Okoh, einer renommierten ghanaischen Künstlerin und Lehrerin, für die Unabhängigkeit am 6. März 1957 entworfen."
+  },
+  "GR": {
+    "funFact": "Griechenlands Flagge hat 9 waagrechte Streifen in abwechselnd Blau und Weiß, und das Kreuz im Obereck symbolisiert das Christentum."
+  },
+  "GD": {
+    "funFact": "Grenadas Flagge hat sechs gelbe Sterne am Rand, einen weiteren auf einer roten Scheibe in der Mitte und eine Muskatnuss an der Stangenseite."
+  },
+  "GT": {
+    "funFact": "Guatemalas Flagge trägt ein Wappen mit dem Quetzal, dem Nationalvogel Guatemalas."
+  },
+  "GN": {
+    "funFact": "Guineas Rot, Gelb und Grün verwenden die panafrikanischen Farben, teils als Anspielung auf die Flagge Ghanas."
+  },
+  "GW": {
+    "funFact": "Der schwarze Stern auf der Flagge Guinea-Bissaus symbolisiert die Führungsrolle der PAIGC, seine Farbe steht für die Menschen Afrikas."
+  },
+  "GY": {
+    "funFact": "Guyanas Goldener Pfeilspitze wurde von Whitney Smith entworfen, einem amerikanischen Vexillologen."
+  },
+  "HT": {
+    "funFact": "Haitis Wappen trägt das Motto L'Union fait la Force, was „Einigkeit macht stark“ bedeutet."
+  },
+  "HN": {
+    "funFact": "Die fünf Sterne auf Honduras' Flagge stehen für die fünf Nationen der ehemaligen Zentralamerikanischen Föderation."
+  },
+  "HU": {
+    "funFact": "Ungarns Flagge ähnelt der Fassung von 1816 der britischen republikanischen Trikolore und unterscheidet sich nur in den verwendeten Farbtönen."
+  },
+  "IS": {
+    "funFact": "Islands Flaggengesetz wurde am 17. Juni 1944 angenommen, dem Tag, an dem Island Republik wurde."
+  },
+  "IN": {
+    "funFact": "Indiens Flagge zeigt in der Mitte das Ashoka-Chakra, ein Rad mit 24 Speichen, in Marineblau."
+  },
+  "ID": {
+    "funFact": "Indonesiens Flagge ist der Monacos grafisch ähnlich, mit einem leichten Unterschied im Rotton."
+  },
+  "IR": {
+    "funFact": "Der Takbir ist 11-mal entlang jedes Rands der grünen und roten Streifen auf Irans Flagge geschrieben."
+  },
+  "IQ": {
+    "funFact": "Iraks heutige Flagge wurde 2008 als vorläufiger Kompromiss angenommen und verwendet die Streifen der Flagge der Arabischen Befreiung."
+  },
+  "IE": {
+    "funFact": "Irlands Trikolore sollte die Einheit zwischen Katholiken (Grün) und Protestanten (Orange) symbolisieren."
+  },
+  "IL": {
+    "funFact": "Israels Flagge, am 28. Oktober 1948 angenommen, ist ein weißes Banner mit zwei blauen Streifen oberhalb und unterhalb eines Davidsterns."
+  },
+  "IT": {
+    "funFact": "Italien begeht jedes Jahr einen Tag der Trikolore, der am 31. Dezember 1996 gesetzlich festgelegt wurde."
+  },
+  "JM": {
+    "funFact": "Jamaikas Flagge soll direkt von der Nationalflagge Schottlands inspiriert worden sein."
+  },
+  "JP": {
+    "funFact": "Japans Flagge heißt offiziell Nisshōki, „Flagge der Sonne“, ist aber besser als Hinomaru, „Sonnenkreis“, bekannt."
+  },
+  "JO": {
+    "funFact": "Jordaniens Flagge beruht auf der Flagge des Arabischen Aufstands von 1916 gegen das Osmanische Reich."
+  },
+  "KZ": {
+    "funFact": "Kasachstans Flagge zeigt eine goldene Sonne mit 32 Strahlen über einem fliegenden goldenen Steppenadler."
+  },
+  "KE": {
+    "funFact": "Kenias Flagge trägt einen Massai-Schild und zwei gekreuzte Speere und wurde am 12. Dezember 1963 bei der Unabhängigkeit offiziell angenommen."
+  },
+  "KI": {
+    "funFact": "Die 17 Strahlen der Sonne auf Kiribatis Flagge stehen für die 16 Gilbertinseln und Banaba."
+  },
+  "XK": {
+    "funFact": "Der Entwurf von Kosovos Flagge stammt aus einem internationalen Wettbewerb mit fast eintausend Einsendungen."
+  },
+  "KW": { "funFact": "Kuwaits ist die einzige Nationalflagge mit einem spitzwinkligen Trapez." },
+  "KG": {
+    "funFact": "Die gelbe Sonne auf Kirgisistans Flagge enthält ein Tündük, die Öffnung in der Mitte des Dachs einer Jurte."
+  },
+  "LA": {
+    "funFact": "Laos' Flagge ist als Mondflagge bekannt, und ihr blauer Mittelstreifen ist doppelt so hoch wie die roten."
+  },
+  "LV": {
+    "funFact": "Lettland nahm seine rot-weiß-rote Flagge am 27. Februar 1990 wieder an, kurz vor der Wiedererlangung der Unabhängigkeit."
+  },
+  "LB": {
+    "funFact": "Der weiße Streifen auf Libanons Flagge ist doppelt so hoch wie jeder rote Streifen, mit einer grünen Zeder, die beide berührt."
+  },
+  "LS": {
+    "funFact": "Lesothos Flagge mit einem schwarzen Mokorotlo (einem Basotho-Hut) wurde am 4. Oktober 2006, dem 40. Jahrestag der Unabhängigkeit, angenommen."
+  },
+  "LR": {
+    "funFact": "Liberias Flagge ähnelt stark der US-Flagge, was die Gründung des Landes durch freie Farbige und ehemalige Sklaven aus den Vereinigten Staaten und der Karibik widerspiegelt."
+  },
+  "LY": {
+    "funFact": "Libyens Flagge wurde von Omar Faiek Shennib entworfen und 1951 mit der Gründung des Königreichs Libyen eingeführt."
+  },
+  "LI": {
+    "funFact": "Liechtenstein fügte seiner Flagge 1937 eine Krone hinzu, nachdem es bei den Olympischen Spielen im Jahr zuvor entdeckt hatte, dass sie mit der Zivilflagge Haitis identisch war."
+  },
+  "LT": {
+    "funFact": "Litauens Flagge wurde am 25. April 1918 während seiner ersten Unabhängigkeitsphase angenommen."
+  },
+  "LU": {
+    "funFact": "Luxemburgs Flagge wurde erstmals zwischen 1845 und 1848 verwendet, aber erst 1993 offiziell angenommen."
+  },
+  "MG": {
+    "funFact": "Madagaskars Flagge wurde von Andrianome Ranaivosoa entworfen, einem Mitarbeiter des Nationalen Geografischen Instituts Madagaskars."
+  },
+  "MW": {
+    "funFact": "Malawis Flagge wurde am 6. Juli 1964 offiziell angenommen, als die Kolonie Njassaland unabhängig wurde und sich in Malawi umbenannte."
+  },
+  "MY": {
+    "funFact": "Malaysias 14 Streifen stehen für die Gleichstellung der 13 Mitgliedstaaten und der Bundesterritorien, und die 14 Zacken des Sterns für ihre Einheit."
+  },
+  "MV": {
+    "funFact": "Das Rot auf der Flagge der Malediven, am 25. Juli 1965 angenommen, steht für das Blut der Helden der Nation."
+  },
+  "ML": {
+    "funFact": "Malis Flagge ist eine senkrechte Trikolore in den panafrikanischen Farben: Grün, Gold und Rot."
+  },
+  "MT": {
+    "funFact": "Maltas ist die einzige Nationalflagge mit englischsprachigem Text: „For Gallantry“, auf dem George Cross."
+  },
+  "MH": {
+    "funFact": "Die Flagge der Marshallinseln wurde von Emlain Kabua entworfen, der ersten First Lady der Republik."
+  },
+  "MR": {
+    "funFact": "Mauretaniens heutige Flagge wurde 2017 nach einem Referendum angenommen, bei dem 86 % der Wähler für eine Änderung stimmten."
+  },
+  "MU": {
+    "funFact": "Mauritius' Flagge wurde von Gurudutt Moher entworfen, dessen Beitrag im März 2018 posthum gewürdigt wurde."
+  },
+  "MX": {
+    "funFact": "Das Emblem auf Mexikos Flagge beruht auf dem aztekischen Symbol für Tenochtitlán, das heutige Mexiko-Stadt."
+  },
+  "FM": {
+    "funFact": "Die vier Sterne auf Mikronesiens Flagge stehen für die vier Bundesstaaten: Chuuk, Pohnpei, Kosrae und Yap."
+  },
+  "MD": {
+    "funFact": "Moldaus Trikolore beruht auf der Flagge Rumäniens und spiegelt die nationale und kulturelle Verbundenheit beider Länder wider."
+  },
+  "MC": {
+    "funFact": "Das Rot und Weiß auf Monacos Flagge sind seit mindestens 1339 die heraldischen Farben des Hauses Grimaldi."
+  },
+  "MN": {
+    "funFact": "Das Soyombo auf Mongoliens Flagge enthält zwei Fische, die in der mongolischen Mythologie nie schlafen und symbolisieren, dass der Geist des mongolischen Volkes nie schläft."
+  },
+  "ME": {
+    "funFact": "Montenegros Flagge wurde am 13. Juli 2004 offiziell angenommen, als das Land noch Teil der Staatenunion Serbien und Montenegro war."
+  },
+  "MA": {
+    "funFact": "Der grüne Stern auf Marokkos Flagge steht für die fünf Säulen des Islam, und das Rot für das Blut der Vorfahren und die Einheit."
+  },
+  "MZ": {
+    "funFact": "Mosambiks Flagge zeigt eine AK-47 mit Bajonett, gekreuzt mit einer Hacke, über einem aufgeschlagenen Buch."
+  },
+  "MM": { "funFact": "Myanmars heutige Flagge wurde am 21. Oktober 2010 angenommen." },
+  "NA": {
+    "funFact": "Namibias Flagge wurde am 21. März 1990 bei der Unabhängigkeit angenommen und ersetzte die südafrikanische Trikolore aus der Zeit der Apartheid."
+  },
+  "NR": {
+    "funFact": "Auf Naurus Flagge steht der goldene Streifen für den Äquator, und der Stern zeigt die Lage des Landes knapp darunter."
+  },
+  "NP": {
+    "funFact": "Nepals ist die einzige nicht rechteckige Nationalflagge der Welt und die einzige, die höher als breit ist."
+  },
+  "NL": {
+    "funFact": "Die niederländische Flagge ist die älteste Trikolore, die ununterbrochen in Gebrauch ist."
+  },
+  "NZ": {
+    "funFact": "Neuseelands erste international anerkannte Nationalflagge, die Flagge der Vereinigten Stämme, wurde 1834 angenommen."
+  },
+  "NI": {
+    "funFact": "Nicaraguas Flagge gehört zu den wenigen mit Violett, wegen des Regenbogens in ihrem Wappen."
+  },
+  "NE": {
+    "funFact": "Nigers Flagge ist seit 1959 in Gebrauch, ein Jahr vor der formellen Unabhängigkeit des Landes von Französisch-Westafrika."
+  },
+  "NG": {
+    "funFact": "Taiwo Akinkunmis Entwurf für Nigerias Flagge gewann einen landesweiten Wettbewerb mit über dreitausend Einsendungen."
+  },
+  "KP": {
+    "funFact": "Nordkoreas Flagge wurde am 8. September 1948 mit der ersten Verfassung des Landes offiziell angenommen."
+  },
+  "MK": {
+    "funFact": "Die achtstrahlige Sonne auf Nordmazedoniens Flagge steht für die neue Sonne der Freiheit, auf die in „Denes nad Makedonija“ („Heute über Mazedonien“) Bezug genommen wird."
+  },
+  "NO": {
+    "funFact": "Der senkrechte Teil des Kreuzes auf Norwegens Flagge ist zur Stangenseite verschoben, nach dem Vorbild von Dänemarks Dannebrog."
+  },
+  "OM": {
+    "funFact": "Omans Flagge trägt ein Staatsemblem aus gekreuzten Schwertern über einem Khanjar, einem traditionellen gebogenen Dolch."
+  },
+  "PK": {
+    "funFact": "Pakistans Flagge zeigt einen schrägen Halbmond und einen fünfzackigen Stern auf Grün, mit einem senkrechten weißen Streifen an der Stangenseite."
+  },
+  "PW": {
+    "funFact": "Die außermittige Scheibe auf Palaus Flagge stellt den Mond dar, nicht die Sonne wie auf den Flaggen Japans und Bangladeschs."
+  },
+  "PS": {
+    "funFact": "Palästinas Flagge verwendet die panarabischen Farben, die im heutigen Stil erstmals beim Arabischen Aufstand von 1916 kombiniert wurden."
+  },
+  "PA": {
+    "funFact": "Panamas Tag der Flagge wird am 4. November gefeiert, einen Tag nach der Trennung des Landes von Kolumbien."
+  },
+  "PG": {
+    "funFact": "Papua-Neuguineas Flagge zeigt auf der einen Seite das Kreuz des Südens und auf der anderen die Silhouette eines Raggiana-Paradiesvogels."
+  },
+  "PY": {
+    "funFact": "Paraguays ist die einzige Nationalflagge der Welt mit einem unterschiedlichen Design auf jeder Seite."
+  },
+  "PE": {
+    "funFact": "Perus Tag der Flagge wird am 7. Juni gefeiert, dem Jahrestag der Schlacht von Arica."
+  },
+  "PH": {
+    "funFact": "Die acht Strahlen der Sonne auf der philippinischen Flagge stehen für die ursprünglichen acht Provinzen, die sich in der Revolution von 1896 gegen Spanien erhoben."
+  },
+  "PL": { "funFact": "Weiß und Rot wurden 1831 offiziell als Nationalfarben Polens angenommen." },
+  "PT": {
+    "funFact": "Portugals Flagge wurde 1910 verkündet, nach der Revolution vom 5. Oktober 1910."
+  },
+  "QA": {
+    "funFact": "Katars ist die einzige Nationalflagge der Welt, deren Breite mehr als das Doppelte ihrer Höhe beträgt."
+  },
+  "CG": {
+    "funFact": "Die Flagge der Republik Kongo wurde 1959 angenommen, um die französische Trikolore zu ersetzen, und bis 1970 verwendet."
+  },
+  "RO": {
+    "funFact": "Die Farben von Rumäniens Flagge werden seit dem 14. Jahrhundert auf offiziellen Insignien und Symbolen verwendet."
+  },
+  "RU": {
+    "funFact": "Russlands weiß-blau-rotes Design wurde 1693 von Zar Peter dem Großen erstmals eingeführt."
+  },
+  "RW": {
+    "funFact": "In der Kolonialzeit führte das Königreich Ruanda zuerst die deutsche und dann die belgische Flagge."
+  },
+  "KN": {
+    "funFact": "Die Flagge von St. Kitts und Nevis wurde 1983 angenommen, um die Flagge von Saint Christopher-Nevis-Anguilla zu ersetzen."
+  },
+  "LC": {
+    "funFact": "Saint Lucias Flagge wurde 1967 angenommen, um die britische Blue Ensign mit dem Wappen der Kolonie zu ersetzen."
+  },
+  "VC": {
+    "funFact": "Die grünen Rauten auf der Flagge von St. Vincent verweisen auf den Buchstaben V und auf die Spitznamen „Edelsteine der Antillen“ und „Juwelen der Karibik“."
+  },
+  "WS": {
+    "funFact": "Samoas Flagge wurde 1948 mit vier Sternen entworfen, und der kleinere fünfte Stern kam 1949 hinzu."
+  },
+  "SM": {
+    "funFact": "San Marinos Wappen trägt ein Schriftband mit dem Wort LIBERTAS, das „Freiheit“ bedeutet."
+  },
+  "ST": {
+    "funFact": "Die Flagge von São Tomé und Príncipe, am 12. Juli 1975 angenommen, ist der ersten Flagge der Bewegung, die das Land in die Unabhängigkeit führte, fast identisch."
+  },
+  "SA": {
+    "funFact": "Saudi-Arabiens Flagge trägt seit dem 15. März 1973 die Schahada und ein weißes Schwert auf Grün."
+  },
+  "SN": {
+    "funFact": "Senegals Flagge wurde 1960 angenommen, um die Flagge der Mali-Föderation zu ersetzen."
+  },
+  "RS": {
+    "funFact": "Serbiens Trikolore wird in unterschiedlichen Formen seit 1839 als Flagge verwendet."
+  },
+  "SC": {
+    "funFact": "Die Flagge der Seychellen verwendet die offiziellen Farben zweier großer politischer Parteien des Landes."
+  },
+  "SL": {
+    "funFact": "Sierra Leones Flagge wurde 1961, im Jahr der Unabhängigkeit, angenommen, um die britische Blue Ensign zu ersetzen."
+  },
+  "SG": {
+    "funFact": "Singapurs Flagge wurde 1959 angenommen und von einem Regierungsausschuss unter Leitung des stellvertretenden Premierministers Toh Chin Chye entworfen."
+  },
+  "SK": {
+    "funFact": "Die Flagge der Slowakei verwendet die panslawischen Farben Weiß, Blau und Rot, wie die Flaggen vieler anderer slawischer Nationen."
+  },
+  "SI": { "funFact": "Sloweniens Wappen zeigt den Berg Triglav, den höchsten Gipfel des Landes." },
+  "SB": {
+    "funFact": "Die Flagge der Salomonen wurde am 18. November 1977 angenommen, acht Monate vor der Unabhängigkeit des Landes."
+  },
+  "SO": {
+    "funFact": "Der weiße fünfzackige Stern auf Somalias Flagge steht für die fünf Regionen, in denen Somali leben."
+  },
+  "ZA": {
+    "funFact": "Südafrikas Flagge wurde im März 1994 entworfen und am 27. April 1994, während der Parlamentswahl 1994, angenommen."
+  },
+  "KR": {
+    "funFact": "Südkoreas Taegeukgi hat in der Mitte ein rotes und blaues Taegeuk, mit einem schwarzen Trigramm in jeder Ecke."
+  },
+  "SS": {
+    "funFact": "Die Flagge des Südsudan wurde 2005 angenommen, sechs Jahre bevor das Land 2011 unabhängig wurde."
+  },
+  "ES": {
+    "funFact": "Spaniens Flagge trägt den Spitznamen la Rojigualda, weil ihr mittlerer Streifen einst mit dem altertümlichen Begriff gualda, einem natürlichen Farbstoff, bezeichnet wurde."
+  },
+  "LK": {
+    "funFact": "Sri Lankas Flagge zeigt einen goldenen Löwen mit einem Kastane-Schwert und in jeder Ecke ein goldenes Bo-Blatt."
+  },
+  "SD": {
+    "funFact": "Sudans Flagge, seit dem 20. Mai 1970 in Gebrauch, beruht auf der Flagge der Arabischen Befreiung der ägyptischen Revolution von 1952."
+  },
+  "SR": {
+    "funFact": "Surinames Gesetz verlangt, dass Schiffe bei einem Besuch in einem anderen Land seine Flagge hissen, um Missverständnisse zu verringern."
+  },
+  "SE": { "funFact": "Schwedens Blau und Gelb sollen vom Wappen von 1442 inspiriert sein." },
+  "CH": {
+    "funFact": "Die Flagge der Schweiz ist quadratisch, statt der für Nationalflaggen typischen rechteckigen Form."
+  },
+  "SY": {
+    "funFact": "Syriens Flagge hat grüne, weiße und schwarze Streifen mit drei roten fünfzackigen Sternen im weißen Streifen."
+  },
+  "TW": {
+    "funFact": "Taiwans Flagge wurde 1895 von der Gesellschaft zur Wiederbelebung Chinas entworfen, und Sun Yat-sen fügte 1906 das rote Feld hinzu."
+  },
+  "TJ": {
+    "funFact": "Tadschikistans Flagge hat in der Mitte eine gelbe Krone, überragt von einem Bogen aus sieben Sternen."
+  },
+  "TZ": {
+    "funFact": "Tansanias Flagge wurde 1964 angenommen, um die einzelnen Flaggen von Tanganjika und Sansibar zu ersetzen, als die beiden Staaten sich zusammenschlossen."
+  },
+  "TH": {
+    "funFact": "Thailands Flagge wurde am 28. September 1917 durch ein königliches Dekret von Rama VI. angenommen."
+  },
+  "TL": {
+    "funFact": "Timor-Lestes Flagge hat ein schwarzes Dreieck mit einem weißen Stern, über einem größeren gelben Dreieck, auf rotem Feld."
+  },
+  "TG": {
+    "funFact": "Togos Flagge wurde 1960 vom togoischen Künstler Paul Ahyi entworfen, kurz vor der Unabhängigkeit am 27. April."
+  },
+  "TO": {
+    "funFact": "Tongas Verfassung schreibt vor, dass die Nationalflagge niemals geändert werden darf."
+  },
+  "TT": {
+    "funFact": "Auf der Flagge von Trinidad und Tobago stehen Rot, Schwarz und Weiß für Feuer, Erde und Wasser."
+  },
+  "TN": {
+    "funFact": "Tunesiens Flagge geht auf eine Entscheidung von Bey Hussein II. nach der Schlacht von Navarino am 20. Oktober 1827 zurück."
+  },
+  "TR": {
+    "funFact": "Die Flagge der Türkei beruht auf der Flagge des Osmanischen Reichs aus dem 18. Jahrhundert."
+  },
+  "TM": {
+    "funFact": "Turkmenistans Flagge enthält eine symbolische Darstellung der berühmten Teppichherstellung des Landes."
+  },
+  "TV": { "funFact": "Die neun Sterne auf Tuvalus Flagge stehen für die neun Inseln Tuvalus." },
+  "UG": {
+    "funFact": "Der Kronenkranich auf Ugandas Flagge greift das Kolonialabzeichen auf der Blue Ensign auf, die von 1914 bis März 1962 geführt wurde."
+  },
+  "UA": {
+    "funFact": "Die blau-gelbe Bicolore der Ukraine wurde erstmals 1848 während des Völkerfrühlings in Lemberg (Lwiw) gesehen."
+  },
+  "AE": {
+    "funFact": "Die Flagge der VAE wurde 1971 von Abdullah Mohammed Al Maainah entworfen, der 19 Jahre alt war, und gewann einen landesweiten Wettbewerb."
+  },
+  "GB": {
+    "funFact": "Der Union Jack überlagert die Kreuze des heiligen Georg für England, des heiligen Andreas für Schottland und des heiligen Patrick für Nordirland."
+  },
+  "US": {
+    "funFact": "Die 50 Sterne auf der US-Flagge stehen für die 50 Bundesstaaten, und ihre 13 Streifen für die dreizehn britischen Kolonien, die die Unabhängigkeit erlangten."
+  },
+  "UY": {
+    "funFact": "Uruguays Flagge hat neun Streifen und eine Maisonne mit 16 Strahlen, abwechselnd dreieckig und wellig."
+  },
+  "UZ": {
+    "funFact": "Usbekistans Flagge hat einen weißen Halbmond und zwölf weiße Sterne im Obereck."
+  },
+  "VU": {
+    "funFact": "Die Farben von Vanuatus Flagge stammen von einer Parteiflagge von 1977, die vom einheimischen Künstler Kalontas Malon entworfen wurde."
+  },
+  "VA": {
+    "funFact": "Die Flagge der Vatikanstadt ist eine von nur zwei Nationalflaggen mit einem quadratischen Seitenverhältnis von 1:1."
+  },
+  "VE": {
+    "funFact": "Venezuelas gelb-blau-rote Trikolore geht auf die ursprüngliche Flagge von 1811 zurück."
+  },
+  "VN": {
+    "funFact": "Die fünf Zacken des goldenen Sterns auf Vietnams Flagge stehen für die fünf Hauptschichten der vietnamesischen Gesellschaft."
+  },
+  "YE": {
+    "funFact": "Jemens Flagge wurde am 22. Mai 1990 angenommen, dem Tag der Vereinigung des Landes."
+  },
+  "ZM": {
+    "funFact": "Sambias Flagge zeigt einen orangefarbenen afrikanischen Schreiseeadler im Flug auf grünem Feld."
+  },
+  "ZW": {
+    "funFact": "Der Simbabwe-Vogel auf Simbabwes Flagge stellt eine Speckstein-Statuette dar, die in den Ruinen von Groß-Simbabwe gefunden wurde."
+  }
+}

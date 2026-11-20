@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { findWinningWords, plainWord, puzzle } from "./fixtures";
 import { TrailWordsGame } from "./TrailWordsGame";
@@ -13,7 +13,9 @@ function findDialog(title: string): HTMLElement {
 
 async function renderGame() {
   const view = render(<TrailWordsGame />);
-  await screen.findByRole("button", { name: "Shuffle" });
+  const shuffle = await screen.findByRole("button", { name: "Shuffle" });
+  await waitFor(() => expect(shuffle).toBeEnabled(), { timeout: 10000 });
+  await screen.findByRole("button", { name: "Start playing", hidden: true }, { timeout: 10000 });
   return view;
 }
 

@@ -33,8 +33,38 @@
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
+:root[data-theme="dark"] {
+  --bg: #121a16;
+  --surface: #1a241f;
+  --surface-sunken: #223029;
+  --text: #f1efe6;
+  --text-muted: #a9b5ab;
+  --border: #2d3b33;
+  --border-strong: #46574c;
+  --cell-edge: #6b7f72;
+  --primary: #4cb08a;
+  --primary-hover: #63c29d;
+  --primary-shadow: #2a7a5a;
+  --on-primary: #0d1f17;
+  --accent: #f2c14e;
+  --accent-soft: #3d3216;
+  --on-accent: #121a16;
+  --success: #4cb08a;
+  --success-bg: #1d3a2d;
+  --success-text: #8fdcb9;
+  --proximity-near: #4cb08a;
+  --proximity-mid: #f2c14e;
+  --proximity-far: #6f7f75;
+  --danger: #f08a73;
+  --ring: rgba(76, 176, 138, 0.3);
+  --hero-from: #1f5240;
+  --hero-to: #163629;
+  --card-shadow: 0 3px 0 rgba(0, 0, 0, 0.28), 0 10px 24px rgba(0, 0, 0, 0.25);
+  --contour: rgba(76, 176, 138, 0.07);
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
     --bg: #121a16;
     --surface: #1a241f;
     --surface-sunken: #223029;

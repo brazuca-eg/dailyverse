@@ -79,6 +79,7 @@ describe("SwitchbackGame", () => {
 
   it("counts the seconds", () => {
     startGame();
+    walk(1);
     act(() => {
       vi.advanceTimersByTime(65_000);
     });
@@ -138,10 +139,11 @@ describe("SwitchbackGame", () => {
 
   it("wins at the summit: 5 points, the time and a share button", () => {
     startGame();
+    walk(1);
     act(() => {
       vi.advanceTimersByTime(72_000);
     });
-    solveBoard();
+    walk(solution.length - 1, 1);
     expect(screen.getByRole("heading", { name: "You got it!" })).toBeInTheDocument();
     expect(screen.getByText("5 / 5 points")).toBeInTheDocument();
     expect(screen.getByText("Summit reached in 1:12")).toBeInTheDocument();

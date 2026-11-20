@@ -1,4 +1,6 @@
 import { COMPASS_DIRECTIONS } from "./distance";
+import { markDoneToday } from "./doneToday";
+import { MAX_SCORE, loadHistory, recordPlay } from "./history";
 import { isOneOf, isRecord } from "./guards";
 import { MAX_GUESSES, type GameStatus, type GuessingState } from "./guessing";
 import { findStoredValue, saveStoredValue, type KeyValueStore } from "./storage";
@@ -61,6 +63,7 @@ export interface StateStorage<T extends SavedState> {
   markHelpSeen: (store?: KeyValueStore | null) => boolean;
   loadStats: (store?: KeyValueStore | null) => GameStats;
   saveStats: (stats: GameStats, store?: KeyValueStore | null) => boolean;
+  recordResult: (score: number, won: boolean, store?: KeyValueStore | null) => boolean;
 }
 
 export type GameStorage = StateStorage<GuessingState>;
@@ -87,11 +90,23 @@ export function createStateStorage<T extends SavedState>(
         : null;
     },
     saveState: (dayIndex, state, store) => saveStoredValue(keys.game, { dayIndex, state }, store),
-    hasSeenHelp: (store) => findStoredValue(keys.helpSeen, isTrue, store) === true,
+    hasSeenHelp: (store) =>
+      findStoredValue(keys.helpSeen, isTrue, store) === true ||
+      loadGameStats(gameId, store).gamesPlayed > 0 ||
+      loadHistory(store).some((record) => record.game === gameId),
     markHelpSeen: (store) => saveStoredValue(keys.helpSeen, true, store),
     loadStats: (store) => findStoredValue(keys.stats, isGameStats, store) ?? createEmptyStats(),
-    saveStats: (stats, store) => saveStoredValue(keys.stats, stats, store),
+    recordResult: (score, won, store) =>
+      recordPlay({ game: gameId, score, maxScore: MAX_SCORE, won }, store),
+    saveStats: (stats, store) => {
+      markDoneToday(gameId, store);
+      return saveStoredValue(keys.stats, stats, store);
+    },
   };
+}
+
+export function loadGameStats(gameId: string, store?: KeyValueStore | null): GameStats {
+  return findStoredValue(`dailyverse:${gameId}:stats`, isGameStats, store) ?? createEmptyStats();
 }
 
 export function createGameStorage(gameId: string): GameStorage {

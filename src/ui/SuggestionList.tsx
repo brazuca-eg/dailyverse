@@ -1,3 +1,4 @@
+import { readCountryName } from "../core/countryNames";
 import { getFlagEmoji } from "../core/flags";
 import type { Country } from "../core/types";
 import "./SuggestionList.css";
@@ -38,7 +39,7 @@ export function SuggestionList({
               {getFlagEmoji(country.code)}
             </span>
           )}
-          {country.name}
+          {readCountryName(country)}
         </li>
       ))}
     </ul>

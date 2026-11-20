@@ -1,6 +1,11 @@
 import { useState } from "react";
 import type { GameStorage } from "../core/gameStorage";
-import { applyGuess, createGuessingState, type GuessingState } from "../core/guessing";
+import {
+  applyGuess,
+  createGuessingState,
+  type GuessingState,
+  calculateScore,
+} from "../core/guessing";
 import { applyGameResult, type GameStats } from "../core/streak";
 import type { Country } from "../core/types";
 
@@ -29,6 +34,7 @@ export function useGuessingSession(
       const nextStats = applyGameResult(stats, dayIndex, next.status === "won");
       setStats(nextStats);
       storage.saveStats(nextStats);
+      storage.recordResult(calculateScore(next), next.status === "won");
     }
   }
 

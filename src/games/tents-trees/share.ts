@@ -1,5 +1,7 @@
-import { formatElapsed, pluralise } from "../../core/elapsed";
+import { formatElapsed } from "../../core/elapsed";
 import type { TentsState } from "./game";
+import { gameMeta } from "./meta";
+import { tentsMessages } from "./messages";
 
 export function buildShareText(
   state: TentsState,
@@ -7,10 +9,12 @@ export function buildShareText(
   puzzleNumber: number,
   url?: string,
 ): string {
-  const result = state.status === "won" ? "⛺" : "gave up";
+  const result = state.status === "won" ? "⛺" : tentsMessages("tents.share.gaveUp");
+  const checks = tentsMessages("tents.share.checks", { count: state.checks });
+  const hints = tentsMessages("tents.share.hints", { count: state.hints });
   const lines = [
-    `Dailyverse Tents and Trees #${puzzleNumber} ${size}x${size} ${result}`,
-    `⏱ ${formatElapsed(state.elapsedSeconds)} · 🔎 ${pluralise(state.checks, "check")} · 💡 ${pluralise(state.hints, "hint")}`,
+    `Dailyverse ${gameMeta("meta.tents.title")} #${puzzleNumber} ${size}x${size} ${result}`,
+    `⏱ ${formatElapsed(state.elapsedSeconds)} · 🔎 ${checks} · 💡 ${hints}`,
   ];
   if (url) {
     lines.push(url);

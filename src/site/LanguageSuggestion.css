@@ -1,0 +1,28 @@
+.suggestion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  color: var(--text);
+  background: var(--accent-soft);
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+}
+
+.suggestion-text {
+  margin: 0;
+  font-weight: 600;
+}
+
+.suggestion-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suggestion-button {
+  min-height: 44px;
+  padding: 0 16px;
+  text-decoration: none;
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { shadeColour } from "./colour";
+import { mixColours, shadeColour, toGreyColour } from "./colour";
 
 function lightnessOf(hex: string): number {
   const channels = [1, 3, 5].map((start) => parseInt(hex.slice(start, start + 2), 16) / 255);
@@ -43,5 +43,28 @@ describe("shadeColour", () => {
       expect(shadeColour(hex, 0)).toBe(hex);
       expect(shadeColour(hex, 1)).toMatch(/^#[0-9a-f]{6}$/);
     });
+  });
+});
+
+describe("mixColours", () => {
+  it("gives the first colour for none of the second and the second for all of it", () => {
+    expect(mixColours("#102030", "#f0e0d0", 0)).toBe("#102030");
+    expect(mixColours("#102030", "#f0e0d0", 1)).toBe("#f0e0d0");
+  });
+
+  it("gives a colour part of the way between the two", () => {
+    expect(mixColours("#000000", "#ffffff", 0.5)).toBe("#808080");
+    expect(mixColours("#ff0000", "#0000ff", 0.5)).toBe("#800080");
+  });
+});
+
+describe("toGreyColour", () => {
+  it("keeps a grey as it is and takes the colour out of others", () => {
+    expect(toGreyColour("#808080")).toBe("#808080");
+    expect(toGreyColour("#ff0000")).toBe("#4c4c4c");
+    const [red, green, blue] = [1, 3, 5].map((start) =>
+      toGreyColour("#2f7d57").slice(start, start + 2),
+    );
+    expect(new Set([red, green, blue]).size).toBe(1);
   });
 });

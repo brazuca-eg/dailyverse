@@ -1,13 +1,16 @@
 import type { GuessingState } from "../../core/guessing";
 import { findCountryByCode } from "../../core/search";
 import type { Country } from "../../core/types";
+import { useLocaleData } from "../../hooks/useLocaleData";
 import { useTodaysItem } from "../../hooks/useTodaysItem";
 import { GuessingGame } from "../../ui/GuessingGame";
 import { FlagViewer } from "./FlagViewer";
-import { findFlagFact } from "./facts";
+import { findFlagFact, loadLocalFacts } from "./facts";
 import { buildRoundId, resolveRevealStage } from "./game";
 import { flagStorage } from "./persistence";
-import { FLAG_FRAGMENT_RULE_STEPS } from "./rules";
+import { flagMessages as t } from "./messages";
+import { gameMeta } from "./meta";
+import { buildRuleSteps } from "./rules";
 import type { FlagEntry } from "./types";
 
 interface FlagGameProps {
@@ -18,9 +21,10 @@ interface FlagGameProps {
 
 export function FlagGame({ schedule, countries, launchDate }: FlagGameProps) {
   const { dayIndex, item: entry } = useTodaysItem(schedule, launchDate);
+  const localFacts = useLocaleData(loadLocalFacts);
   const answer = findCountryByCode(countries, entry.code);
   if (!answer) {
-    return <p>Today's flag could not be loaded.</p>;
+    return <p>{t("flag.loadError")}</p>;
   }
 
   function renderFlag(state: GuessingState) {
@@ -29,16 +33,16 @@ export function FlagGame({ schedule, countries, launchDate }: FlagGameProps) {
 
   return (
     <GuessingGame
-      gameTitle="Flag Fragment"
+      gameTitle={gameMeta("meta.flag.title")}
       storage={flagStorage}
       puzzleId={buildRoundId(entry.code, dayIndex)}
       answer={answer}
       countries={countries}
       dayIndex={dayIndex}
-      ruleSteps={FLAG_FRAGMENT_RULE_STEPS}
+      ruleSteps={buildRuleSteps()}
       renderStage={renderFlag}
       showFlags={false}
-      resultFact={findFlagFact(entry.code) ?? undefined}
+      resultFact={findFlagFact(entry.code, localFacts) ?? undefined}
     />
   );
 }
