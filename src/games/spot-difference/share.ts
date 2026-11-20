@@ -1,4 +1,5 @@
 import { DIFFERENCE_COUNT } from "./difficulty";
+import { gameMeta } from "./meta";
 import { MAX_LIVES, countLivesLeft, type SpotState } from "./game";
 
 const LIFE_EMOJI = "❤️";
@@ -9,7 +10,7 @@ export function buildShareText(state: SpotState, puzzleNumber: number, url?: str
     LIFE_EMOJI.repeat(countLivesLeft(state)) +
     LOST_LIFE_EMOJI.repeat(MAX_LIVES - countLivesLeft(state));
   const lines = [
-    `Dailyverse Spot the Difference #${puzzleNumber} ${state.found.length}/${DIFFERENCE_COUNT}`,
+    `Dailyverse ${gameMeta("meta.spot.title")} #${puzzleNumber} ${state.found.length}/${DIFFERENCE_COUNT}`,
     hearts,
   ];
   if (url) {

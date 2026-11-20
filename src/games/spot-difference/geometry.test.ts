@@ -94,3 +94,26 @@ describe("measureParts", () => {
     expect(measureParts(pine, drawElement(pine))).toEqual(measureElement(pine));
   });
 });
+
+describe("measureElement for a mirrored element", () => {
+  const tent = {
+    id: "tent-1",
+    kind: "palm" as const,
+    x: 200,
+    y: 400,
+    scale: 1,
+    rotation: 0,
+    shade: 0,
+    variant: 0,
+    layer: 5,
+  };
+
+  it("mirrors the bounds around the position of the element", () => {
+    const plain = measureElement(tent);
+    const flipped = measureElement({ ...tent, flip: true });
+    expect(flipped.left).toBeCloseTo(200 - (plain.right - 200), 5);
+    expect(flipped.right).toBeCloseTo(200 - (plain.left - 200), 5);
+    expect(flipped.top).toBeCloseTo(plain.top, 5);
+    expect(flipped.bottom).toBeCloseTo(plain.bottom, 5);
+  });
+});

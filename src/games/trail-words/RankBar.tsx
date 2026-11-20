@@ -1,4 +1,5 @@
-import { findRankProgress, RANKS } from "./ranks";
+import { t } from "./messages";
+import { findRankProgress, RANKS, readRankLabel } from "./ranks";
 import "./RankBar.css";
 
 interface RankBarProps {
@@ -10,24 +11,28 @@ export function RankBar({ score, maxScore }: RankBarProps) {
   const progress = findRankProgress(score, maxScore);
   const top = Math.max(1, Math.ceil(maxScore * RANKS[RANKS.length - 1].share));
   const percent = Math.min(100, Math.round((score / top) * 100));
+  const rank = readRankLabel(progress.rank);
   const goal =
-    progress.next === null ? "Top rank reached" : `${progress.pointsToNext} to ${progress.next}`;
+    progress.next === null
+      ? t("words.rank.top")
+      : t("words.rank.goal", {
+          points: progress.pointsToNext,
+          rank: readRankLabel(progress.next),
+        });
   return (
     <div className="rank-bar">
       <div className="rank-row">
-        <p className="rank-name">{progress.rank}</p>
-        <p className="rank-score">
-          {score} {score === 1 ? "point" : "points"} · {goal}
-        </p>
+        <p className="rank-name">{rank}</p>
+        <p className="rank-score">{t("words.rank.score", { count: score, goal })}</p>
       </div>
       <div
         className="rank-track"
         role="progressbar"
-        aria-label="Rank progress"
+        aria-label={t("words.rank.progress")}
         aria-valuemin={0}
         aria-valuemax={top}
         aria-valuenow={Math.min(score, top)}
-        aria-valuetext={`${progress.rank}, ${score} points, ${goal}`}
+        aria-valuetext={t("words.rank.valuetext", { rank, score, goal })}
       >
         <div className="rank-fill" style={{ width: `${percent}%` }} />
         {RANKS.slice(1).map((rank) => (

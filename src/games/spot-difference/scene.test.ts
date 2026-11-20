@@ -3,7 +3,7 @@ import { VARIANT_COUNTS } from "./elements";
 import { boundsOverlap, isInside, measureElement } from "./geometry";
 import { SCENE_HEIGHT, SCENE_WIDTH, THEME_RECIPES } from "./recipes";
 import { generateScene } from "./scene";
-import { THEMES } from "./types";
+import { ELEMENT_KINDS, MOODS, THEMES } from "./types";
 
 const SEEDS = Array.from({ length: 120 }, (_, seed) => seed);
 const MIN_ELEMENTS = 28;
@@ -24,8 +24,27 @@ describe("generateScene", () => {
   it("uses every theme, spread across consecutive seeds", () => {
     const themes = SEEDS.map((seed) => generateScene(seed).theme);
     THEMES.forEach((theme) => {
-      expect(themes.filter((candidate) => candidate === theme).length).toBeGreaterThan(15);
+      expect(themes.filter((candidate) => candidate === theme).length).toBeGreaterThan(
+        SEEDS.length / (THEMES.length * 2),
+      );
     });
+  });
+
+  it("uses every time of day, with day light the most common", () => {
+    const moods = SEEDS.map((seed) => generateScene(seed).mood);
+    MOODS.forEach((mood) => {
+      expect(moods.filter((candidate) => candidate === mood).length).toBeGreaterThan(0);
+    });
+    const count = (mood: string) => moods.filter((candidate) => candidate === mood).length;
+    expect(count("day")).toBeGreaterThan(count("night"));
+  });
+
+  it("mixes places and times of day, so neighbouring days look different", () => {
+    const looks = Array.from({ length: 60 }, (_, seed) => {
+      const { theme, mood } = generateScene(seed);
+      return `${theme}/${mood}`;
+    });
+    expect(new Set(looks).size).toBeGreaterThanOrEqual(20);
   });
 
   it("does not repeat the same theme many days in a row", () => {
@@ -151,5 +170,50 @@ describe("generateScene", () => {
     const average = (values: number[]) =>
       values.reduce((sum, value) => sum + value, 0) / values.length;
     expect(average(near)).toBeGreaterThan(average(far));
+  });
+});
+
+describe("the places and things of the scenes", () => {
+  const scenes = Array.from({ length: 200 }, (_, seed) => generateScene(seed));
+
+  it("uses every kind of thing somewhere", () => {
+    const used = new Set(scenes.flatMap((scene) => scene.elements.map((element) => element.kind)));
+    ELEMENT_KINDS.forEach((kind) => expect(used.has(kind)).toBe(true));
+  });
+
+  it("puts boats and ducks on the water and umbrellas on the beach only", () => {
+    scenes.forEach((scene) => {
+      const kinds = scene.elements.map((element) => element.kind);
+      if (kinds.includes("duck")) {
+        expect(scene.theme).toBe("lake");
+      }
+      if (kinds.includes("umbrella")) {
+        expect(scene.theme).toBe("beach");
+      }
+      if (kinds.includes("snowman")) {
+        expect(scene.theme).toBe("winter");
+      }
+      if (kinds.includes("windmill") || kinds.includes("barn")) {
+        expect(scene.theme).toBe("countryside");
+      }
+    });
+  });
+
+  it("keeps balloons high in the sky", () => {
+    scenes
+      .flatMap((scene) => scene.elements)
+      .filter((element) => element.kind === "balloon")
+      .forEach((element) => expect(element.y).toBeLessThan(220));
+  });
+
+  it("does not let things overlap in the crowded places", () => {
+    scenes.slice(0, 40).forEach((scene) => {
+      const crowd = scene.elements.filter((element) => element.layer === 5);
+      crowd.forEach((first, index) => {
+        crowd.slice(index + 1).forEach((second) => {
+          expect(boundsOverlap(measureElement(first), measureElement(second), 0)).toBe(false);
+        });
+      });
+    });
   });
 });

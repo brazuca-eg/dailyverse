@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { MAX_GUESSES, type GameStatus } from "../core/guessing";
+import { uiMessages as t } from "./messages";
 import "./ProgressPips.css";
 
 interface ProgressPipsProps {
@@ -37,8 +38,8 @@ export function ProgressPips({
 }: ProgressPipsProps) {
   const defaultLabel =
     status === "playing"
-      ? `Guess ${guessCount + 1} of ${total}`
-      : `${guessCount} of ${total} guesses used`;
+      ? t("ui.progress.current", { current: guessCount + 1, total })
+      : t("ui.progress.done", { used: guessCount, total });
   const label = customLabel ?? defaultLabel;
   return (
     <div className="progress">

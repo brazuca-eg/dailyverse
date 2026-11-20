@@ -1,8 +1,10 @@
+import { readCountryName } from "../core/countryNames";
 import { getFlagEmoji } from "../core/flags";
 import type { Country } from "../core/types";
 import { CheckIcon } from "./icons";
 import type { GuessRecord } from "../core/guessing";
 import { GuessRow } from "./GuessRow";
+import { uiMessages as t } from "./messages";
 import "./GuessRow.css";
 
 interface GuessHistoryProps {
@@ -16,9 +18,9 @@ export function GuessHistory({ guesses, countries, showFlags = true }: GuessHist
     return null;
   }
   const flagClass = showFlags ? "" : " guess-no-flag";
-  const namesByCode = new Map(countries.map((country) => [country.code, country.name]));
+  const namesByCode = new Map(countries.map((country) => [country.code, readCountryName(country)]));
   return (
-    <ol className="guesses card-list" aria-label="Your guesses">
+    <ol className="guesses card-list" aria-label={t("ui.history.label")}>
       {guesses.map((guess) => {
         const name = namesByCode.get(guess.countryCode) ?? guess.countryCode;
         if (guess.feedback.isCorrect) {
@@ -31,7 +33,7 @@ export function GuessHistory({ guesses, countries, showFlags = true }: GuessHist
               )}
               <div className="guess-main">
                 <span className="guess-name">{name}</span>
-                <span className="guess-correct-label">Correct</span>
+                <span className="guess-correct-label">{t("ui.history.correct")}</span>
               </div>
               <span className="guess-badge guess-badge-correct">
                 <CheckIcon size={22} />

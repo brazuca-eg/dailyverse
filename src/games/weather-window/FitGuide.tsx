@@ -1,5 +1,6 @@
-import { TRIPS, WEATHERS, readFit } from "./catalogue";
+import { TRIPS, WEATHERS, readFit, readTripLabel, readWeatherLabel } from "./catalogue";
 import { TripIcon, WeatherIcon } from "./Icons";
+import { t } from "./messages";
 import "./FitGuide.css";
 
 interface FitGuideProps {
@@ -9,14 +10,14 @@ interface FitGuideProps {
 export function FitGuide({ trips }: FitGuideProps) {
   return (
     <table className="ww-fit">
-      <caption>Fit guide: points each weather gives each trip</caption>
+      <caption>{t("weather.fit.caption")}</caption>
       <thead>
         <tr>
           <td />
           {WEATHERS.map((weather, index) => (
             <th key={weather.id} scope="col">
               <WeatherIcon weather={index} size={20} />
-              <span>{weather.label}</span>
+              <span>{readWeatherLabel(index)}</span>
             </th>
           ))}
         </tr>
@@ -26,7 +27,7 @@ export function FitGuide({ trips }: FitGuideProps) {
           <tr key={TRIPS[trip].id}>
             <th scope="row">
               <TripIcon trip={trip} size={18} />
-              <span>{TRIPS[trip].label}</span>
+              <span>{readTripLabel(trip)}</span>
             </th>
             {WEATHERS.map((weather, index) => (
               <td key={weather.id}>{readFit(trip, index)}</td>

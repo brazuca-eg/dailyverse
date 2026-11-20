@@ -1,5 +1,6 @@
-import { DAY_NAMES, TRIPS } from "./catalogue";
+import { TRIPS, readShortDayName, readTripLabel } from "./catalogue";
 import { TripIcon } from "./Icons";
+import { t } from "./messages";
 import type { WeatherPuzzle } from "./types";
 import { UNPLACED } from "./types";
 import "./Trips.css";
@@ -25,9 +26,11 @@ export function Trips({ puzzle, plan, selectedTrip, isActive, onSelect }: TripsP
             onClick={() => onSelect(index)}
           >
             <TripIcon trip={trip} size={26} />
-            <span className="ww-trip-name">{TRIPS[trip].label}</span>
+            <span className="ww-trip-name">{readTripLabel(trip)}</span>
             <span className="ww-trip-day">
-              {plan[index] === UNPLACED ? "Not planned" : DAY_NAMES[plan[index]].label.slice(0, 3)}
+              {plan[index] === UNPLACED
+                ? t("weather.trips.notPlanned")
+                : readShortDayName(plan[index])}
             </span>
           </button>
         </li>

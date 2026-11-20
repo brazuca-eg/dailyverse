@@ -1,6 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createInitialState, buildPuzzleId, finishPreview, placeTrip, startPreview } from "./game";
+import { loadHistory } from "../../core/history";
 import { easyRound } from "./fixtures";
 import { weatherWindowStorage } from "./persistence";
 import { analysePuzzle, scorePlan } from "./solver";
@@ -265,6 +266,18 @@ describe("useWeatherSession", () => {
     expect(session.result.current.state.status).toBe("lost");
     expect(session.result.current.stats.gamesWon).toBe(0);
     expect(session.result.current.stats.gamesPlayed).toBe(1);
+  });
+
+  it("records the points in the play history, less one for each peek", () => {
+    const session = renderSession();
+    toPlanning(session);
+    run(session, (current) => current.togglePeek());
+    run(session, (current) => current.tapDay(0));
+    placeAll(session, bestPlan);
+    run(session, (current) => current.submit());
+    expect(loadHistory()).toEqual([
+      expect.objectContaining({ game: "weather-window", score: 4, maxScore: 5, won: true }),
+    ]);
   });
 
   it("saves the finished game and restores it", () => {

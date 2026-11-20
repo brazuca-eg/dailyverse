@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, type ReactNode } from "react";
 import { CloseIcon } from "./icons";
+import { uiMessages as t } from "./messages";
 import "./Modal.css";
 
 interface ModalProps {
@@ -42,7 +43,12 @@ export function Modal({ open, title, onClose, children }: ModalProps) {
           <h2 id={titleId} className="modal-title">
             {title}
           </h2>
-          <button type="button" className="icon-button" aria-label="Close" onClick={onClose}>
+          <button
+            type="button"
+            className="icon-button"
+            aria-label={t("ui.modal.close")}
+            onClick={onClose}
+          >
             <CloseIcon size={22} />
           </button>
         </header>

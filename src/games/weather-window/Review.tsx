@@ -1,4 +1,5 @@
-import { DAY_NAMES, TRIPS, WEATHERS, readFit } from "./catalogue";
+import { TRIPS, readDayName, readFit, readTripLabel, readWeatherLabel } from "./catalogue";
+import { t } from "./messages";
 import { analysePuzzle } from "./solver";
 import type { WeatherPuzzle } from "./types";
 import "./Review.css";
@@ -11,22 +12,28 @@ interface ReviewProps {
 function describePick(puzzle: WeatherPuzzle, trip: number, day: number): string {
   const weather = puzzle.weather[day];
   const points = readFit(puzzle.trips[trip], weather);
-  return `${DAY_NAMES[day].label}, ${WEATHERS[weather].label}, ${points} ${points === 1 ? "point" : "points"}`;
+  return [
+    readDayName(day),
+    readWeatherLabel(weather),
+    t("weather.review.points", { count: points }),
+  ].join(", ");
 }
 
 export function Review({ puzzle, plan }: ReviewProps) {
   const { bestPlan } = analysePuzzle(puzzle);
   return (
-    <section className="ww-review" aria-label="Your plan and the best plan">
+    <section className="ww-review" aria-label={t("weather.review.label")}>
       <ul className="ww-review-list">
         {puzzle.trips.map((trip, index) => (
           <li key={TRIPS[trip].id} className="ww-review-row">
-            <strong>{TRIPS[trip].label}</strong>
-            <span>You: {describePick(puzzle, index, plan[index])}</span>
+            <strong>{readTripLabel(trip)}</strong>
+            <span>
+              {t("weather.review.you", { pick: describePick(puzzle, index, plan[index]) })}
+            </span>
             <span>
               {puzzle.weather[plan[index]] === puzzle.weather[bestPlan[index]]
-                ? "Best: you matched it"
-                : `Best: ${describePick(puzzle, index, bestPlan[index])}`}
+                ? t("weather.review.matched")
+                : t("weather.review.best", { pick: describePick(puzzle, index, bestPlan[index]) })}
             </span>
           </li>
         ))}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { calculateMillisUntilNextDay, formatCountdown } from "../core/daily";
+import { uiMessages as t } from "./messages";
 import "./NextPuzzleCountdown.css";
 
 export function NextPuzzleCountdown() {
@@ -18,14 +19,14 @@ export function NextPuzzleCountdown() {
         className="button button-secondary button-block"
         onClick={() => window.location.reload()}
       >
-        Play today's puzzle
+        {t("ui.countdown.play")}
       </button>
     );
   }
 
   return (
     <div className="countdown" role="timer">
-      <span className="countdown-label">Next puzzle in</span>
+      <span className="countdown-label">{t("ui.countdown.label")}</span>
       <span className="countdown-time">{formatCountdown(millisLeft)}</span>
     </div>
   );

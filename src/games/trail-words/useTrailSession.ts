@@ -1,3 +1,4 @@
+import { countRanksReached } from "./ranks";
 import { useEffect, useRef, useState } from "react";
 import type { StateStorage } from "../../core/gameStorage";
 import { shuffle } from "../../core/random";
@@ -12,6 +13,7 @@ import {
   submitGuess,
   typeLetter,
   type TrailState,
+  calculateScore,
 } from "./game";
 import type { TrailPuzzle } from "./puzzle";
 
@@ -95,6 +97,10 @@ export function useTrailSession(
       latestStats.current = nextStats;
       setStats(nextStats);
       storage.saveStats(nextStats);
+      storage.recordResult(
+        countRanksReached(calculateScore(puzzle, next.found), puzzle.maxScore),
+        after === "won",
+      );
     }
   }
 

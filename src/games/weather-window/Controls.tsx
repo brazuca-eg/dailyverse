@@ -1,3 +1,4 @@
+import { t } from "./messages";
 import "./Controls.css";
 
 interface ControlsProps {
@@ -24,10 +25,10 @@ export function Controls({
         disabled={peeksLeft === 0 && !isPeekArmed}
         onClick={onTogglePeek}
       >
-        {isPeekArmed ? "Pick a day" : `Peek (${peeksLeft} left)`}
+        {isPeekArmed ? t("weather.controls.pick") : t("weather.controls.peek", { left: peeksLeft })}
       </button>
       <button type="button" className="button ww-control" disabled={!canSubmit} onClick={onSubmit}>
-        Submit plan
+        {t("weather.controls.submit")}
       </button>
     </div>
   );

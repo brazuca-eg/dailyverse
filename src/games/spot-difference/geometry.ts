@@ -25,7 +25,7 @@ function listPrimitiveCorners(primitive: Primitive): [number, number][] {
 
 function transformPoint(element: SceneElement, [x, y]: [number, number]): [number, number] {
   const radians = (element.rotation * Math.PI) / 180;
-  const scaledX = x * element.scale;
+  const scaledX = x * element.scale * (element.flip ? -1 : 1);
   const scaledY = y * element.scale;
   return [
     element.x + scaledX * Math.cos(radians) - scaledY * Math.sin(radians),

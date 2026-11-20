@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { hasStartedPlaying } from "../../core/clock";
+import { useEffect, useRef, useState, useMemo } from "react";
 import type { StateStorage } from "../../core/gameStorage";
 import { applyGameResult, type GameStats } from "../../core/streak";
 import {
@@ -13,8 +14,10 @@ import {
   resetPath,
   undoStep,
   type SwitchbackState,
+  calculateScore,
 } from "./game";
 import { toCol, toRow } from "./grid";
+import { t } from "./messages";
 import type { SwitchbackRound } from "./types";
 
 const TICK_MS = 1000;
@@ -82,6 +85,7 @@ export function useSwitchbackSession(
       latestStats.current = nextStats;
       setStats(nextStats);
       storage.saveStats(nextStats);
+      storage.recordResult(calculateScore(next), next.status === "won");
     }
   }
 
@@ -89,13 +93,16 @@ export function useSwitchbackSession(
     const before = countReachedMarks(puzzle, previous.path);
     const after = countReachedMarks(puzzle, next.path);
     if (next.status === "won") {
-      return "Summit reached! Every square is covered.";
+      return t("switch.notice.won");
     }
-    return after > before ? `Checkpoint ${after} reached.` : null;
+    return after > before ? t("switch.notice.checkpoint", { number: after }) : null;
   }
 
+  const initialState = useMemo(() => createInitialState(puzzleId, round.puzzle), [puzzleId, round]);
+  const isClockRunning = state.status === "playing" && hasStartedPlaying(state, initialState);
+
   useEffect(() => {
-    if (state.status !== "playing") {
+    if (!isClockRunning) {
       return undefined;
     }
     const timer = window.setInterval(() => {
@@ -107,7 +114,7 @@ export function useSwitchbackSession(
       }
     }, TICK_MS);
     return () => window.clearInterval(timer);
-  }, [state.status, storage, dayIndex]);
+  }, [isClockRunning, storage, dayIndex]);
 
   return {
     state,
@@ -122,9 +129,8 @@ export function useSwitchbackSession(
       }
     },
     undo: () => apply((current) => undoStep(current, puzzle)),
-    reset: () => apply((current) => resetPath(current, puzzle), "Trail cleared."),
-    hint: () =>
-      apply((current) => giveHint(current, puzzle, solution), "Your trail was corrected one step."),
+    reset: () => apply((current) => resetPath(current, puzzle), t("switch.notice.reset")),
+    hint: () => apply((current) => giveHint(current, puzzle, solution), t("switch.notice.hint")),
     surrender: () => apply(giveUp),
   };
 }

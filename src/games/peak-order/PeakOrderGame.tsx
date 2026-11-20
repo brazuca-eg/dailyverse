@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useDayIndex } from "../../hooks/useDayIndex";
+import { useLocaleData } from "../../hooks/useLocaleData";
 import { useHelpDialog } from "../../hooks/useHelpDialog";
 import { GameDialogs } from "../../ui/GameDialogs";
 import { GameToolbar } from "../../ui/GameToolbar";
@@ -15,8 +16,10 @@ import {
   readConfirmed,
   readStatus,
 } from "./game";
-import { PEAK_ORDER_RULE_STEPS } from "./helpText";
+import { buildRuleSteps } from "./helpText";
+import { peakMessages as t } from "./messages";
 import { peakOrderStorage } from "./persistence";
+import { loadLocalNames, localisePuzzle } from "./localNames";
 import { PeakList } from "./PeakList";
 import { buildDailyPeakPuzzle, type PeakPuzzle } from "./puzzle";
 import { buildShareText } from "./share";
@@ -26,10 +29,6 @@ import "./PeakOrderGame.css";
 interface PlayProps {
   puzzle: PeakPuzzle;
   dayIndex: number;
-}
-
-function describeChecks(left: number): string {
-  return `${left} ${left === 1 ? "check" : "checks"} left`;
 }
 
 function PeakPlay({ puzzle, dayIndex }: PlayProps) {
@@ -48,7 +47,7 @@ function PeakPlay({ puzzle, dayIndex }: PlayProps) {
         guessCount={state.history.length}
         status={status}
         total={5}
-        label={describeChecks(readChecksLeft(state))}
+        label={t("peak.checksLeft", { count: readChecksLeft(state) })}
         actions={
           <GameToolbar onShowHelp={helpDialog.open} onShowStats={() => setIsStatsOpen(true)} />
         }
@@ -77,7 +76,7 @@ function PeakPlay({ puzzle, dayIndex }: PlayProps) {
           disabled={!canCheck(state)}
           onClick={session.check}
         >
-          Check order
+          {t("peak.check")}
         </button>
       )}
       <ResultPanel
@@ -86,17 +85,17 @@ function PeakPlay({ puzzle, dayIndex }: PlayProps) {
         maxScore={MAX_SCORE}
         summary={
           status === "won"
-            ? `Ordered in ${state.history.length} ${state.history.length === 1 ? "check" : "checks"}`
-            : "Here is the right order"
+            ? t("peak.result.won", { count: state.history.length })
+            : t("peak.result.lost")
         }
-        lostEyebrow="Out of checks"
+        lostEyebrow={t("peak.result.lostEyebrow")}
         shareText={buildShareText(puzzle, state, dayIndex + 1, shareUrl)}
       />
       <GameDialogs
         helpDialog={helpDialog}
         isStatsOpen={isStatsOpen}
         onCloseStats={() => setIsStatsOpen(false)}
-        ruleSteps={PEAK_ORDER_RULE_STEPS}
+        ruleSteps={buildRuleSteps()}
         stats={session.stats}
         dayIndex={dayIndex}
       />
@@ -106,6 +105,10 @@ function PeakPlay({ puzzle, dayIndex }: PlayProps) {
 
 export function PeakOrderGame() {
   const dayIndex = useDayIndex(PEAK_LAUNCH_DATE);
-  const puzzle = useMemo(() => buildDailyPeakPuzzle(dayIndex), [dayIndex]);
+  const names = useLocaleData(loadLocalNames);
+  const puzzle = useMemo(
+    () => localisePuzzle(buildDailyPeakPuzzle(dayIndex), names),
+    [dayIndex, names],
+  );
   return <PeakPlay puzzle={puzzle} dayIndex={dayIndex} />;
 }

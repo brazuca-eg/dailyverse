@@ -1,3 +1,5 @@
+import { t } from "./messages";
+
 export interface Rank {
   name: string;
   share: number;
@@ -36,7 +38,24 @@ export function findRankProgress(score: number, maxScore: number): RankProgress 
   };
 }
 
+export function countRanksReached(score: number, maxScore: number): number {
+  return RANKS.filter((rank) => score >= calculateThreshold(rank, maxScore)).length;
+}
+
 export function hasReachedWinRank(score: number, maxScore: number): boolean {
   const win = RANKS.find((rank) => rank.name === WIN_RANK) as Rank;
   return maxScore > 0 && score >= calculateThreshold(win, maxScore);
+}
+
+const RANK_KEYS = {
+  Beginner: "words.rank.Beginner",
+  Hiker: "words.rank.Hiker",
+  Trekker: "words.rank.Trekker",
+  Ranger: "words.rank.Ranger",
+  Summit: "words.rank.Summit",
+} as const;
+
+export function readRankLabel(name: string): string {
+  const key = Object.entries(RANK_KEYS).find(([rank]) => rank === name)?.[1];
+  return key ? t(key) : name;
 }

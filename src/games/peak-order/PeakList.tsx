@@ -1,7 +1,7 @@
 import { useEffect, useRef, type DragEvent, type KeyboardEvent } from "react";
 import { ArrowUpIcon, CheckIcon } from "../../ui/icons";
-import { CATEGORIES } from "./categories";
 import { formatValue } from "./format";
+import { peakMessages as t } from "./messages";
 import type { PeakPuzzle } from "./puzzle";
 import { ROUND_SIZE } from "./tiers";
 import type { FocusRequest, FocusTarget } from "./usePeakSession";
@@ -29,9 +29,9 @@ function describeRow(
   isRevealed: boolean,
 ): string {
   const { name, value } = puzzle.items[item];
-  const parts = [`${name}, position ${position + 1} of ${ROUND_SIZE}`];
+  const parts = [t("peak.row.label", { name, position: position + 1, total: ROUND_SIZE })];
   if (isConfirmed) {
-    parts.push("in the right place");
+    parts.push(t("peak.row.confirmed"));
   }
   if (isRevealed) {
     parts.push(formatValue(value, puzzle.category));
@@ -54,7 +54,8 @@ export function PeakList({
 }: PeakListProps) {
   const list = useRef<HTMLOListElement>(null);
   const dragSource = useRef<number | null>(null);
-  const { lowest, highest } = CATEGORIES[puzzle.category];
+  const lowest = t(`peak.end.${puzzle.category}.low`);
+  const highest = t(`peak.end.${puzzle.category}.high`);
 
   useEffect(() => {
     if (focusRequest === null) {
@@ -93,7 +94,7 @@ export function PeakList({
   return (
     <div className="peak-list-wrap">
       <p className="peak-end">{lowest}</p>
-      <ol className="peak-list" ref={list} aria-label={`Your order, ${lowest} first`}>
+      <ol className="peak-list" ref={list} aria-label={t("peak.list.label", { end: lowest })}>
         {order.map((item, position) => {
           const isConfirmed = confirmed[position];
           const isSelected = selected === position;
@@ -134,7 +135,7 @@ export function PeakList({
                   </span>
                   {isConfirmed && (
                     <span className="peak-badge" aria-hidden="true">
-                      <CheckIcon size={16} /> In place
+                      <CheckIcon size={16} /> {t("peak.row.badge")}
                     </span>
                   )}
                 </button>
@@ -163,7 +164,7 @@ export function PeakList({
                     type="button"
                     className="icon-button peak-shift"
                     data-role="up"
-                    aria-label={`Move ${name} up`}
+                    aria-label={t("peak.row.moveUp", { name })}
                     disabled={position === 0}
                     onClick={() => onShift(position, -1, "up")}
                   >
@@ -173,7 +174,7 @@ export function PeakList({
                     type="button"
                     className="icon-button peak-shift peak-shift-down"
                     data-role="down"
-                    aria-label={`Move ${name} down`}
+                    aria-label={t("peak.row.moveDown", { name })}
                     disabled={position === ROUND_SIZE - 1}
                     onClick={() => onShift(position, 1, "down")}
                   >

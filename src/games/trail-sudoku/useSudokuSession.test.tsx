@@ -149,8 +149,25 @@ describe("useSudokuSession", () => {
     expect(session.result.current.stats.gamesPlayed).toBe(1);
   });
 
+  it("does not count time until the first move, then starts counting", () => {
+    const session = renderSession();
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+    expect(session.result.current.state.elapsedSeconds).toBe(0);
+    expect(vi.getTimerCount()).toBe(0);
+    run(session, (current) => current.select(empties[0]));
+    run(session, (current) => current.enter(wrongDigit(empties[0])));
+    act(() => {
+      vi.advanceTimersByTime(2000);
+    });
+    expect(session.result.current.state.elapsedSeconds).toBe(2);
+  });
+
   it("counts the seconds, and saves them", () => {
     const session = renderSession();
+    run(session, (current) => current.select(empties[0]));
+    run(session, (current) => current.enter(wrongDigit(empties[0])));
     act(() => {
       vi.advanceTimersByTime(3000);
     });

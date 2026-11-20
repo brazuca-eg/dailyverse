@@ -1,0 +1,25 @@
+---
+import type { Locale } from "../i18n/locales";
+import { statsMessages } from "../i18n/stats";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { StatsOverview } from "./StatsOverview";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = statsMessages.in(locale);
+---
+
+<BaseLayout
+  title={t("stats.title") + " – Dailyverse"}
+  description={t("stats.description")}
+  locale={locale}
+>
+  <Fragment slot="hero">
+    <h1>{t("stats.title")}</h1>
+    <p class="lead">{t("stats.lead")}</p>
+  </Fragment>
+  <StatsOverview client:only="react" />
+</BaseLayout>

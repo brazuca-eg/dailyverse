@@ -1,6 +1,6 @@
 .ww-forecast {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(62px, 1fr));
+  grid-template-columns: repeat(var(--ww-narrow-columns), minmax(0, 1fr));
   gap: 8px;
   margin: 0;
   padding: 0;
@@ -8,13 +8,14 @@
 }
 
 .ww-day {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
   width: 100%;
   min-height: 112px;
-  padding: 8px 4px;
+  padding: 8px 2px;
   color: var(--text-muted);
   background: var(--surface-sunken);
   border: 2px solid var(--cell-edge);
@@ -56,8 +57,11 @@
 }
 
 .ww-day-label {
-  font-size: 0.8rem;
+  max-width: 100%;
+  font-size: 0.72rem;
   font-weight: 600;
+  text-align: center;
+  overflow-wrap: anywhere;
 }
 
 .ww-day-trip {
@@ -69,4 +73,10 @@
   font-weight: 700;
   color: var(--text);
   white-space: nowrap;
+}
+
+@media (min-width: 520px) {
+  .ww-forecast {
+    grid-template-columns: repeat(var(--ww-days), minmax(0, 1fr));
+  }
 }

@@ -1,0 +1,78 @@
+---
+import { siteMessages } from "../i18n/site";
+import { buildLocalePath, type Locale } from "../i18n/locales";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/home.css";
+import { HomeSummary } from "./HomeSummary";
+import { LanguageSuggestion } from "./LanguageSuggestion";
+import { listGameGroups, listGroupGames } from "./games";
+import { GAME_ICONS } from "./icons";
+import { STAR_PATH } from "./starIcon";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = siteMessages.in(locale);
+---
+
+<BaseLayout title={t("site.home.title") + " – Dailyverse"} locale={locale} wide>
+  <Fragment slot="hero">
+    <h1>{t("site.home.title")}</h1>
+    <p class="lead">{t("site.home.lead")}</p>
+  </Fragment>
+  {locale === "en" && <LanguageSuggestion client:only="react" />}
+  <HomeSummary client:only="react" />
+  <section class="home-group" id="favourites" aria-labelledby="favourites-title" hidden>
+    <h2 class="home-group-title" id="favourites-title">
+      {t("site.fav.title")}
+    </h2>
+    <p class="home-group-lead">{t("site.fav.lead")}</p>
+    <ul class="game-list" id="favourites-list"></ul>
+  </section>
+  {listGameGroups().map((group) => (
+    <section class="home-group" aria-labelledby={`group-${group.id}`}>
+      <h2 class="home-group-title" id={`group-${group.id}`}>
+        {t(`site.group.${group.id}.name`)}
+      </h2>
+      <p class="home-group-lead">{t(`site.group.${group.id}.lead`)}</p>
+      <ul class="game-list">
+        {listGroupGames(group).map((game) => (
+          <li data-game-slug={game.slug}>
+            <a class="game-card" href={buildLocalePath(locale, game.slug)}>
+              <span class="game-card-icon" aria-hidden="true" set:html={GAME_ICONS[game.slug]} />
+              <span class="game-card-body">
+                <span class="game-card-title">{game.readMeta(locale, "title")}</span>
+                <span class="game-card-text">{game.readMeta(locale, "tagline")}</span>
+                <span class="game-card-done" data-done-game={game.storageId} hidden>
+                  <span aria-hidden="true">✓</span> {t("site.home.done")}
+                </span>
+              </span>
+              <span class="game-card-cta">{t("site.home.play")}</span>
+            </a>
+            <button
+              type="button"
+              class="fav-toggle"
+              data-fav-slug={game.slug}
+              data-label-add={t("site.fav.addGame", { game: game.readMeta(locale, "title") })}
+              data-label-remove={t("site.fav.removeGame", { game: game.readMeta(locale, "title") })}
+              aria-label={t("site.fav.addGame", { game: game.readMeta(locale, "title") })}
+              aria-pressed="false"
+              hidden
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                <path d={STAR_PATH} />
+              </svg>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>
+
+<script>
+  import { initFavourites } from "./favouritesDom";
+  initFavourites();
+</script>

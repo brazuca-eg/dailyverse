@@ -1,4 +1,5 @@
 import { scoreWord } from "./analysis";
+import { t } from "./messages";
 import { hasReachedWinRank } from "./ranks";
 import { MIN_WORD_LENGTH } from "./words";
 import type { TrailPuzzle } from "./puzzle";
@@ -100,18 +101,23 @@ export function listMissedWords(puzzle: TrailPuzzle, found: readonly string[]): 
   return puzzle.words.filter((word) => !found.includes(word));
 }
 
-const REJECTION_MESSAGES: Record<RejectionReason, string> = {
-  "too-short": "Too short",
-  "bad-letters": "Bad letters",
-  "missing-centre": "Missing centre letter",
-  "already-found": "Already found",
-  "not-in-list": "Not in word list",
-};
-
 export function describeRejection(reason: RejectionReason): string {
-  return REJECTION_MESSAGES[reason];
+  switch (reason) {
+    case "too-short":
+      return t("words.notice.tooShort");
+    case "bad-letters":
+      return t("words.notice.badLetters");
+    case "missing-centre":
+      return t("words.notice.missingCentre");
+    case "already-found":
+      return t("words.notice.alreadyFound");
+    case "not-in-list":
+      return t("words.notice.notInList");
+  }
 }
 
 export function describeAcceptance(result: { points: number; isPangram: boolean }): string {
-  return result.isPangram ? `Pangram! +${result.points}` : `+${result.points}`;
+  return result.isPangram
+    ? t("words.notice.pangram", { points: result.points })
+    : t("words.notice.accepted", { points: result.points });
 }

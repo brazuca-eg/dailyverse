@@ -2,6 +2,7 @@ import { useRef, useState, type CSSProperties, type KeyboardEvent, type PointerE
 import { GRASS, TENT, type Analysis, type LineStatus } from "./game";
 import { GrassPiece, TentPiece, TreePiece } from "./Pieces";
 import { toIndex } from "./rules";
+import { tentsMessages } from "./messages";
 import type { TentsPuzzle } from "./types";
 import "./Board.css";
 
@@ -22,11 +23,10 @@ interface Drag {
 }
 
 const LINE_SYMBOLS: Readonly<Record<LineStatus, string>> = { under: "", met: "✓", over: "!" };
-const LINE_WORDS: Readonly<Record<LineStatus, string>> = {
-  under: "needs more",
-  met: "done",
-  over: "too many",
-};
+
+function describeLine(status: LineStatus): string {
+  return tentsMessages(`tents.line.status.${status}`);
+}
 
 const ARROW_STEPS: Readonly<Record<string, readonly [number, number]>> = {
   ArrowLeft: [0, -1],
@@ -57,8 +57,8 @@ function readCellKind(isTree: boolean, mark: number): CellKind {
 }
 
 function describeCell(kind: CellKind, isAnswer: boolean, isClash: boolean): string {
-  const base = isAnswer ? "tent (answer)" : kind;
-  return isClash ? `${base}, conflict` : base;
+  const base = isAnswer ? tentsMessages("tents.cell.answer") : tentsMessages(`tents.cell.${kind}`);
+  return isClash ? tentsMessages("tents.cell.conflict", { base }) : base;
 }
 
 function LineHeader({
@@ -76,7 +76,11 @@ function LineHeader({
     <th
       scope={scope}
       className={`line line-${status}`}
-      aria-label={`${label}: ${target} ${target === 1 ? "tent" : "tents"}, ${LINE_WORDS[status]}`}
+      aria-label={tentsMessages("tents.line.label", {
+        label,
+        count: target,
+        status: describeLine(status),
+      })}
     >
       <span aria-hidden="true">
         {target}
@@ -165,7 +169,7 @@ export function Board({
     <table
       className="board"
       role="grid"
-      aria-label={`Tents and trees board, ${size} by ${size}`}
+      aria-label={tentsMessages("tents.board.label", { size })}
       style={{ "--size": size } as CSSProperties}
       onKeyDown={handleKeyDown}
       onPointerDown={handlePointerDown}
@@ -182,7 +186,7 @@ export function Board({
             <LineHeader
               key={col}
               scope="col"
-              label={`Column ${col + 1}`}
+              label={tentsMessages("tents.line.col", { n: col + 1 })}
               target={target}
               status={analysis.cols[col]}
             />
@@ -194,7 +198,7 @@ export function Board({
           <tr key={row}>
             <LineHeader
               scope="row"
-              label={`Row ${row + 1}`}
+              label={tentsMessages("tents.line.row", { n: row + 1 })}
               target={target}
               status={analysis.rows[row]}
             />
@@ -222,7 +226,11 @@ export function Board({
                       .filter(Boolean)
                       .join(" ")}
                     aria-disabled={isTree || undefined}
-                    aria-label={`Row ${row + 1}, column ${col + 1}, ${describeCell(kind, isAnswer, isClash)}`}
+                    aria-label={tentsMessages("tents.cell.label", {
+                      row: row + 1,
+                      col: col + 1,
+                      description: describeCell(kind, isAnswer, isClash),
+                    })}
                   >
                     {isTree && <TreePiece />}
                     {!isTree && (marks[index] === TENT || isAnswer) && <TentPiece />}

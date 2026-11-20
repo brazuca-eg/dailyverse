@@ -1,3 +1,4 @@
+import { t } from "./messages";
 import "./Honeycomb.css";
 
 interface HoneycombProps {
@@ -11,7 +12,7 @@ const OUTER_POSITIONS = ["top", "upper-right", "lower-right", "bottom", "lower-l
 
 export function Honeycomb({ centre, outer, disabled = false, onLetter }: HoneycombProps) {
   return (
-    <div className="honeycomb" role="group" aria-label="Letters">
+    <div className="honeycomb" role="group" aria-label={t("words.honeycomb.label")}>
       {outer.map((letter, index) => (
         <button
           key={letter}
@@ -28,7 +29,7 @@ export function Honeycomb({ centre, outer, disabled = false, onLetter }: Honeyco
         type="button"
         className="hex hex-centre"
         disabled={disabled}
-        aria-label={`${centre}, centre letter`}
+        aria-label={t("words.honeycomb.centre", { letter: centre })}
         onClick={() => onLetter(centre)}
       >
         <span aria-hidden="true">{centre}</span>

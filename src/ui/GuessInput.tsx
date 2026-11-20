@@ -1,9 +1,14 @@
 import { useId, useRef, useState, type KeyboardEvent, type SubmitEvent } from "react";
+import { readCountryName } from "../core/countryNames";
+import { isTouchDevice } from "../core/device";
 import { findCountryByName, searchCountries } from "../core/search";
 import type { Country } from "../core/types";
 import { SearchIcon } from "./icons";
+import { uiMessages as t } from "./messages";
 import { buildOptionId, SuggestionList } from "./SuggestionList";
 import "./GuessInput.css";
+
+const KEYBOARD_DELAY_MS = 300;
 
 interface GuessInputProps {
   countries: readonly Country[];
@@ -11,12 +16,6 @@ interface GuessInputProps {
   onSubmitGuess: (country: Country) => void;
   showFlags?: boolean;
 }
-
-const ERROR_MESSAGES = {
-  empty: "Type a country to guess.",
-  unknown: "Pick a country from the list.",
-  duplicate: "You already guessed that one.",
-} as const;
 
 export function GuessInput({
   countries,
@@ -44,7 +43,7 @@ export function GuessInput({
 
   function selectCountry(country: Country) {
     setSelected(country);
-    setQuery(country.name);
+    setQuery(readCountryName(country));
     setError(null);
   }
 
@@ -55,13 +54,17 @@ export function GuessInput({
   function trySubmit() {
     const target = findTypedCountry();
     if (!target) {
-      setError(query.trim() === "" ? ERROR_MESSAGES.empty : ERROR_MESSAGES.unknown);
+      setError(query.trim() === "" ? t("ui.input.error.empty") : t("ui.input.error.unknown"));
     } else if (excludedCodes.includes(target.code)) {
-      setError(ERROR_MESSAGES.duplicate);
+      setError(t("ui.input.error.duplicate"));
     } else {
       onSubmitGuess(target);
       updateQuery("");
-      inputRef.current?.focus();
+      if (isTouchDevice()) {
+        inputRef.current?.blur();
+      } else {
+        inputRef.current?.focus();
+      }
     }
   }
 
@@ -93,6 +96,15 @@ export function GuessInput({
     }
   }
 
+  function handleFocus() {
+    if (isTouchDevice()) {
+      window.setTimeout(
+        () => inputRef.current?.scrollIntoView({ block: "center" }),
+        KEYBOARD_DELAY_MS,
+      );
+    }
+  }
+
   function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     trySubmit();
@@ -107,7 +119,7 @@ export function GuessInput({
             ref={inputRef}
             type="text"
             role="combobox"
-            aria-label="Guess a country"
+            aria-label={t("ui.input.label")}
             aria-expanded={isOpen}
             aria-controls={listId}
             aria-autocomplete="list"
@@ -115,13 +127,15 @@ export function GuessInput({
             aria-invalid={error !== null}
             aria-describedby={error ? errorId : undefined}
             autoComplete="off"
+            autoCorrect="off"
             autoCapitalize="words"
             enterKeyHint="go"
             spellCheck={false}
-            placeholder="Type a country"
+            placeholder={t("ui.input.placeholder")}
             value={query}
             onChange={(event) => updateQuery(event.target.value)}
             onKeyDown={handleKeyDown}
+            onFocus={handleFocus}
           />
           {isOpen && (
             <SuggestionList
@@ -134,7 +148,7 @@ export function GuessInput({
           )}
         </div>
         <button type="submit" className="button button-primary">
-          Guess
+          {t("ui.input.submit")}
         </button>
       </div>
       {error && (

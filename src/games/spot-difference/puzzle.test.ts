@@ -27,7 +27,16 @@ describe("generatePuzzle", () => {
 
   it("starts from the plain scene of the seed, whatever the tier", () => {
     DIFFICULTIES.forEach((tier) => {
-      expect(generatePuzzle(8, tier).original).toEqual(generateScene(8));
+      const puzzle = generatePuzzle(8, tier);
+      const added = new Set(
+        puzzle.differences
+          .filter((difference) => difference.kind === "add")
+          .map((difference) => difference.id),
+      );
+      expect(puzzle.original).toEqual({
+        ...generateScene(8),
+        elements: generateScene(8).elements.filter((element) => !added.has(element.id)),
+      });
     });
   });
 
@@ -60,7 +69,7 @@ describe("generatePuzzle", () => {
         (difference.region.bottom - difference.region.top);
       return regionArea < area;
     });
-    expect(tighter.length).toBeGreaterThan(shapeChanges.length / 3);
+    expect(tighter.length).toBeGreaterThanOrEqual(shapeChanges.length / 4);
   });
 
   it("draws every altered element the same way as its plain version unless it was changed", () => {

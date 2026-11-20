@@ -1,17 +1,20 @@
 import { describe, expect, it } from "vitest";
 import { createRandom } from "../../core/random";
-import { DIFFICULTIES } from "../../core/difficulty";
-import { alterElement, ELIGIBLE_KINDS, planDifferences } from "./differences";
+import { DIFFICULTIES, type Difficulty } from "../../core/difficulty";
+import { alterElement, ELIGIBLE_KINDS, planDifferences, type DifferencePlan } from "./differences";
 import { TIER_PROFILES } from "./difficulty";
 import { drawElement, TENT_COLOURS, VARIANT_COUNTS } from "./elements";
 import { boundsOverlap, measureElement } from "./geometry";
 import { CROWD_BY_LAYER, SCENE_HEIGHT, SCENE_WIDTH } from "./recipes";
+import { MOOD_SHADE_BOOST, PALETTES } from "./palettes";
 import { generateScene } from "./scene";
 import {
   DIFFERENCE_KINDS,
   type DifferenceKind,
   type ElementKind,
+  type Scene,
   type SceneElement,
+  type SceneMood,
 } from "./types";
 
 const SEEDS = Array.from({ length: 30 }, (_, seed) => seed);
@@ -202,6 +205,11 @@ describe("planDifferences", () => {
         const after = plan.altered.elements.find((candidate) => candidate.id === difference.id);
         if (difference.kind === "remove") {
           expect(after).toBeUndefined();
+        } else if (difference.kind === "add") {
+          expect(after).toEqual(before);
+          expect(plan.original.elements.some((candidate) => candidate.id === difference.id)).toBe(
+            false,
+          );
         } else {
           expect(after).not.toEqual(before);
         }
@@ -293,3 +301,162 @@ describe("planDifferences", () => {
     expect(planDifferences(empty, "hard", createRandom(1))).toBeNull();
   });
 });
+
+function planWithRetries(scene: Scene, tier: Difficulty, attempt = 0): DifferencePlan | null {
+  const plan = planDifferences(scene, tier, createRandom(scene.seed * 101 + attempt + 1));
+  return plan ?? (attempt < 39 ? planWithRetries(scene, tier, attempt + 1) : null);
+}
+
+describe("planDifferences in every place and at every time of day", () => {
+  const scenes = Array.from({ length: 80 }, (_, seed) => generateScene(seed));
+
+  it("finds five differences for every place and time of day, at every tier, within a few tries", () => {
+    scenes.forEach((scene) => {
+      DIFFICULTIES.forEach((tier) => {
+        const plan = planWithRetries(scene, tier);
+        expect(plan?.differences ?? []).toHaveLength(5);
+      });
+    });
+  });
+
+  it("uses the colours of the place to find what changed in a tree that changes colour", () => {
+    const autumn = { ...generateScene(1), theme: "autumn" as const, mood: "day" as const };
+    const tree = element("roundTree", { variant: 0 });
+    const scene = { ...autumn, elements: [tree] };
+    const colourOf = (variant: number) =>
+      drawElement({ ...tree, variant }, { palette: PALETTES.autumn, mood: "day" }).map(
+        (part) => part.fill,
+      );
+    expect(colourOf(0)[1]).not.toBe(colourOf(1)[1]);
+    expect(scene.elements).toHaveLength(1);
+  });
+
+  it("makes the colour steps bigger where the light hides them", () => {
+    const steps = (mood: SceneMood) =>
+      scenes
+        .filter((scene) => scene.mood === mood)
+        .flatMap((scene) => {
+          const plan = planDifferences(scene, "hard", createRandom(scene.seed + 5));
+          return (plan?.differences ?? [])
+            .filter((difference) => difference.kind === "reshade")
+            .map((difference) => {
+              const before = scene.elements.find((candidate) => candidate.id === difference.id);
+              const after = plan?.altered.elements.find(
+                (candidate) => candidate.id === difference.id,
+              );
+              return Math.abs((after?.shade ?? 0) - (before?.shade ?? 0));
+            });
+        });
+    expect(new Set(steps("day"))).toEqual(new Set([TIER_PROFILES.hard.shadeSteps]));
+    const night = Math.round(TIER_PROFILES.hard.shadeSteps * MOOD_SHADE_BOOST.night);
+    expect(steps("night").length).toBeGreaterThan(0);
+    expect(new Set(steps("night"))).toEqual(new Set([night]));
+  });
+
+  it("does not ask the player to spot a tiny flower changing shape in the dark", () => {
+    scenes
+      .filter((scene) => scene.mood === "night")
+      .forEach((scene) => {
+        const plan = planDifferences(scene, "hard", createRandom(scene.seed + 3));
+        const flowerShapes = (plan?.differences ?? []).filter((difference) => {
+          const original = scene.elements.find((candidate) => candidate.id === difference.id);
+          return original?.kind === "flower" && difference.kind === "revariant";
+        });
+        expect(flowerShapes).toEqual([]);
+      });
+  });
+
+  it("only offers a resize that is big enough to see in the light of the scene", () => {
+    scenes.forEach((scene) => {
+      const plan = planDifferences(scene, "hard", createRandom(scene.seed + 9));
+      (plan?.differences ?? [])
+        .filter((difference) => difference.kind === "resize")
+        .forEach((difference) => {
+          const original = scene.elements.find((candidate) => candidate.id === difference.id);
+          const bounds = original ? measureElement(original) : null;
+          const area = bounds ? (bounds.right - bounds.left) * (bounds.bottom - bounds.top) : 0;
+          expect(
+            (area * TIER_PROFILES.hard.resizeShare[0]) / MOOD_SHADE_BOOST[scene.mood],
+          ).toBeGreaterThanOrEqual(30);
+        });
+    });
+  });
+});
+
+describe("the new kinds of difference", () => {
+  const deer = element("deer", { x: 300, y: 480 });
+
+  it("mirrors an element, and mirrors it back the second time", () => {
+    const once = alterElement(deer, "mirror", hard, createRandom(1));
+    expect(once?.flip).toBe(true);
+    const twice = alterElement(once as SceneElement, "mirror", hard, createRandom(1));
+    expect(twice?.flip).toBe(false);
+    expect(once).toEqual({ ...deer, flip: true });
+  });
+
+  it("keeps the place and size of a mirrored element", () => {
+    const mirrored = alterElement(deer, "mirror", hard, createRandom(1)) as SceneElement;
+    const [before, after] = [measureElement(deer), measureElement(mirrored)];
+    expect((before.left + before.right) / 2).toBeCloseTo(
+      300 + (300 - (after.left + after.right) / 2),
+      5,
+    );
+    expect(after.bottom).toBeCloseTo(before.bottom, 5);
+    expect(after.right - after.left).toBeCloseTo(before.right - before.left, 5);
+  });
+
+  it("adds an element by taking it out of the other picture", () => {
+    const withAdd = scenesWithAdd();
+    expect(withAdd.length).toBeGreaterThan(0);
+    withAdd.forEach(({ scene, plan }) => {
+      plan.differences
+        .filter((difference) => difference.kind === "add")
+        .forEach((difference) => {
+          expect(scene.elements.some((candidate) => candidate.id === difference.id)).toBe(true);
+          expect(plan.original.elements.some((candidate) => candidate.id === difference.id)).toBe(
+            false,
+          );
+          expect(plan.altered.elements.some((candidate) => candidate.id === difference.id)).toBe(
+            true,
+          );
+        });
+    });
+  });
+
+  it("leaves the other pictures of a puzzle whole when nothing is added", () => {
+    const scene = generateScene(3);
+    const plan = planWithRetries(scene, "easy");
+    const added = (plan?.differences ?? []).filter((difference) => difference.kind === "add");
+    expect(plan?.original.elements).toHaveLength(scene.elements.length - added.length);
+  });
+
+  it("marks an added or mirrored element with a region that covers it", () => {
+    scenesWithAdd().forEach(({ scene, plan }) => {
+      plan.differences
+        .filter((difference) => difference.kind === "add" || difference.kind === "mirror")
+        .forEach((difference) => {
+          const target = scene.elements.find((candidate) => candidate.id === difference.id);
+          const bounds = target ? measureElement(target) : difference.region;
+          expect(difference.region.left).toBeLessThanOrEqual(bounds.left);
+          expect(difference.region.right).toBeGreaterThanOrEqual(bounds.right);
+        });
+    });
+  });
+
+  it("has the same kinds to add as to remove, and only asymmetric kinds to mirror", () => {
+    expect(ELIGIBLE_KINDS.add).toEqual(ELIGIBLE_KINDS.remove);
+    ["campfire", "sun", "mountain", "pine", "flower"].forEach((kind) => {
+      expect(ELIGIBLE_KINDS.mirror).not.toContain(kind);
+    });
+  });
+});
+
+function scenesWithAdd() {
+  return Array.from({ length: 40 }, (_, seed) => generateScene(seed))
+    .map((scene) => ({ scene, plan: planWithRetries(scene, "medium") }))
+    .filter(
+      (entry): entry is { scene: Scene; plan: DifferencePlan } =>
+        entry.plan !== null &&
+        entry.plan.differences.some((difference) => difference.kind === "add"),
+    );
+}

@@ -4,44 +4,79 @@ import "../styles/base.css";
 import "../styles/animations.css";
 import "../styles/primitives.css";
 import "./BaseLayout.css";
+import { DEFAULT_LOCALE, buildLocalePath, type Locale } from "../i18n/locales";
+import { siteMessages } from "../i18n/site";
+import { SiteMenu } from "../site/SiteMenu";
+import { THEME_INIT_SCRIPT } from "../theme/theme";
+import { buildAlternateLinks, buildSocialTags } from "./socialMeta";
 
 interface Props {
   title: string;
   description?: string;
   wide?: boolean;
+  game?: boolean;
+  locale?: Locale;
 }
 
 const {
   title,
-  description = "Small daily games. A new puzzle every day.",
+  description = siteMessages.in(Astro.props.locale ?? DEFAULT_LOCALE)("site.home.description"),
   wide = false,
+  game = false,
+  locale = DEFAULT_LOCALE,
 } = Astro.props;
+
+const site = Astro.site ?? new URL(Astro.url.origin);
+const socialTags = buildSocialTags({
+  site,
+  pathname: Astro.url.pathname,
+  locale,
+  title,
+  description,
+});
+const alternates = buildAlternateLinks(site, Astro.url.pathname);
 ---
 
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#2a7a58" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#1e4a3a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#2a7a58" />
+    <script is:inline set:html={THEME_INIT_SCRIPT} />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <link rel="canonical" href={new URL(Astro.url.pathname, site).href} />
+    {alternates.map((link) => (
+      <link rel="alternate" hreflang={link.hreflang} href={link.href} />
+    ))}
+    {socialTags.map((tag) => (
+      <meta property={tag.property} name={tag.name} content={tag.content} />
+    ))}
   </head>
   <body>
     <header class="hero">
-      <div class="hero-sun" aria-hidden="true"></div>
-      <div class:list={["hero-inner", { "hero-inner-wide": wide }]}>
-        <a href="/" class="brand" aria-label="Dailyverse home">
-          <svg class="brand-mark" viewBox="0 0 32 32" width="34" height="34" aria-hidden="true">
-            <rect width="32" height="32" rx="10" fill="#fbf6ec"></rect>
-            <circle cx="23" cy="10" r="3.2" fill="#f2b632"></circle>
-            <path d="M4 25 13 10l5 8 3-4 7 11z" fill="#1f5f46"></path>
-          </svg>
-          <span class="brand-name">Dailyverse</span>
-        </a>
+      <div class:list={["hero-inner", { "hero-inner-wide": wide, "hero-inner-game": game }]}>
+        <div class="hero-top">
+          <a
+            href={buildLocalePath(locale)}
+            class="brand"
+            aria-label={siteMessages.in(locale)("site.brand.label")}
+          >
+            <svg class="brand-mark" viewBox="0 0 32 32" width="34" height="34" aria-hidden="true">
+              <rect width="32" height="32" rx="10" fill="#fbf6ec"></rect>
+              <circle cx="23" cy="10" r="3.2" fill="#f2b632"></circle>
+              <path d="M4 25 13 10l5 8 3-4 7 11z" fill="#1f5f46"></path>
+            </svg>
+            <span class="brand-name">Dailyverse</span>
+          </a>
+          <div class="hero-sun" aria-hidden="true"></div>
+          <SiteMenu client:only="react" />
+        </div>
         <slot name="hero" />
       </div>
       <svg class="hero-hills" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
@@ -56,7 +91,7 @@ const {
         <path d="M0 104 C200 80 340 112 560 96 S920 74 1200 102 V120 H0 Z" fill="var(--bg)"></path>
       </svg>
     </header>
-    <main class:list={["page", { "page-wide": wide }]}>
+    <main class:list={["page", { "page-wide": wide, "page-game": game }]}>
       <slot />
     </main>
   </body>

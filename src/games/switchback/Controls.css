@@ -1,12 +1,12 @@
 .sw-controls {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
   gap: 8px;
 }
 
 .sw-control {
   min-height: 44px;
-  padding: 0 12px;
+  padding: 6px 8px;
   font-size: 0.95rem;
 }
 

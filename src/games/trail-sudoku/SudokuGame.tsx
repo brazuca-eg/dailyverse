@@ -7,7 +7,8 @@ import { GameToolbar } from "../../ui/GameToolbar";
 import { ResultPanel } from "../../ui/ResultPanel";
 import { Board } from "./Board";
 import { countDigit, calculateScore, findConflicts, MAX_SCORE, readValues } from "./game";
-import { TRAIL_SUDOKU_RULE_STEPS } from "./helpText";
+import { buildRuleSteps } from "./helpText";
+import { sudokuMessages as t } from "./messages";
 import { NumberPad } from "./NumberPad";
 import { trailSudokuStorage } from "./persistence";
 import { findDailySudokuRound } from "./daily";
@@ -44,7 +45,7 @@ function SudokuPlay({ round, dayIndex }: PlayProps) {
           ⏱ {formatElapsed(state.elapsedSeconds)}
         </span>
         <span className="sudoku-size">
-          {puzzle.size}x{puzzle.size} · {round.tier}
+          {t("sudoku.header.size", { size: puzzle.size, tier: t(`sudoku.tier.${round.tier}`) })}
         </span>
         <GameToolbar onShowHelp={helpDialog.open} onShowStats={() => setIsStatsOpen(true)} />
       </div>
@@ -85,17 +86,17 @@ function SudokuPlay({ round, dayIndex }: PlayProps) {
         maxScore={MAX_SCORE}
         summary={
           state.status === "won"
-            ? `Solved in ${formatElapsed(state.elapsedSeconds)}`
-            : "Here is the solution"
+            ? t("sudoku.result.won", { time: formatElapsed(state.elapsedSeconds) })
+            : t("sudoku.result.lost")
         }
-        lostEyebrow="Gave up"
+        lostEyebrow={t("sudoku.result.eyebrow")}
         shareText={buildShareText(state, puzzle.size, dayIndex + 1, shareUrl)}
       />
       <GameDialogs
         helpDialog={helpDialog}
         isStatsOpen={isStatsOpen}
         onCloseStats={() => setIsStatsOpen(false)}
-        ruleSteps={TRAIL_SUDOKU_RULE_STEPS}
+        ruleSteps={buildRuleSteps()}
         stats={session.stats}
         dayIndex={dayIndex}
       />
@@ -107,7 +108,7 @@ export function SudokuGame() {
   const dayIndex = useDayIndex(SUDOKU_LAUNCH_DATE);
   const round = useMemo(() => findDailySudokuRound(dayIndex), [dayIndex]);
   if (!round) {
-    return <p>Today's puzzle could not be loaded.</p>;
+    return <p>{t("sudoku.error.load")}</p>;
   }
   return <SudokuPlay round={round} dayIndex={dayIndex} />;
 }

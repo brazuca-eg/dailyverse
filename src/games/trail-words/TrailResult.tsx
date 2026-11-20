@@ -3,7 +3,8 @@ import { Confetti } from "../../ui/Confetti";
 import { NextPuzzleCountdown } from "../../ui/NextPuzzleCountdown";
 import { ShareButton } from "../../ui/ShareButton";
 import { calculateScore, listMissedWords, type TrailStatus } from "./game";
-import { findRankProgress } from "./ranks";
+import { t } from "./messages";
+import { findRankProgress, readRankLabel } from "./ranks";
 import type { TrailPuzzle } from "./puzzle";
 import "./TrailResult.css";
 
@@ -25,13 +26,17 @@ export function TrailResult({ puzzle, found, status, ended, shareText }: TrailRe
   return (
     <section className={won ? "trail-result trail-won" : "trail-result"} aria-live="polite">
       {won && !ended && <Confetti />}
-      <p className="trail-eyebrow">{won ? `You reached ${rank}` : "Game ended"}</p>
-      <h2 className="trail-title">{won ? "Well climbed!" : "Better luck tomorrow"}</h2>
+      <p className="trail-eyebrow">
+        {won ? t("words.result.reached", { rank: readRankLabel(rank) }) : t("words.result.ended")}
+      </p>
+      <h2 className="trail-title">{won ? t("words.result.won") : t("words.result.lost")}</h2>
       <pre className="share-preview">{shareText}</pre>
       <ShareButton text={shareText} />
       {ended && missed.length > 0 && (
         <div className="trail-missed">
-          <h3 className="trail-missed-title">Words you missed ({missed.length})</h3>
+          <h3 className="trail-missed-title">
+            {t("words.result.missed", { total: missed.length })}
+          </h3>
           <ul className="trail-missed-list">
             {missed.map((word) => (
               <li

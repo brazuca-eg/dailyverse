@@ -62,3 +62,20 @@ export function shadeColour(hex: string, shade: number): string {
   const lightness = clamp(hsl.lightness + shade * LIGHTNESS_PER_SHADE, 0, 1);
   return toHex(fromHsl({ ...hsl, lightness }));
 }
+
+export function mixColours(first: string, second: string, share: number): string {
+  const [one, two] = [parseHex(first), parseHex(second)];
+  return toHex(
+    one.map((channel, index) => channel + (two[index] - channel) * share) as [
+      number,
+      number,
+      number,
+    ],
+  );
+}
+
+export function toGreyColour(hex: string): string {
+  const [red, green, blue] = parseHex(hex);
+  const grey = 0.299 * red + 0.587 * green + 0.114 * blue;
+  return toHex([grey, grey, grey]);
+}

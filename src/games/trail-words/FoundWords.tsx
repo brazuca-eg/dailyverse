@@ -1,3 +1,4 @@
+import { t } from "./messages";
 import type { TrailPuzzle } from "./puzzle";
 import "./FoundWords.css";
 
@@ -12,12 +13,10 @@ export function FoundWords({ puzzle, found }: FoundWordsProps) {
   const sorted = [...found].sort();
   const recent = found.slice(-PREVIEW_COUNT).reverse();
   return (
-    <section className="found" aria-label="Found words">
+    <section className="found" aria-label={t("words.found.label")}>
       <details>
         <summary className="found-summary">
-          <span className="found-count">
-            {found.length} {found.length === 1 ? "word" : "words"} found
-          </span>
+          <span className="found-count">{t("words.found.count", { count: found.length })}</span>
           <span className="found-preview" aria-hidden="true">
             {recent.join(" · ")}
           </span>

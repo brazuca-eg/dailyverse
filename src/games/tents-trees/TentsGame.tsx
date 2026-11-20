@@ -11,7 +11,8 @@ import { Controls } from "./Controls";
 import { findDailyRound } from "./daily";
 import { analyse, calculateScore, MAX_SCORE, readTents } from "./game";
 import { tentsTreesStorage } from "./persistence";
-import { TENTS_TREES_RULE_STEPS } from "./helpText";
+import { buildRuleSteps } from "./helpText";
+import { tentsMessages } from "./messages";
 import { buildShareText } from "./share";
 import type { TentsRound } from "./types";
 import { useTentsSession } from "./useTentsSession";
@@ -44,7 +45,7 @@ function TentsPlay({ round, dayIndex }: PlayProps) {
         guessCount={Math.min(placed, puzzle.trees.length)}
         status={state.status}
         total={puzzle.trees.length}
-        label={`${placed} of ${puzzle.trees.length} tents placed`}
+        label={tentsMessages("tents.progress", { placed, total: puzzle.trees.length })}
         showCurrent={false}
         actions={
           <>
@@ -83,17 +84,17 @@ function TentsPlay({ round, dayIndex }: PlayProps) {
         maxScore={MAX_SCORE}
         summary={
           state.status === "won"
-            ? `You pitched all ${puzzle.trees.length} tents`
-            : "Here is where the tents were"
+            ? tentsMessages("tents.summary.won", { total: puzzle.trees.length })
+            : tentsMessages("tents.summary.lost")
         }
-        lostEyebrow="Gave up"
+        lostEyebrow={tentsMessages("tents.lostEyebrow")}
         shareText={buildShareText(state, puzzle.size, dayIndex + 1, shareUrl)}
       />
       <GameDialogs
         helpDialog={helpDialog}
         isStatsOpen={isStatsOpen}
         onCloseStats={() => setIsStatsOpen(false)}
-        ruleSteps={TENTS_TREES_RULE_STEPS}
+        ruleSteps={buildRuleSteps()}
         stats={session.stats}
         dayIndex={dayIndex}
       />
@@ -105,7 +106,7 @@ export function TentsGame({ launchDate }: TentsGameProps) {
   const dayIndex = useDayIndex(launchDate);
   const round = useMemo(() => findDailyRound(dayIndex), [dayIndex]);
   if (!round) {
-    return <p>Today's puzzle could not be loaded.</p>;
+    return <p>{tentsMessages("tents.error.load")}</p>;
   }
   return <TentsPlay round={round} dayIndex={dayIndex} />;
 }

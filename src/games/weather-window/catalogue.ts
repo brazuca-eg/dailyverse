@@ -1,3 +1,5 @@
+import { t } from "./messages";
+
 export interface Named {
   id: string;
   label: string;
@@ -43,6 +45,54 @@ export function readFit(trip: number, weather: number): number {
   return FIT[trip][weather];
 }
 
+const WEATHER_KEYS = [
+  "weather.name.sunny",
+  "weather.name.cloudy",
+  "weather.name.rainy",
+  "weather.name.windy",
+  "weather.name.snowy",
+] as const;
+
+const TRIP_KEYS = [
+  "weather.trip.hike",
+  "weather.trip.kayak",
+  "weather.trip.camp",
+  "weather.trip.climb",
+  "weather.trip.ski",
+] as const;
+
+const DAY_KEYS = [
+  "weather.day.mon",
+  "weather.day.tue",
+  "weather.day.wed",
+  "weather.day.thu",
+  "weather.day.fri",
+  "weather.day.sat",
+  "weather.day.sun",
+] as const;
+
+const SHORT_DAY_KEYS = [
+  "weather.short.mon",
+  "weather.short.tue",
+  "weather.short.wed",
+  "weather.short.thu",
+  "weather.short.fri",
+  "weather.short.sat",
+  "weather.short.sun",
+] as const;
+
+export function readWeatherLabel(weather: number): string {
+  return t(WEATHER_KEYS[weather]);
+}
+
+export function readTripLabel(trip: number): string {
+  return t(TRIP_KEYS[trip]);
+}
+
+export function readDayName(day: number): string {
+  return t(DAY_KEYS[day]);
+}
+
 export function readShortDayName(day: number): string {
-  return DAY_NAMES[day].label.slice(0, 3);
+  return t(SHORT_DAY_KEYS[day]);
 }

@@ -1,5 +1,6 @@
 import type { Country } from "../../core/types";
 import { DailyGame } from "./DailyGame";
+import { mysteryMessages as t } from "./messages";
 import type { MysteryPlacePuzzle } from "./types";
 import { useTodaysPuzzle } from "./useTodaysPuzzle";
 
@@ -12,7 +13,7 @@ interface MysteryPlaceGameProps {
 export function MysteryPlaceGame({ puzzles, countries, launchDate }: MysteryPlaceGameProps) {
   const { dayIndex, puzzle, answer } = useTodaysPuzzle(puzzles, countries, launchDate);
   if (!answer) {
-    return <p>Today's puzzle could not be loaded.</p>;
+    return <p>{t("mystery.loadError")}</p>;
   }
   return <DailyGame puzzle={puzzle} answer={answer} countries={countries} dayIndex={dayIndex} />;
 }

@@ -1,5 +1,6 @@
 import { MAX_GUESSES } from "../../core/guessing";
 import { findFlagUrl } from "./flagImages";
+import { flagMessages as t } from "./messages";
 import { REVEAL_STAGES, type RevealStage } from "./game";
 import type { FlagFocus } from "./types";
 import { resolveFlagViewport } from "./viewport";
@@ -25,7 +26,7 @@ export function FlagViewer({ code, focus, stage }: FlagViewerProps) {
     <div
       className={`flag-viewer flag-viewer-${stage}`}
       role="img"
-      aria-label={`Mystery flag, view ${hint} of ${MAX_GUESSES}`}
+      aria-label={t("flag.viewer.label", { view: hint, max: MAX_GUESSES })}
     >
       {url && (
         <img

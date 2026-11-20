@@ -1,3 +1,4 @@
+import { t } from "./messages";
 import type { Toast } from "./useTrailSession";
 import "./WordInput.css";
 
@@ -18,7 +19,7 @@ export function WordInput({ input, centre, letters, toast }: WordInputProps) {
       </p>
       <p
         className={isRejected ? "typed typed-shake" : "typed"}
-        aria-label={input === "" ? "Your word is empty" : `Your word: ${input}`}
+        aria-label={input === "" ? t("words.input.empty") : t("words.input.word", { word: input })}
         key={`typed-${isRejected ? toast.id : 0}`}
       >
         {[...input].map((letter, index) => (

@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { useArmedAction } from "../../hooks/useArmedAction";
+import { sudokuMessages as t } from "./messages";
 import "./NumberPad.css";
 
 interface NumberPadProps {
@@ -35,7 +36,7 @@ export function NumberPad({
       <div
         className="sudoku-digits"
         role="group"
-        aria-label="Numbers"
+        aria-label={t("sudoku.pad.numbers")}
         style={{ "--keys": size } as CSSProperties}
       >
         {Array.from({ length: size }, (_, index) => {
@@ -47,7 +48,7 @@ export function NumberPad({
               type="button"
               className="button button-secondary sudoku-digit-key"
               disabled={left <= 0}
-              aria-label={`${digit}, ${Math.max(left, 0)} left`}
+              aria-label={t("sudoku.pad.key", { digit, left: Math.max(left, 0) })}
               onClick={() => onDigit(digit)}
             >
               <span aria-hidden="true">{digit}</span>
@@ -65,10 +66,10 @@ export function NumberPad({
           aria-pressed={isNotesMode}
           onClick={onToggleNotes}
         >
-          Notes {isNotesMode ? "on" : "off"}
+          {isNotesMode ? t("sudoku.pad.notes.on") : t("sudoku.pad.notes.off")}
         </button>
         <button type="button" className="button button-secondary sudoku-action" onClick={onErase}>
-          Erase
+          {t("sudoku.pad.erase")}
         </button>
         <button
           type="button"
@@ -76,13 +77,13 @@ export function NumberPad({
           disabled={!canUndo}
           onClick={onUndo}
         >
-          Undo
+          {t("sudoku.pad.undo")}
         </button>
         <button type="button" className="button button-secondary sudoku-action" onClick={onCheck}>
-          Check
+          {t("sudoku.pad.check")}
         </button>
         <button type="button" className="button button-secondary sudoku-action" onClick={onHint}>
-          Hint
+          {t("sudoku.pad.hint")}
         </button>
         <button
           type="button"
@@ -90,7 +91,7 @@ export function NumberPad({
           aria-pressed={giveUp.isArmed}
           onClick={giveUp.trigger}
         >
-          {giveUp.isArmed ? "Tap again" : "Give up"}
+          {giveUp.isArmed ? t("sudoku.pad.tapAgain") : t("sudoku.pad.giveUp")}
         </button>
       </div>
     </div>

@@ -15,8 +15,9 @@ import {
   type TapOutcome,
 } from "./game";
 import { Lives } from "./Lives";
+import { spotMessages as t } from "./messages";
 import { spotDifferenceStorage } from "./persistence";
-import { SPOT_DIFFERENCE_RULE_STEPS } from "./rules";
+import { buildRuleSteps } from "./rules";
 import { SceneView } from "./SceneView";
 import { buildShareText } from "./share";
 import type { Puzzle } from "./types";
@@ -33,20 +34,26 @@ interface SpotRoundProps {
 }
 
 function announce(state: SpotState, outcome: TapOutcome | null): string {
-  const found = `${state.found.length} of ${DIFFERENCE_COUNT} found.`;
+  const progress = t("spot.announce.progress", {
+    found: state.found.length,
+    total: DIFFERENCE_COUNT,
+  });
   if (outcome === "found") {
-    return `Found a difference. ${found}`;
+    return t("spot.announce.found", { progress });
   }
   if (outcome === "missed") {
-    return `No difference there. ${countLivesLeft(state)} lives left. ${found}`;
+    return t("spot.announce.missed", {
+      lives: t("spot.lives.left", { count: countLivesLeft(state) }),
+      progress,
+    });
   }
   return "";
 }
 
 function summarise(state: SpotState): string {
   return state.found.length === DIFFERENCE_COUNT
-    ? `You found all ${DIFFERENCE_COUNT} differences`
-    : `You found ${state.found.length} of ${DIFFERENCE_COUNT} differences`;
+    ? t("spot.summary.all", { total: DIFFERENCE_COUNT })
+    : t("spot.summary.some", { found: state.found.length, total: DIFFERENCE_COUNT });
 }
 
 function SpotRound({ puzzle, dayIndex }: SpotRoundProps) {
@@ -96,7 +103,7 @@ function SpotRound({ puzzle, dayIndex }: SpotRoundProps) {
           guessCount={state.found.length}
           status={state.status}
           total={DIFFERENCE_COUNT}
-          label={`Found ${state.found.length} of ${DIFFERENCE_COUNT}`}
+          label={t("spot.progress.label", { found: state.found.length, total: DIFFERENCE_COUNT })}
           showCurrent={false}
           actions={
             <>
@@ -109,7 +116,7 @@ function SpotRound({ puzzle, dayIndex }: SpotRoundProps) {
       <div className="spot-scenes">
         <SceneView
           scene={puzzle.original}
-          label="First picture"
+          label={t("spot.scene.first")}
           frameRef={(frame) => {
             frames.current[0] = frame;
           }}
@@ -117,7 +124,7 @@ function SpotRound({ puzzle, dayIndex }: SpotRoundProps) {
         />
         <SceneView
           scene={puzzle.altered}
-          label="Second picture"
+          label={t("spot.scene.second")}
           frameRef={(frame) => {
             frames.current[1] = frame;
           }}
@@ -128,14 +135,14 @@ function SpotRound({ puzzle, dayIndex }: SpotRoundProps) {
         {announce(state, lastOutcome)}
       </p>
       <div className="spot-controls">
-        {!isOver && <p className="spot-hint">Tap a difference in either picture.</p>}
+        {!isOver && <p className="spot-hint">{t("spot.hint")}</p>}
         <button
           type="button"
           className="button button-secondary spot-zoom"
           aria-pressed={isZoomed}
           onClick={() => setIsZoomed(!isZoomed)}
         >
-          {isZoomed ? "Zoom out" : "Zoom in"}
+          {isZoomed ? t("spot.zoom.out") : t("spot.zoom.in")}
         </button>
       </div>
       <div className="spot-column">
@@ -144,7 +151,7 @@ function SpotRound({ puzzle, dayIndex }: SpotRoundProps) {
           score={calculateScore(state)}
           maxScore={DIFFERENCE_COUNT}
           summary={summarise(state)}
-          lostEyebrow="Out of lives"
+          lostEyebrow={t("spot.lost.eyebrow")}
           shareText={buildShareText(state, dayIndex + 1, shareUrl)}
         />
       </div>
@@ -152,7 +159,7 @@ function SpotRound({ puzzle, dayIndex }: SpotRoundProps) {
         helpDialog={helpDialog}
         isStatsOpen={isStatsOpen}
         onCloseStats={() => setIsStatsOpen(false)}
-        ruleSteps={SPOT_DIFFERENCE_RULE_STEPS}
+        ruleSteps={buildRuleSteps()}
         stats={stats}
         dayIndex={dayIndex}
       />
@@ -164,7 +171,7 @@ export function SpotGame({ launchDate }: SpotGameProps) {
   const dayIndex = useDayIndex(launchDate);
   const puzzle = useMemo(() => findDailyPuzzle(dayIndex), [dayIndex]);
   if (!puzzle) {
-    return <p>Today's puzzle could not be loaded.</p>;
+    return <p>{t("spot.load.error")}</p>;
   }
   return <SpotRound puzzle={puzzle} dayIndex={dayIndex} />;
 }

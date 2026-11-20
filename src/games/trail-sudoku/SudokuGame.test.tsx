@@ -79,6 +79,7 @@ describe("SudokuGame", () => {
 
   it("counts the seconds", () => {
     startGame();
+    enter(empties[1], 4);
     act(() => {
       vi.advanceTimersByTime(65_000);
     });
@@ -159,6 +160,7 @@ describe("SudokuGame", () => {
 
   it("wins when the grid is solved: 5 points, the time and a share button", () => {
     startGame();
+    enter(empties[1], wrongDigit(empties[1]));
     act(() => {
       vi.advanceTimersByTime(192_000);
     });

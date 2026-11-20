@@ -7,6 +7,7 @@ import {
 } from "react";
 import { countReachedMarks } from "./game";
 import { toCol, toRow } from "./grid";
+import { t } from "./messages";
 import type { SwitchbackPuzzle, Wall } from "./types";
 import type { Direction } from "./useSwitchbackSession";
 import "./Board.css";
@@ -46,31 +47,33 @@ function toPoints(size: number, cells: readonly number[]): string {
 function describeFences(puzzle: SwitchbackPuzzle, cell: number): string[] {
   const { size } = puzzle;
   const sides: [number, string][] = [
-    [cell - size, "above"],
-    [cell + 1, "right"],
-    [cell + size, "below"],
-    [cell - 1, "left"],
+    [cell - size, t("switch.fence.above")],
+    [cell + 1, t("switch.fence.right")],
+    [cell + size, t("switch.fence.below")],
+    [cell - 1, t("switch.fence.left")],
   ];
   return sides
     .filter(([other]) =>
       puzzle.walls.some(([a, b]) => (a === cell && b === other) || (b === cell && a === other)),
     )
-    .map(([, side]) => `fence ${side}`);
+    .map(([, label]) => label);
 }
 
 function describeCell(puzzle: SwitchbackPuzzle, path: readonly number[], cell: number): string {
   const { size } = puzzle;
   const mark = puzzle.marks.indexOf(cell);
-  const parts = [`Row ${toRow(size, cell) + 1}, column ${toCol(size, cell) + 1}`];
+  const parts = [
+    t("switch.cell.position", { row: toRow(size, cell) + 1, column: toCol(size, cell) + 1 }),
+  ];
   if (mark !== -1) {
-    parts.push(`checkpoint ${mark + 1}`);
+    parts.push(t("switch.cell.checkpoint", { number: mark + 1 }));
   }
   if (cell === path[path.length - 1]) {
-    parts.push("end of your trail");
+    parts.push(t("switch.cell.end"));
   } else if (path.includes(cell)) {
-    parts.push("on your trail");
+    parts.push(t("switch.cell.trail"));
   } else {
-    parts.push("empty");
+    parts.push(t("switch.cell.empty"));
   }
   return [...parts, ...describeFences(puzzle, cell)].join(", ");
 }
@@ -169,7 +172,7 @@ export function Board({
     <div
       className="sw-board"
       role="group"
-      aria-label="Switchback board"
+      aria-label={t("switch.board.label")}
       style={{ "--size": size } as CSSProperties}
       onKeyDown={handleKeyDown}
       onPointerDown={handlePointerDown}

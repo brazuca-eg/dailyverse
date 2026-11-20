@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { calculateThreshold, findRankProgress, hasReachedWinRank, RANKS, WIN_RANK } from "./ranks";
+import {
+  calculateThreshold,
+  countRanksReached,
+  findRankProgress,
+  hasReachedWinRank,
+  RANKS,
+  WIN_RANK,
+} from "./ranks";
 
 describe("RANKS", () => {
   it("climb from zero to Summit, with each share higher than the last", () => {
@@ -76,5 +83,21 @@ describe("hasReachedWinRank", () => {
 
   it("is never true for a puzzle worth no points", () => {
     expect(hasReachedWinRank(0, 0)).toBe(false);
+  });
+});
+
+describe("countRanksReached", () => {
+  it("counts the ranks reached, so a new player has one", () => {
+    expect(countRanksReached(0, 100)).toBe(1);
+    expect(countRanksReached(15, 100)).toBe(2);
+    expect(countRanksReached(30, 100)).toBe(3);
+    expect(countRanksReached(50, 100)).toBe(4);
+    expect(countRanksReached(70, 100)).toBe(5);
+    expect(countRanksReached(100, 100)).toBe(5);
+  });
+
+  it("stays below a rank until its threshold", () => {
+    expect(countRanksReached(14, 100)).toBe(1);
+    expect(countRanksReached(49, 100)).toBe(3);
   });
 });

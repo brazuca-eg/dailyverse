@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { isDoneToday } from "./doneToday";
+import { recordPlay } from "./history";
 import { applyGuess, createGuessingState } from "./guessing";
 import { createGameStorage, createStateStorage, isGuessingState } from "./gameStorage";
 import { applyGameResult, createEmptyStats } from "./streak";
@@ -195,5 +197,40 @@ describe("isGuessingState", () => {
     expect(isGuessingState(null)).toBe(false);
     expect(isGuessingState({ puzzleId: "p", guesses: [], status: "cheating" })).toBe(false);
     expect(isGuessingState({ puzzleId: 1, guesses: [], status: "playing" })).toBe(false);
+  });
+});
+
+describe("finishing a game", () => {
+  it("marks the game as finished today when the result is saved", () => {
+    const store = createMemoryStore();
+    const storage = createGameStorage("flag-fragment");
+    expect(isDoneToday("flag-fragment", store)).toBe(false);
+    storage.saveStats(applyGameResult(createEmptyStats(), 3, true), store);
+    expect(isDoneToday("flag-fragment", store)).toBe(true);
+    expect(isDoneToday("peak-order", store)).toBe(false);
+  });
+
+  it("does not mark anything when only the game state is saved", () => {
+    const store = createMemoryStore();
+    const storage = createGameStorage("flag-fragment");
+    storage.saveState(3, createGuessingState("p"), store);
+    expect(isDoneToday("flag-fragment", store)).toBe(false);
+  });
+});
+
+describe("hasSeenHelp for a returning player", () => {
+  it("is true once the game was finished before, even if the help was never closed", () => {
+    const store = createMemoryStore();
+    const storage = createGameStorage("flag-fragment");
+    expect(storage.hasSeenHelp(store)).toBe(false);
+    storage.saveStats(applyGameResult(createEmptyStats(), 3, false), store);
+    expect(storage.hasSeenHelp(store)).toBe(true);
+  });
+
+  it("is true when the play history has this game, and not for another game", () => {
+    const store = createMemoryStore();
+    recordPlay({ game: "flag-fragment", score: 3, maxScore: 5, won: true }, store);
+    expect(createGameStorage("flag-fragment").hasSeenHelp(store)).toBe(true);
+    expect(createGameStorage("peak-order").hasSeenHelp(store)).toBe(false);
   });
 });
